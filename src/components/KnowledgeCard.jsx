@@ -94,7 +94,7 @@ export default function KnowledgeCard({ item, onSelect }) {
             {isEmergency ? 'Cấp cứu' : 'Bệnh lý'}
           </span>
         </div>
-        <SeverityBadge severity={priority} customText={priorityLabel} />
+        {isEmergency && <SeverityBadge severity={priority} customText={priorityLabel} />}
       </div>
 
       {/* 2. Ảnh y tế lớn, trọn vẹn, to rõ thấy trọn hình chim cánh cụt */}
@@ -109,28 +109,6 @@ export default function KnowledgeCard({ item, onSelect }) {
           <h3 className="h5 fw-heavy mb-2 text-dark">
             {title}
           </h3>
-
-          {/* GROUP A: BỆNH LÝ MẮT (Mục 7) */}
-          {!isEmergency && (
-            <div className="mb-3">
-              <div className="small fw-bold text-muted text-uppercase mb-1">
-                Dấu hiệu thường gặp:
-              </div>
-              <p
-                className="mb-2 text-secondary fw-medium"
-                style={{
-                  fontSize: '0.95rem',
-                  lineHeight: '1.45',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
-                }}
-              >
-                {summary || description}
-              </p>
-            </div>
-          )}
 
           {/* GROUP B: CẤP CỨU CHẤN THƯƠNG MẮT (Mục 8) */}
           {isEmergency && (
@@ -176,8 +154,8 @@ export default function KnowledgeCard({ item, onSelect }) {
               <span>{buttonLabel}</span>
             </button>
 
-            <span className="fw-bold small text-visi-primary">
-              Chi tiết →
+            <span className="fw-bold small text-visi-primary text-nowrap">
+              Xem chi tiết →
             </span>
           </div>
 
