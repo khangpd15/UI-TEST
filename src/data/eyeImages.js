@@ -40,7 +40,7 @@ export const eyeIllustrations = {
     
     <!-- Brand banner -->
     <rect x="180" y="395" width="240" height="38" rx="19" fill="%23FFFFFF" stroke="%230B7F86" stroke-width="2"/>
-    <text x="300" y="420" font-family="'Inter', sans-serif" font-size="14" font-weight="bold" fill="%230B7F86" text-anchor="middle">VISI MEDICAL GROUP • REMICARE</text>
+    <text x="300" y="420" font-family="'Inter', sans-serif" font-size="14" font-weight="bold" fill="%230B7F86" text-anchor="middle">KHANGEYE • REMICARE</text>
   </svg>`,
 
   // 1. Mắt bị va đập

@@ -5,7 +5,7 @@ export default function DoDontSection({ doList = [], dontList = [] }) {
   const defaultDo = [
     { icon: "🧴", text: "Rửa mắt sạch bằng nước/nước muối" },
     { icon: "🏥", text: "Đến bệnh viện chuyên khoa mắt ngay" },
-    { icon: "☎", text: "Gọi hỗ trợ cấp cứu 0395 151 151" }
+    { icon: "☎", text: "Gọi hỗ trợ cấp cứu 0916 973 161" }
   ];
 
   const defaultDont = [

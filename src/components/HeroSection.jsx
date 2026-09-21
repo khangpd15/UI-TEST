@@ -8,11 +8,11 @@ export default function HeroSection({ onCheckProblems, onOpenVoiceAssistant }) {
         <div className="row align-items-center g-4 g-lg-5">
           {/* CỘT TRÁI (LEFT) */}
           <div className="col-12 col-lg-7 text-center text-lg-start">
-            {/* Tagline hệ sinh thái VISI */}
+            {/* Tagline hệ sinh thái KHANGEYE */}
             <div className="d-inline-flex align-items-center gap-2 px-3 py-1 bg-light border border-secondary border-opacity-25 rounded-pill mb-3">
               <span style={{ color: 'var(--visi-primary)' }}>✦</span>
               <span className="small fw-bold" style={{ color: 'var(--visi-primary-dark)' }}>
-                HỆ SINH THÁI Y KHOA VISI • "MỖI ÁNH MẮT, MỘT NIỀM TIN"
+                HỆ SINH THÁI Y KHOA KHANGEYE • "MỖI ÁNH MẮT, MỘT NIỀM TIN"
               </span>
             </div>
 
@@ -53,7 +53,7 @@ export default function HeroSection({ onCheckProblems, onOpenVoiceAssistant }) {
             <div className="hero-caregiver-box">
               <img
                 src={eyeIllustrations.heroCaregiver}
-                alt="Minh họa bác sĩ nhãn khoa VISI kiểm tra mắt"
+                alt="Minh họa bác sĩ nhãn khoa KHANGEYE kiểm tra mắt"
                 loading="eager"
               />
             </div>

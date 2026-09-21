@@ -16,7 +16,7 @@ export default function Footer({ onNavigate, onCallEmergency }) {
               </div>
               <div>
                 <span className="h4 mb-0 fw-heavy text-white">ReMiCare</span>
-                <span className="badge bg-light text-dark ms-2 small">VISI Ecosystem</span>
+                <span className="badge bg-light text-dark ms-2 small">KHANGEYE Ecosystem</span>
               </div>
             </div>
 
@@ -24,7 +24,7 @@ export default function Footer({ onNavigate, onCallEmergency }) {
               Sức khỏe mắt – Sơ cứu – Chăm sóc
             </p>
             <p className="small" style={{ color: '#DDEFEF', lineHeight: '1.5' }}>
-              Thành viên thuộc hệ sinh thái y khoa <strong>VISI Medical Group</strong>. Định hướng y khoa chuyên sâu về nhãn khoa với thông điệp <em>"Mỗi ánh mắt, một niềm tin"</em>.
+              Thành viên thuộc hệ sinh thái y khoa <strong>KHANGEYE</strong>. Định hướng y khoa chuyên sâu về nhãn khoa với thông điệp <em>"Mỗi ánh mắt, một niềm tin"</em>.
             </p>
 
             <div className="p-2 px-3 rounded-2 mt-3" style={{ background: 'rgba(0, 0, 0, 0.2)', border: '1px solid rgba(255, 255, 255, 0.15)' }}>
@@ -88,12 +88,12 @@ export default function Footer({ onNavigate, onCallEmergency }) {
               Đường dây nóng hỗ trợ khẩn cấp:
             </p>
             <a
-              href="tel:0395151151"
+              href="tel:0916973161"
               className="d-inline-flex align-items-center gap-2 fw-heavy text-white fs-4 text-decoration-none p-2 px-3 rounded-3"
               style={{ backgroundColor: 'var(--emergency)' }}
             >
               <i className="bi bi-telephone-fill"></i>
-              <span>0395 151 151</span>
+              <span>0916 973 161</span>
             </a>
             <p className="small text-white-50 mt-3 mb-0">
               Trực ban y tế nhãn khoa luôn sẵn sàng tiếp nhận hướng dẫn cấp cứu tức thời.
@@ -104,7 +104,7 @@ export default function Footer({ onNavigate, onCallEmergency }) {
         {/* Bottom copyright */}
         <div className="visi-footer-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
           <span>
-            © {new Date().getFullYear()} ReMiCare • VISI Medical Group. Bảo lưu mọi quyền.
+            © {new Date().getFullYear()} ReMiCare • KHANGEYE. Bảo lưu mọi quyền.
           </span>
           <span className="small text-white-50">
             Tiêu chuẩn Trợ năng Y tế WCAG 2.1 AA/AAA

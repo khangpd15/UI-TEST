@@ -32,7 +32,7 @@ export default function Navbar({ activePage, setActivePage, textScale, setTextSc
               role="button"
               tabIndex={0}
               onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleNavClick('home')}
-              aria-label="ReMiCare - Hệ sinh thái VISI"
+              aria-label="ReMiCare - Hệ sinh thái KHANGEYE"
             >
               <div className="visi-logo-icon">
                 <i className="bi bi-eye-fill"></i>
@@ -41,11 +41,11 @@ export default function Navbar({ activePage, setActivePage, textScale, setTextSc
                 <div className="d-flex align-items-center gap-1">
                   <span className="visi-brand-title">ReMiCare</span>
                   <span className="badge bg-light text-muted border px-1 py-0 small d-none d-sm-inline" style={{ fontSize: '0.65rem' }}>
-                    VISI
+                    KHANGEYE
                   </span>
                 </div>
                 <span className="brand-subtitle">
-                  HỆ SINH THÁI VISI
+                  HỆ SINH THÁI KHANGEYE
                 </span>
               </div>
             </div>

@@ -42,7 +42,7 @@ export default function KnowledgePage() {
           <div className="d-inline-flex align-items-center gap-2 px-3 py-1 bg-light border rounded-pill mb-2">
             <i className="bi bi-book-half" style={{ color: 'var(--visi-primary)' }}></i>
             <span className="small fw-bold" style={{ color: 'var(--visi-primary-dark)' }}>
-              CẨM NANG Y KHOA VISI MEDICAL GROUP
+              CẨM NANG Y KHOA KHANGEYE
             </span>
           </div>
           <h1 className="h1 fw-heavy mb-2">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function EmergencyFloatingButton({ hotline = "0395151151" }) {
+export default function EmergencyFloatingButton({ hotline = "0916973161" }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -44,10 +44,10 @@ export default function EmergencyFloatingButton({ hotline = "0395151151" }) {
               <i className="bi bi-hospital" aria-hidden="true"></i>
             </div>
             <h4 className="fw-heavy text-dark mb-1">
-              Đường dây nóng cấp cứu ReMiCare - VISI
+              Đường dây nóng cấp cứu ReMiCare - KHANGEYE
             </h4>
             <p className="text-danger fw-bold fs-2 mb-2 font-monospace">
-              {hotline}
+              0916 973 161
             </p>
             <p className="text-muted fs-6 mb-0">
               Trực ban y tế 24/7 – Luôn sẵn sàng hướng dẫn sơ cứu chấn thương mắt tức thì.

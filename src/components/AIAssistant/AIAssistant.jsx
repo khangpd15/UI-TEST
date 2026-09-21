@@ -36,7 +36,7 @@ export default function AIAssistant({
   initialCaseId = null,
   onBack,
   onReset,
-  hotline = "0395 151 151"
+  hotline = "0916 973 161"
 }) {
   const [mode, setMode] = useState('idle'); // idle | listening | review | processing | question | result | redFlag | error
   const [transcript, setTranscript] = useState('');

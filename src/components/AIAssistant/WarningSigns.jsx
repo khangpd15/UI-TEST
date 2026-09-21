@@ -5,7 +5,7 @@ import React from 'react';
  * - Khối "KHI NÀO CẦN ĐI KHÁM?"
  * - Hiển thị các dấu hiệu nguy hiểm cảnh báo người dùng đến bệnh viện
  */
-export default function WarningSigns({ warningSigns = [], hotline = "0395 151 151" }) {
+export default function WarningSigns({ warningSigns = [], hotline = "0916 973 161" }) {
   if (!warningSigns || warningSigns.length === 0) return null;
 
   return (

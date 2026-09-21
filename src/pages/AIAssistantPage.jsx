@@ -18,7 +18,7 @@ export default function AIAssistantPage({ initialCaseId = null, onBack }) {
         <AIAssistant
           initialCaseId={initialCaseId}
           onBack={onBack}
-          hotline="0395 151 151"
+          hotline="0916 973 161"
         />
       </div>
     </div>

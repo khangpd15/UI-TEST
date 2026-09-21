@@ -11,7 +11,7 @@ export const eyeCareVideos = [
     duration: "02:15",
     language: "vi",
     verified: true,
-    source: "Hội Nhãn khoa Quốc tế & Bệnh viện Mắt VISI",
+    source: "Hội Nhãn khoa Quốc tế & Bệnh viện Mắt KHANGEYE",
     description: "Cách rửa mắt đúng kỹ thuật bằng nước muối sinh lý, không làm trầy xước giác mạc khi có hạt bụi bẩn bay vào."
   },
   {
@@ -23,7 +23,7 @@ export const eyeCareVideos = [
     duration: "03:40",
     language: "vi",
     verified: true,
-    source: "Cấp cứu Y khoa St John & VISI Medical",
+    source: "Cấp cứu Y khoa St John & KHANGEYE Medical",
     description: "Kỹ thuật vạch mi mắt và tư thế xối dòng nước liên tục 15-20 phút bảo vệ thị lực khi dính xà phòng, hóa chất độc hại."
   },
   {
@@ -35,7 +35,7 @@ export const eyeCareVideos = [
     duration: "02:50",
     language: "vi",
     verified: true,
-    source: "Chuyên khoa Chấn thương Mắt VISI",
+    source: "Chuyên khoa Chấn thương Mắt KHANGEYE",
     description: "Nguyên tắc không tì đè nhãn cầu, cách chườm lạnh giảm tụ máu và tư thế nghỉ ngơi chờ khám chuyên sâu."
   },
   {
@@ -95,7 +95,7 @@ export const eyeCareVideos = [
     duration: "02:20",
     language: "vi",
     verified: true,
-    source: "Khoa Dịch tễ & Nhãn khoa Cộng đồng VISI",
+    source: "Khoa Dịch tễ & Nhãn khoa Cộng đồng KHANGEYE",
     description: "Cách nhỏ mắt không chạm đầu lọ vào lông mi, cách ly khăn mặt và phòng tránh lây nhiễm cho cả gia đình."
   }
 ];

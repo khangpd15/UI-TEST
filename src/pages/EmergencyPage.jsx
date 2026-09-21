@@ -20,7 +20,7 @@ export default function EmergencyPage({ caseId = 'EM-03', onBack, onSelectOtherC
           initialCaseId={caseId}
           onBack={onBack}
           onReset={() => onSelectOtherCase && onSelectOtherCase(null)}
-          hotline="0395 151 151"
+          hotline="0916 973 161"
         />
 
         {/* Chuyển nhanh sang trường hợp cấp cứu mắt khác (EM-01 đến EM-06) */}

@@ -121,7 +121,7 @@ export default function App() {
 
         {/* 5. Fixed Emergency Floating Button (Section 13: bottom: 16px; left: 16px; right: 16px;) */}
         <EmergencyFloatingButton
-          hotline="0395151151"
+          hotline="0916973161"
         />
       </div>
     </DeviceViewSwitcher>

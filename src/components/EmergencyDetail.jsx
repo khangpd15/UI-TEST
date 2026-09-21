@@ -9,7 +9,7 @@ import SeverityBadge from './SeverityBadge';
  * 3. Emergency Instruction (chữ to rõ ràng, không bị ngắt cụt)
  * 4. Primary Emergency Button (full width, tối thiểu 72px, hỗ trợ 2 dòng tự nhiên)
  */
-export default function EmergencyDetail({ currentCase, onActionClick, hotline = "0395 151 151" }) {
+export default function EmergencyDetail({ currentCase, onActionClick, hotline = "0916 973 161" }) {
   if (!currentCase) return null;
 
   return (

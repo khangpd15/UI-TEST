@@ -9,7 +9,7 @@ import React from 'react';
 export default function RedFlagAlert({
   redFlags = [],
   onViewSafeSteps,
-  hotline = "0395 151 151"
+  hotline = "0916 973 161"
 }) {
   const hotlineClean = hotline.replace(/\s/g, '');
 
