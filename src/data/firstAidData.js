@@ -12,7 +12,7 @@ const em01 = {
   title: "Sơ cứu dị vật nhỏ vào mắt",
   leadHeading: "RỬA MẮT BẰNG NƯỚC SẠCH HOẶC NƯỚC MUỐI SINH LÝ",
   instruction: "Tuyệt đối không dụi mắt. Rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý.",
-  image: eyeIllustrations.foreignObject,
+  image: eyeIllustrations.smallForeignObject,
   category: "emergency",
   priority: "high",
   severity: "high",
@@ -59,7 +59,7 @@ const em02 = {
   title: "Sơ cứu dị vật nhọn / Vật cắm vào mắt",
   leadHeading: "TUYỆT ĐỐI KHÔNG TỰ Ý RÚT DỊ VẬT RA NGOÀI",
   instruction: "KHÔNG RÚT DỊ VẬT - KHÔNG XOAY - KHÔNG ẤN - KHÔNG BĂNG ÉP LÊN NHÃN CẦU!",
-  image: eyeIllustrations.foreignObject,
+  image: eyeIllustrations.penetratingObject,
   category: "emergency",
   priority: "critical",
   severity: "critical",
@@ -153,7 +153,7 @@ const em04 = {
   title: "Sơ cứu bỏng nhiệt ở mắt",
   leadHeading: "LẬP TỨC LÀM MÁT VÀ RỬA MẮT BẰNG NƯỚC SẠCH",
   instruction: "Lập tức làm mát và rửa bằng nước sạch - Đến ngay cơ sở y tế để bác sĩ đánh giá!",
-  image: eyeIllustrations.eyeBurn,
+  image: eyeIllustrations.thermalBurn,
   category: "emergency",
   priority: "high",
   severity: "high",
@@ -247,7 +247,7 @@ const em06 = {
   title: "Tổn thương mắt do tia hàn / tia UV",
   leadHeading: "RỜI KHỎI NGUỒN SÁNG - KHÔNG TỰ DÙNG THUỐC TÊ NHỎ MẮT",
   instruction: "Rời khỏi nguồn sáng ngay, không dụi mắt. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt!",
-  image: eyeIllustrations.eyeBurn,
+  image: eyeIllustrations.uvWelding,
   category: "emergency",
   priority: "medium",
   severity: "medium",
@@ -327,7 +327,7 @@ export const firstAidList = [
     badgeText: "Khẩn cấp",
     brief: "Bụi, cát, hạt mạt nhỏ bay vào mắt gây cộm xót",
     action: "Rửa bằng nước sạch hoặc nước muối sinh lý. Không dụi mắt.",
-    image: eyeIllustrations.foreignObject
+    image: eyeIllustrations.smallForeignObject
   },
   {
     id: "EM-02",
@@ -341,7 +341,7 @@ export const firstAidList = [
     badgeText: "Cực kỳ khẩn cấp",
     brief: "Mạt kim loại, mảnh kính, cành cây, vật nhọn cắm vào mắt",
     action: "KHÔNG TỰ RÚT DỊ VẬT - Che bằng cốc giấy sạch, đi viện ngay.",
-    image: eyeIllustrations.foreignObject
+    image: eyeIllustrations.penetratingObject
   },
   {
     id: "EM-03",
@@ -369,7 +369,7 @@ export const firstAidList = [
     badgeText: "Khẩn cấp",
     brief: "Nước sôi, dầu mỡ nóng, tia lửa nhiệt",
     action: "Lập tức làm mát và rửa bằng nước sạch, đến cơ sở y tế.",
-    image: eyeIllustrations.eyeBurn
+    image: eyeIllustrations.thermalBurn
   },
   {
     id: "EM-05",
@@ -397,6 +397,6 @@ export const firstAidList = [
     badgeText: "Cần lưu ý",
     brief: "Tia lửa hàn, hồ quang điện, đèn cực tím UV",
     action: "Rời nguồn sáng, không dụi mắt, TUYỆT ĐỐI KHÔNG DÙNG THUỐC TÊ.",
-    image: eyeIllustrations.eyeBurn
+    image: eyeIllustrations.uvWelding
   }
 ];

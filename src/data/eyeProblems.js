@@ -26,7 +26,7 @@ export const eyeProblems = [
     priority: "critical",
     severity: "critical",
     badgeText: "Cực kỳ khẩn cấp",
-    image: eyeIllustrations.foreignObject
+    image: eyeIllustrations.penetratingObject
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ export const eyeProblems = [
     priority: "high",
     severity: "high",
     badgeText: "Khẩn cấp",
-    image: eyeIllustrations.foreignObject
+    image: eyeIllustrations.smallForeignObject
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ export const eyeProblems = [
     priority: "high",
     severity: "high",
     badgeText: "Khẩn cấp",
-    image: eyeIllustrations.eyeBurn
+    image: eyeIllustrations.thermalBurn
   },
   {
     id: 6,
@@ -70,6 +70,6 @@ export const eyeProblems = [
     priority: "medium",
     severity: "medium",
     badgeText: "Cần lưu ý",
-    image: eyeIllustrations.eyeBurn
+    image: eyeIllustrations.uvWelding
   }
 ];
