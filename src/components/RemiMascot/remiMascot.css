@@ -1,7 +1,10 @@
 /* ==========================================================================
    REMI FLOATING MASCOT & CHATBOT STYLES
    Mascot chim cánh cụt Remi - Bạn đồng hành chăm sóc mắt
-   Tích hợp hiệu ứng chạy ngang màn hình (Full Screen Sprint) và Khói/Bụi (Smoke/Dust Puffs)
+   Tích hợp:
+   - Chạy ngang toàn màn hình (Full Screen Sprint)
+   - Dừng ở chính giữa màn hình nói "Đố anh bắt được em!" & câu trend thú vị
+   - Hiệu ứng khói/bụi phì phì sau gót chân (Cartoon Smoke/Dust Puffs)
    ========================================================================== */
 
 /* --- Biến màu & thiết lập chung --- */
@@ -39,7 +42,6 @@
 /* Khi đang nghỉ tại căn cứ góc phải */
 .remi-runner-container.remi-at-home {
   left: calc(100% - 75px);
-  transform: scaleX(1);
 }
 
 /* Khi chạy từ ngoài màn hình vào lúc mở trang */
@@ -50,27 +52,24 @@
 @keyframes remiEntranceAcross {
   0% {
     left: calc(100% + 80px);
-    transform: scaleX(-1);
   }
   75% {
     left: calc(100% - 75px);
-    transform: scaleX(-1);
   }
   88% {
     left: calc(100% - 75px);
-    transform: scaleX(1) translateY(-10px);
   }
   100% {
     left: calc(100% - 75px);
-    transform: scaleX(1) translateY(0);
   }
 }
 
 /* ==========================================================================
-   HÀNH ĐỘNG CHẠY TỪ CUỐI MÀN HÌNH BÊN NÀY QUA BÊN KIA (FULL SCREEN SPRINT)
+   HÀNH ĐỘNG CHẠY TỪ CUỐI MÀN HÌNH BÊN NÀY QUA BÊN KIA
+   DỪNG Ở CHÍNH GIỮA MÀN HÌNH & DỪNG Ở MÉP TRÁI (16 GIÂY / CHU KỲ)
    ========================================================================== */
 .remi-runner-container.remi-sprinting-across {
-  animation: remiSprintAcrossTrack 14s infinite ease-in-out;
+  animation: remiTrackMove 16s infinite ease-in-out;
 }
 
 /* Tạm dừng chạy khi rê chuột vào để người dùng dễ bấm */
@@ -79,56 +78,85 @@
   animation-play-state: paused !important;
 }
 
-@keyframes remiSprintAcrossTrack {
-  /* 1. Bắt đầu từ mép phải màn hình, quay mặt sang trái */
+@keyframes remiTrackMove {
+  /* 1. Bắt đầu từ mép phải màn hình */
   0% {
     left: calc(100% - 75px);
-    transform: scaleX(-1);
   }
-  /* 2. Lon ton chạy hết tốc lực từ phải sang tận cùng bên trái màn hình */
-  2% {
-    left: calc(100% - 75px);
-    transform: scaleX(-1);
+  /* 2. Chạy hết tốc lực ra CHÍNH GIỮA MÀN HÌNH (20%) */
+  20% {
+    left: calc(50% - 35px);
   }
-  40% {
-    left: 8px;
-    transform: scaleX(-1);
+  /* 3. DỪNG TẠI CHÍNH GIỮA MÀN HÌNH nói "Đố anh bắt được em" & nhảy nhót (20% - 34%) */
+  34% {
+    left: calc(50% - 35px);
   }
-  /* 3. Phanh lại ở mép trái, quay mặt chính diện chào người dùng */
-  42% {
-    left: 8px;
-    transform: scaleX(1) translateY(0);
-  }
-  /* 4. Nhảy mừng rỡ tại mép trái màn hình */
-  46% {
-    left: 8px;
-    transform: scaleX(1) translateY(-16px);
-  }
+  /* 4. Tiếp tục phi nước đại sang TẬN CÙNG MÉP TRÁI MÀN HÌNH (34% - 50%) */
   50% {
-    left: 8px;
-    transform: scaleX(1) translateY(0);
+    left: 16px;
   }
-  /* 5. Đứng thở, quan sát một chút */
-  54% {
-    left: 8px;
-    transform: scaleX(1);
+  /* 5. DỪNG TẠI MÉP TRÁI nói câu trend & nhảy nhót (50% - 64%) */
+  64% {
+    left: 16px;
   }
-  /* 6. Quay người sang phải và bắt đầu chạy trở lại mép phải */
-  56% {
-    left: 8px;
-    transform: scaleX(1);
-  }
+  /* 6. Quay đầu phi nước đại một mạch về lại MÉP PHẢI (64% - 94%) */
   94% {
     left: calc(100% - 75px);
+  }
+  /* 7. Về đích mép phải, nhảy mừng hoàn thành vòng chạy (94% - 100%) */
+  100% {
+    left: calc(100% - 75px);
+  }
+}
+
+/* ==========================================================================
+   HƯỚNG MẶT & TƯ THẾ CỦA REMI THEO TỪNG CHẶNG TRÊN ĐƯỜNG CHẠY
+   ========================================================================== */
+.remi-is-sprinting {
+  animation: remiPenguinSprintPose 16s infinite ease-in-out;
+}
+
+@keyframes remiPenguinSprintPose {
+  /* 0% - 19.9%: Chạy sang trái (quay mặt trái) */
+  0%, 19.9% {
+    transform: scaleX(-1);
+  }
+  /* 20% - 33.9%: DỪNG CHÍNH GIỮA, quay mặt chính diện chào & nhảy nhót trêu người dùng */
+  20%, 24% {
+    transform: scaleX(1) translateY(0);
+  }
+  25%, 29% {
+    transform: scaleX(1) translateY(-15px); /* Nhảy cẫng lên khi nói "Đố anh bắt được em!" */
+  }
+  30%, 33.9% {
+    transform: scaleX(1) translateY(0);
+  }
+  /* 34% - 49.9%: Tiếp tục chạy sang trái (quay mặt trái) */
+  34%, 49.9% {
+    transform: scaleX(-1);
+  }
+  /* 50% - 63.9%: DỪNG MÉP TRÁI, quay mặt chính diện & nhảy chào */
+  50%, 54% {
+    transform: scaleX(1) translateY(0);
+  }
+  55%, 59% {
+    transform: scaleX(1) translateY(-14px); /* Nhảy nhót tại mép trái */
+  }
+  60%, 63.9% {
+    transform: scaleX(1) translateY(0);
+  }
+  /* 64% - 93.9%: Chạy về mép phải (quay mặt phải) */
+  64%, 93.9% {
     transform: scaleX(1);
   }
-  /* 7. Phanh lại ở mép phải, nhảy nhẹ mừng rỡ hoàn thành vòng chạy */
-  96% {
-    left: calc(100% - 75px);
+  /* 94% - 100%: Dừng mép phải, nhảy về đích */
+  94%, 96.9% {
+    transform: scaleX(1) translateY(0);
+  }
+  97%, 99.9% {
     transform: scaleX(1) translateY(-10px);
   }
   100% {
-    left: calc(100% - 75px);
     transform: scaleX(1) translateY(0);
   }
 }
@@ -146,7 +174,7 @@
   outline: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition: filter 0.2s ease;
   filter: drop-shadow(0 8px 18px rgba(7, 95, 102, 0.28));
 }
 
@@ -157,8 +185,7 @@
 }
 
 .remi-trigger-btn:hover {
-  transform: translateY(-4px) scale(1.08);
-  filter: drop-shadow(0 12px 26px rgba(7, 95, 102, 0.4));
+  filter: drop-shadow(0 14px 28px rgba(7, 95, 102, 0.45));
 }
 
 /* ==========================================================================
@@ -167,37 +194,46 @@
 .remi-smoke-trail {
   position: absolute;
   bottom: 6px;
-  left: -24px; /* Nằm ngay phía sau gót chân */
+  left: -24px; /* Nằm ngay sau gót chân */
   width: 64px;
   height: 36px;
   pointer-events: none;
   z-index: -1;
-  /* Khói chỉ hiện trong các giai đoạn đang chạy của chu kỳ */
-  animation: remiSprintSmokeCycle 14s infinite ease-in-out;
+  animation: remiSprintSmokeCycle 16s infinite ease-in-out;
 }
 
-/* Ẩn khói khi đứng yên */
-.remi-at-home .remi-smoke-trail {
-  display: none;
-}
-
+/* Khói chỉ phun ra trong các giai đoạn đang chạy trên đường */
 @keyframes remiSprintSmokeCycle {
+  /* 1. Chạy từ phải ra giữa (0% - 20%): Khói BẬT */
   0%, 1.9% {
     opacity: 0;
     visibility: hidden;
   }
-  2%, 39.9% {
+  2%, 19.9% {
     opacity: 1;
     visibility: visible;
   }
-  40%, 55.9% {
+  /* 2. DỪNG Ở CHÍNH GIỮA (20% - 34%): Khói TẮT */
+  20%, 33.9% {
     opacity: 0;
     visibility: hidden;
   }
-  56%, 93.9% {
+  /* 3. Chạy từ giữa sang trái (34% - 50%): Khói BẬT */
+  34%, 49.9% {
     opacity: 1;
     visibility: visible;
   }
+  /* 4. DỪNG Ở MÉP TRÁI (50% - 64%): Khói TẮT */
+  50%, 63.9% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  /* 5. Chạy từ trái về phải (64% - 94%): Khói BẬT */
+  64%, 93.9% {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* 6. DỪNG Ở MÉP PHẢI (94% - 100%): Khói TẮT */
   94%, 100% {
     opacity: 0;
     visibility: hidden;
@@ -305,16 +341,16 @@
 }
 
 /* ==========================================================================
-   HOẠT ẢNH CHÂN & CÁNH ĐẦY SỐNG ĐỘNG (KHÔNG BỊ ĐƠ)
+   HOẠT ẢNH CHÂN & CÁNH ĐẦY SỐNG ĐỘNG KHI CHẠY (FEET WHIRRING)
    ========================================================================== */
 
-/* Chân đạp liên tục tốc độ cao (Looney Tunes style pitter-patter) */
-.remi-is-sprinting .remi-foot-left {
+/* Chân đạp liên tục tốc độ cao khi đang chạy */
+.remi-is-sprinting.remi-feet-active .remi-foot-left {
   animation: remiSprintFootLeft 0.16s infinite alternate ease-in-out;
   transform-origin: 40px 88px;
 }
 
-.remi-is-sprinting .remi-foot-right {
+.remi-is-sprinting.remi-feet-active .remi-foot-right {
   animation: remiSprintFootRight 0.16s infinite alternate ease-in-out;
   transform-origin: 60px 88px;
 }
@@ -338,7 +374,7 @@
 }
 
 /* Thân người chúi về phía trước khi phi nước đại */
-.remi-is-sprinting .remi-penguin-svg {
+.remi-is-sprinting.remi-feet-active .remi-penguin-svg {
   animation: remiSprintLean 0.16s infinite alternate ease-in-out;
   transform-origin: 50px 88px;
 }
@@ -353,12 +389,12 @@
 }
 
 /* Cánh đập lia lịa giữ thăng bằng khi chạy */
-.remi-is-sprinting .remi-wing-left {
+.remi-is-sprinting.remi-feet-active .remi-wing-left {
   animation: remiSprintWingLeft 0.16s infinite alternate ease-in-out;
   transform-origin: 24px 52px;
 }
 
-.remi-is-sprinting .remi-wing-right {
+.remi-is-sprinting.remi-feet-active .remi-wing-right {
   animation: remiSprintWingRight 0.16s infinite alternate ease-in-out;
   transform-origin: 76px 52px;
 }
@@ -382,10 +418,65 @@
 }
 
 /* ==========================================================================
+   BÓNG THOẠI NÓI CÂU TREND & "ĐỐ ANH BẮT ĐƯỢC EM" (SPEECH BUBBLE)
+   ========================================================================== */
+.remi-greeting-bubble {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFFFFF;
+  color: #075F66;
+  border: 2px solid #0B7F86;
+  border-radius: 18px;
+  padding: 7px 14px;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(7, 95, 102, 0.22);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+  z-index: 1049;
+  animation: remiBubblePopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: auto;
+}
+
+/* Đuôi bóng thoại chỉ xuống đầu Remi */
+.remi-greeting-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-bottom: 2px solid #0B7F86;
+  border-right: 2px solid #0B7F86;
+}
+
+.remi-greeting-bubble:hover {
+  background: #F0FDF4;
+  transform: translateX(-50%) scale(1.05);
+}
+
+@keyframes remiBubblePopIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6) translateY(10px);
+  }
+  70% {
+    transform: translateX(-50%) scale(1.08) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
    CÁC TRẠNG THÁI NGHỈ / NHẢY / NGHIÊNG ĐẦU KHI Ở GÓC
    ========================================================================== */
-
-/* Nhảy nhẹ tại chỗ */
 .remi-anim-jump {
   animation: remiJumpAnim 1.1s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
@@ -405,7 +496,6 @@
   }
 }
 
-/* Nghiêng đầu tò mò */
 .remi-anim-tilt {
   animation: remiTiltAnim 1.5s ease-in-out;
 }
@@ -444,54 +534,6 @@
   50% {
     transform: scale(1.25);
     opacity: 0.8;
-  }
-}
-
-/* --- Speech Bubble Nhỏ (Greeting) --- */
-.remi-greeting-bubble {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  right: -8px;
-  background: #FFFFFF;
-  color: #0F172A;
-  border: 1.5px solid #C4E5E5;
-  border-radius: 16px 16px 4px 16px;
-  padding: 8px 12px;
-  min-width: 160px;
-  max-width: 220px;
-  box-shadow: 0 8px 24px rgba(7, 95, 102, 0.16);
-  font-size: 0.84rem;
-  line-height: 1.35;
-  cursor: pointer;
-  animation: remiBubbleAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  z-index: 1048;
-}
-
-.remi-greeting-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -7px;
-  right: 24px;
-  width: 12px;
-  height: 12px;
-  background: #FFFFFF;
-  border-bottom: 1.5px solid #C4E5E5;
-  border-right: 1.5px solid #C4E5E5;
-  transform: rotate(45deg);
-}
-
-.remi-greeting-bubble:hover {
-  background: #F8FDFF;
-}
-
-@keyframes remiBubbleAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(10px) scale(0.92);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 
@@ -741,6 +783,14 @@
     left: calc(100% - 60px);
   }
 
+  .remi-greeting-bubble {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    white-space: normal;
+    max-width: 200px;
+    text-align: center;
+  }
+
   .remi-chat-panel {
     right: 12px;
     bottom: 80px;
@@ -748,13 +798,6 @@
     height: 480px;
     max-height: calc(100vh - 110px);
     border-radius: 16px;
-  }
-
-  .remi-greeting-bubble {
-    right: 0;
-    max-width: 190px;
-    font-size: 0.8rem;
-    padding: 6px 10px;
   }
 }
 
@@ -780,6 +823,7 @@
 @media (prefers-reduced-motion: reduce) {
   .remi-runner-container.remi-sprinting-across,
   .remi-runner-container.remi-entering,
+  .remi-is-sprinting,
   .remi-smoke-trail,
   .remi-puff,
   .remi-spark,
