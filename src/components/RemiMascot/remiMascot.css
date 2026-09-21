@@ -43,7 +43,7 @@
   outline: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: filter 0.2s ease;
   filter: drop-shadow(0 8px 18px rgba(7, 95, 102, 0.26));
 }
 
@@ -54,11 +54,7 @@
 }
 
 .remi-trigger-btn:hover {
-  transform: translateY(-4px) scale(1.04);
-}
-
-.remi-trigger-btn:active {
-  transform: translateY(-1px) scale(0.98);
+  filter: drop-shadow(0 12px 24px rgba(7, 95, 102, 0.35));
 }
 
 /* Vòng badge thông báo nhỏ trên đầu Remi */
@@ -135,48 +131,180 @@
   }
 }
 
-/* --- Animation Xuất Hiện Lần Đầu (Entrance) --- */
-.remi-entrance {
-  animation: remiEntranceAnim 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* ==========================================================================
+   HÀNH ĐỘNG CHẠY QUA CHẠY LẠI & CỬ ĐỘNG MASCOT (Mục 4 & 5)
+   ========================================================================== */
+
+/* 1. Hành động bước vào khi mở trang (Entrance Walk) */
+.remi-entrance-walk {
+  animation: remiEntranceWalkAnim 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes remiEntranceAnim {
+@keyframes remiEntranceWalkAnim {
   0% {
     opacity: 0;
-    transform: translateY(35px) scale(0.8);
+    transform: translateX(90px) scaleX(-1);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(65px) scaleX(-1) translateY(-3px);
+  }
+  40% {
+    transform: translateX(45px) scaleX(-1) translateY(0);
   }
   60% {
-    opacity: 1;
-    transform: translateY(-6px) scale(1.05);
+    transform: translateX(20px) scaleX(-1) translateY(-3px);
+  }
+  80% {
+    transform: translateX(0px) scaleX(-1) translateY(0);
+  }
+  90% {
+    transform: translateX(0px) scaleX(1) translateY(-6px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0px) scaleX(1) translateY(0);
   }
 }
 
-/* --- Các Animation Tự Nhiên (Idle Mascot) --- */
-/* 1. Lắc lư nhẹ (Waddle) */
-.remi-anim-waddle {
-  animation: remiWaddleAnim 1.6s ease-in-out;
+/* 2. Hành động chạy qua chạy lại một đoạn trên màn hình (Patrol Walk) */
+.remi-anim-patrol {
+  animation: remiPatrolWalk 5s ease-in-out forwards;
 }
 
-@keyframes remiWaddleAnim {
-  0%, 100% {
-    transform: rotate(0deg) translateX(0);
+@keyframes remiPatrolWalk {
+  0% {
+    transform: translateX(0) scaleX(1);
   }
-  25% {
-    transform: rotate(-5deg) translateX(-3px);
+  /* Quay mặt sang trái */
+  4% {
+    transform: translateX(0) scaleX(-1);
   }
-  50% {
-    transform: rotate(0deg) translateX(0);
+  /* Lon ton chạy sang trái */
+  12% {
+    transform: translateX(-18px) scaleX(-1) translateY(-3px);
   }
-  75% {
-    transform: rotate(5deg) translateX(3px);
+  20% {
+    transform: translateX(-36px) scaleX(-1) translateY(0);
+  }
+  28% {
+    transform: translateX(-54px) scaleX(-1) translateY(-3px);
+  }
+  36% {
+    transform: translateX(-70px) scaleX(-1) translateY(0);
+  }
+  /* Dừng lại ở bên trái, quay mặt chính diện và nhảy nhẹ chào người dùng */
+  42% {
+    transform: translateX(-70px) scaleX(1) translateY(0);
+  }
+  48% {
+    transform: translateX(-70px) scaleX(1) translateY(-8px);
+  }
+  54% {
+    transform: translateX(-70px) scaleX(1) translateY(0);
+  }
+  58% {
+    /* Đứng quan sát một chút */
+    transform: translateX(-70px) scaleX(1) translateY(0);
+  }
+  /* Quay người sang phải và bắt đầu chạy về */
+  62% {
+    transform: translateX(-70px) scaleX(1);
+  }
+  70% {
+    transform: translateX(-52px) scaleX(1) translateY(-3px);
+  }
+  78% {
+    transform: translateX(-34px) scaleX(1) translateY(0);
+  }
+  86% {
+    transform: translateX(-16px) scaleX(1) translateY(-3px);
+  }
+  94% {
+    transform: translateX(0) scaleX(1) translateY(-2px);
+  }
+  100% {
+    transform: translateX(0) scaleX(1) translateY(0);
   }
 }
 
-/* 2. Nhảy nhẹ (Jump) */
+/* Các vi chuyển động chân, cánh, thân hình khi Remi chạy */
+.remi-anim-patrol .remi-foot-left,
+.remi-entrance-walk .remi-foot-left {
+  animation: remiFootPatterLeft 0.28s infinite alternate ease-in-out;
+  transform-origin: 40px 88px;
+}
+
+.remi-anim-patrol .remi-foot-right,
+.remi-entrance-walk .remi-foot-right {
+  animation: remiFootPatterRight 0.28s infinite alternate ease-in-out;
+  transform-origin: 60px 88px;
+}
+
+@keyframes remiFootPatterLeft {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-4px) scaleY(0.9);
+  }
+}
+
+@keyframes remiFootPatterRight {
+  0% {
+    transform: translateY(-4px) scaleY(0.9);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.remi-anim-patrol .remi-wing-left,
+.remi-entrance-walk .remi-wing-left {
+  animation: remiWingFlapLeft 0.28s infinite alternate ease-in-out;
+  transform-origin: 24px 52px;
+}
+
+.remi-anim-patrol .remi-wing-right,
+.remi-entrance-walk .remi-wing-right {
+  animation: remiWingFlapRight 0.28s infinite alternate ease-in-out;
+  transform-origin: 76px 52px;
+}
+
+@keyframes remiWingFlapLeft {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-14deg);
+  }
+}
+
+@keyframes remiWingFlapRight {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(14deg);
+  }
+}
+
+.remi-anim-patrol .remi-body-group,
+.remi-entrance-walk .remi-body-group {
+  animation: remiBodyWaddle 0.28s infinite alternate ease-in-out;
+  transform-origin: 50px 80px;
+}
+
+@keyframes remiBodyWaddle {
+  0% {
+    transform: rotate(-3.5deg);
+  }
+  100% {
+    transform: rotate(3.5deg);
+  }
+}
+
+/* 3. Nhảy nhẹ (Jump) */
 .remi-anim-jump {
   animation: remiJumpAnim 1.1s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
@@ -186,17 +314,17 @@
     transform: translateY(0) scale(1, 1);
   }
   30% {
-    transform: translateY(-10px) scale(0.96, 1.05);
+    transform: translateY(-12px) scale(0.96, 1.06);
   }
   55% {
     transform: translateY(0) scale(1.04, 0.94);
   }
   75% {
-    transform: translateY(-3px) scale(0.99, 1.01);
+    transform: translateY(-4px) scale(0.99, 1.01);
   }
 }
 
-/* 3. Nghiêng đầu tò mò (Tilt) */
+/* 4. Nghiêng đầu tò mò (Tilt) */
 .remi-anim-tilt {
   animation: remiTiltAnim 1.5s ease-in-out;
 }
@@ -206,10 +334,30 @@
     transform: rotate(0deg);
   }
   35% {
-    transform: rotate(-8deg);
+    transform: rotate(-9deg);
   }
   70% {
-    transform: rotate(6deg);
+    transform: rotate(7deg);
+  }
+}
+
+/* 5. Lắc lư nhẹ tại chỗ (Waddle in place) */
+.remi-anim-waddle {
+  animation: remiWaddleAnim 1.6s ease-in-out;
+}
+
+@keyframes remiWaddleAnim {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(-5deg) translateX(-4px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(0);
+  }
+  75% {
+    transform: rotate(5deg) translateX(4px);
   }
 }
 
@@ -453,6 +601,29 @@
     bottom: 82px;
   }
 
+  /* Giảm biên độ chạy trên màn hình nhỏ để không tràn */
+  @keyframes remiPatrolWalk {
+    0% { transform: translateX(0) scaleX(1); }
+    4% { transform: translateX(0) scaleX(-1); }
+    15% { transform: translateX(-14px) scaleX(-1) translateY(-2px); }
+    30% { transform: translateX(-38px) scaleX(-1) translateY(0); }
+    40% { transform: translateX(-38px) scaleX(1) translateY(0); }
+    48% { transform: translateX(-38px) scaleX(1) translateY(-6px); }
+    54% { transform: translateX(-38px) scaleX(1) translateY(0); }
+    62% { transform: translateX(-38px) scaleX(1); }
+    75% { transform: translateX(-16px) scaleX(1) translateY(-2px); }
+    92% { transform: translateX(0) scaleX(1) translateY(-2px); }
+    100% { transform: translateX(0) scaleX(1) translateY(0); }
+  }
+
+  @keyframes remiEntranceWalkAnim {
+    0% { opacity: 0; transform: translateX(60px) scaleX(-1); }
+    60% { opacity: 1; transform: translateX(15px) scaleX(-1) translateY(-2px); }
+    85% { transform: translateX(0px) scaleX(-1) translateY(0); }
+    92% { transform: translateX(0px) scaleX(1) translateY(-5px); }
+    100% { opacity: 1; transform: translateX(0px) scaleX(1) translateY(0); }
+  }
+
   .remi-chat-panel {
     right: 12px;
     bottom: 80px;
@@ -489,16 +660,23 @@
 
 /* --- Tôn trọng Accessibility: prefers-reduced-motion --- */
 @media (prefers-reduced-motion: reduce) {
-  .remi-entrance,
+  .remi-entrance-walk,
+  .remi-anim-patrol,
   .remi-anim-waddle,
   .remi-anim-jump,
   .remi-anim-tilt,
   .remi-badge-ping,
   .remi-greeting-bubble,
   .remi-chat-panel,
-  .remi-mic-btn.btn-danger {
+  .remi-mic-btn.btn-danger,
+  .remi-foot-left,
+  .remi-foot-right,
+  .remi-wing-left,
+  .remi-wing-right,
+  .remi-body-group {
     animation: none !important;
     transition: none !important;
+    transform: none !important;
   }
 
   .remi-trigger-btn:hover {

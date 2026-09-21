@@ -57,8 +57,8 @@ export default function RemiPenguin({
 
         {/* 2. Đôi chân nhỏ nhắn màu cam */}
         <g className="remi-feet">
-          <ellipse cx="40" cy="88" rx="8" ry="4.5" fill="url(#remiBeakGrad)" />
-          <ellipse cx="60" cy="88" rx="8" ry="4.5" fill="url(#remiBeakGrad)" />
+          <ellipse cx="40" cy="88" rx="8" ry="4.5" fill="url(#remiBeakGrad)" className="remi-foot-left" />
+          <ellipse cx="60" cy="88" rx="8" ry="4.5" fill="url(#remiBeakGrad)" className="remi-foot-right" />
         </g>
 
         {/* 3. Thân hình tròn đầy đặn đáng yêu */}
