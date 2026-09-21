@@ -1,0 +1,161 @@
+/* ReMiCare - Global Stylesheet (VISI Medical Group Aesthetic) */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--visi-background);
+  color: var(--visi-text);
+  font-family: var(--font-base);
+  font-size: calc(18px * var(--text-scale));
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Ngăn chặn tuyệt đối chia cắt từ tiếng Việt vô lý */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Accessibility Font Resizing */
+body.scale-normal { --text-scale: 1; }
+body.scale-large { --text-scale: 1.15; }
+body.scale-xlarge { --text-scale: 1.3; }
+
+/* Headings (Responsive Typography với clamp) */
+h1, .h1 {
+  font-size: clamp(1.6rem, 5vw, calc(2.2rem * var(--text-scale)));
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--visi-text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.015em;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+h2, .h2 {
+  font-size: clamp(1.35rem, 4vw, calc(1.75rem * var(--text-scale)));
+  font-weight: 700;
+  line-height: 1.32;
+  color: var(--visi-text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  word-break: normal;
+}
+
+h3, .h3 {
+  font-size: clamp(1.18rem, 3.5vw, calc(1.35rem * var(--text-scale)));
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--visi-text);
+  margin-bottom: 0.5rem;
+  word-break: normal;
+}
+
+p, .text-content {
+  font-size: clamp(1rem, 2.5vw, calc(1.1rem * var(--text-scale)));
+  line-height: 1.6;
+  color: var(--visi-text-muted);
+  margin-bottom: 0.75rem;
+  word-break: normal;
+}
+
+/* Button Standards (Chiếu cao tối thiểu 48px, font 16-18px) */
+button, .btn {
+  min-height: 48px;
+  font-size: clamp(16px, 2.5vw, calc(18px * var(--text-scale)));
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  word-break: normal;
+}
+
+button:active, .btn:active {
+  transform: scale(0.98);
+}
+
+/* VISI Teal Primary Button */
+.btn-visi-primary {
+  background-color: var(--visi-primary);
+  color: #FFFFFF !important;
+  border: 2px solid var(--visi-primary);
+}
+
+.btn-visi-primary:hover, .btn-visi-primary:focus {
+  background-color: var(--visi-primary-dark);
+  border-color: var(--visi-primary-dark);
+  color: #FFFFFF !important;
+}
+
+/* VISI Outline Button */
+.btn-visi-outline {
+  background-color: #FFFFFF;
+  color: var(--visi-primary) !important;
+  border: 2px solid var(--visi-primary);
+}
+
+.btn-visi-outline:hover, .btn-visi-outline:focus {
+  background-color: var(--visi-primary-light);
+  color: var(--visi-primary-dark) !important;
+  border-color: var(--visi-primary-dark);
+}
+
+/* Emergency Red Button */
+.btn-emergency-red {
+  background-color: var(--emergency);
+  color: #FFFFFF !important;
+  border: 2px solid var(--emergency-dark);
+}
+
+.btn-emergency-red:hover, .btn-emergency-red:focus {
+  background-color: var(--emergency-dark);
+  border-color: var(--emergency-dark);
+  color: #FFFFFF !important;
+}
+
+/* SECTION TRANSITIONS */
+.section-white {
+  background-color: var(--visi-background);
+}
+
+.section-soft-teal {
+  background-color: var(--visi-background-soft);
+  border-top: 1px solid var(--visi-border);
+  border-bottom: 1px solid var(--visi-border);
+}
+
+.section-emergency-light {
+  background-color: var(--emergency-light);
+  border-top: 2px solid var(--emergency-border);
+  border-bottom: 2px solid var(--emergency-border);
+}
+
+/* FLOATING BUTTON SAFE AREA (Mục 11, 13, 14) */
+/* Đảm bảo nội dung trang không bao giờ bị nút fixed che khuất */
+main, .page-content-wrapper {
+  padding-bottom: 190px;
+}
+
+@media (max-width: 575.98px) {
+  main, .page-content-wrapper {
+    padding-bottom: 200px;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

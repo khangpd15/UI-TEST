@@ -1,0 +1,149 @@
+/* ReMiCare - Accessibility (A11y) Stylesheet */
+/* Tối ưu hóa đặc biệt cho người lớn tuổi, mắt mờ, người sau mổ mắt */
+
+/* High-Visibility Focus Indicators */
+:focus-visible {
+  outline: 3px solid var(--medical-primary-dark) !important;
+  outline-offset: 3px !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #0369A1 !important;
+  outline-offset: 3px !important;
+}
+
+/* Emergency Focus ring */
+.btn-emergency:focus-visible,
+.emergency-focus:focus-visible {
+  outline: 3px solid #7F1D1D !important;
+  outline-offset: 3px !important;
+}
+
+/* Touch Target Minimums (WCAG 2.5.5 / 2.5.8) */
+.touch-target,
+.btn,
+.nav-link,
+.card-clickable {
+  min-width: 48px;
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+/* Text Size Control Bar in Navbar */
+.text-size-toggle-group {
+  display: inline-flex;
+  background-color: var(--visi-primary-light);
+  border: 1.5px solid var(--visi-border);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.text-size-btn {
+  background: transparent;
+  border: none;
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--visi-text);
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-size-btn.active {
+  background-color: var(--visi-primary);
+  color: #FFFFFF !important;
+  box-shadow: 0 1px 4px rgba(11, 127, 134, 0.25);
+}
+
+.text-size-btn:hover:not(.active) {
+  background-color: var(--visi-secondary);
+  color: var(--visi-primary-dark);
+}
+
+@media (max-width: 575.98px) {
+  .text-size-toggle-group {
+    padding: 1px;
+    gap: 1px;
+  }
+
+  .text-size-btn {
+    min-height: 28px;
+    padding: 3px 6px;
+    font-size: 0.78rem;
+  }
+}
+
+/* High Contrast Badges & Texts */
+.badge-contrast {
+  font-weight: 800;
+  padding: 8px 14px;
+  font-size: calc(0.95rem * var(--text-scale));
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+}
+
+/* Clickable card affordance */
+.card-clickable {
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--border-radius-md);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  background-color: #FFFFFF;
+}
+
+.card-clickable:hover {
+  border-color: var(--medical-primary);
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card-clickable:active {
+  transform: translateY(0);
+}
+
+/* Icon Sizing Standards */
+.icon-action {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.icon-large {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.icon-emergency-step {
+  font-size: 48px;
+  line-height: 1;
+}
+
+/* Skip to main content link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 20px;
+  background: var(--medical-primary-dark);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  z-index: 1080;
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 56px;
+}

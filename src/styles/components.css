@@ -1,0 +1,760 @@
+/* ReMiCare - Components Stylesheet (VISI Medical Group Aesthetic) */
+
+/* --- 1. NAVBAR & HEADER --- */
+.visi-navbar {
+  background-color: var(--visi-background);
+  border-bottom: 1px solid var(--visi-border);
+  padding: 8px 0;
+  box-shadow: 0 2px 10px rgba(11, 127, 134, 0.04);
+}
+
+.visi-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.visi-logo-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  background-color: var(--visi-primary-light);
+  color: var(--visi-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 1.5px solid var(--visi-secondary);
+}
+
+.visi-brand-title {
+  color: var(--visi-primary);
+  font-size: clamp(1.25rem, 4vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Mục 15: Header subtitle không bị wrap vỡ chữ */
+.brand-subtitle {
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--visi-text-muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 575.98px) {
+  .visi-navbar {
+    padding: 6px 0;
+  }
+  .visi-brand-logo {
+    gap: 6px;
+  }
+  .visi-logo-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    font-size: 18px;
+    border-radius: 9px;
+  }
+  .visi-brand-title {
+    font-size: 1.15rem;
+  }
+  .brand-subtitle {
+    font-size: 9.5px;
+  }
+}
+
+/* --- 2. HERO SECTION --- */
+.hero-section {
+  padding: clamp(32px, 5vw, 56px) 0;
+  background-color: var(--visi-background);
+}
+
+.hero-caregiver-box {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid var(--visi-border);
+  background: var(--visi-primary-light);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-caregiver-box img {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+/* --- 3. PROBLEM CARDS (Mục 1, 2, 3, 5, 10) --- */
+.problem-card {
+  background: #ffffff;
+  border: 1.5px solid var(--visi-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+
+.problem-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--visi-primary);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Hình ảnh chiếm khoảng 55–65% card */
+.problem-card-image-wrapper {
+  width: 100%;
+  height: 220px;
+  background-color: var(--visi-background-soft);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--visi-border);
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .problem-card-image-wrapper {
+    height: 190px;
+  }
+}
+
+.problem-card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.problem-card:hover .problem-card-image-wrapper img {
+  transform: scale(1.03);
+}
+
+/* Padding card theo mục 10 */
+.problem-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+@media (max-width: 575.98px) {
+  .problem-card-body {
+    padding: 16px;
+  }
+}
+
+/* Mục 1, 2, 3, 5: Responsive typography cho Card Title */
+.problem-card-title {
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--visi-text);
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* --- 4. SEVERITY BADGE (Mục 6, 7, 8, 9) --- */
+.severity-badge-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 12px;
+  border-top: 1px solid var(--visi-border);
+}
+
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  width: fit-content;
+  max-width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+  .severity-badge {
+    font-size: 15px;
+    padding: 8px 14px;
+    gap: 6px;
+  }
+}
+
+.severity-badge-emergency {
+  background-color: var(--emergency-light);
+  color: var(--emergency);
+  border: 1.5px solid var(--emergency-border);
+}
+
+.severity-badge-warning {
+  background-color: var(--warning-light);
+  color: var(--warning);
+  border: 1.5px solid var(--warning-border);
+}
+
+.severity-badge-safe {
+  background-color: var(--success-light);
+  color: var(--success);
+  border: 1.5px solid var(--success-border);
+}
+
+.severity-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* Mục 9: Arrow đứng riêng bên phải, không xuống dòng */
+.card-arrow {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--visi-text-muted);
+  margin-left: 8px;
+}
+
+/* --- 5. CONDITION / EMERGENCY DETAIL HERO COMPONENT (Mục 1 - 10) --- */
+.condition-card,
+.emergency-detail-card {
+  width: 100%;
+  border-radius: 24px;
+  border: 2px solid var(--emergency);
+  background-color: #FFFFFF;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 575.98px) {
+  .condition-card,
+  .emergency-detail-card {
+    width: 100%;
+    margin: 16px 0;
+  }
+}
+
+.condition-card-body {
+  padding: 24px 16px;
+}
+
+@media (min-width: 768px) {
+  .condition-card-body {
+    padding: 32px 28px;
+  }
+}
+
+.condition-detail {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.condition-header,
+.condition-content {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 2. TITLE */
+.condition-title,
+.problem-detail-title {
+  width: 100%;
+  margin: 0 0 14px;
+  font-size: clamp(28px, 7vw, 40px);
+  line-height: 1.2;
+  font-weight: 700;
+  word-break: normal;
+  overflow-wrap: normal;
+  color: var(--visi-text);
+}
+
+/* 3. SEVERITY BADGE */
+.condition-severity,
+.severity-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* 4. EMERGENCY / CONDITION INSTRUCTION */
+.condition-instruction,
+.emergency-instruction {
+  width: 100%;
+  margin: 0 0 24px;
+  font-size: clamp(20px, 5.5vw, 26px);
+  line-height: 1.45;
+  font-weight: 700;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* 6. CTA BUTTON */
+.condition-action,
+.emergency-action-btn {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  background-color: var(--emergency);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(198, 40, 40, 0.35);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.condition-action:hover,
+.emergency-action-btn:hover {
+  background-color: var(--emergency-dark);
+  transform: translateY(-2px);
+  color: #FFFFFF !important;
+}
+
+/* --- 6. EMERGENCY SECTION BANNER --- */
+.emergency-banner-box {
+  background-color: var(--emergency-light);
+  border: 2px solid var(--emergency);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 36px);
+}
+
+.emergency-banner-title {
+  color: var(--emergency);
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 800;
+  margin-bottom: 8px;
+  word-break: normal;
+}
+
+/* --- 6. EMERGENCY DETAIL 3 STEPS --- */
+.emergency-step-box {
+  background: #FFFFFF;
+  border: 1.5px solid var(--visi-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  height: 100%;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s ease;
+}
+
+.emergency-step-box:hover {
+  border-color: var(--emergency);
+}
+
+.step-num-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--emergency);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.step-main-icon {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+/* --- 7. DO & DON'T --- */
+.dodont-card-box {
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  height: 100%;
+}
+
+.dodont-visi-safe {
+  background-color: var(--success-light);
+  border: 2px solid var(--success);
+}
+
+.dodont-visi-prohibited {
+  background-color: var(--emergency-light);
+  border: 2px solid var(--emergency);
+}
+
+/* --- 8. AUDIO GUIDE (Chuẩn giao diện bệnh viện: Nền trắng, ít màu, tối giản, nút ≥ 48px) --- */
+.audio-guide-container {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--visi-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 575.98px) {
+  .audio-guide-container {
+    padding: 16px;
+  }
+}
+
+.audio-guide-btn-teal {
+  background-color: var(--visi-primary);
+  color: #FFFFFF !important;
+  border: 2px solid var(--visi-primary);
+  border-radius: 14px;
+  min-height: 52px;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-weight: 700;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.audio-guide-btn-teal:hover {
+  background-color: var(--visi-primary-dark);
+  border-color: var(--visi-primary-dark);
+}
+
+/* --- 9. VOICE ASSISTANT (Mục 13 & 14) --- */
+.voice-assistant-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 88px;
+  z-index: 1049;
+  background-color: var(--visi-primary);
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 6px 20px rgba(11, 127, 134, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.voice-assistant-fab:hover {
+  background-color: var(--visi-primary-dark);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+@media (max-width: 375px) {
+  .voice-assistant-fab {
+    bottom: 80px;
+    right: 12px;
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+}
+
+/* --- 10. EMERGENCY FLOATING BUTTON (Mục 12 & 14) --- */
+.emergency-floating-bar-mobile {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.emergency-floating-action-btn {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 520px;
+  min-height: 58px;
+  height: 58px;
+  background-color: var(--emergency);
+  color: #FFFFFF !important;
+  border: 2px solid #FFFFFF;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 800;
+  box-shadow: var(--shadow-emergency);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.emergency-floating-action-btn span {
+  white-space: nowrap;
+}
+
+.emergency-floating-action-btn:hover {
+  background-color: var(--emergency-dark);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 375px) {
+  .emergency-floating-action-btn {
+    font-size: 15px;
+    height: 54px;
+    min-height: 54px;
+    gap: 6px;
+  }
+}
+
+/* --- 11. KNOWLEDGE CARD --- */
+.knowledge-service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--visi-border);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.knowledge-service-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--visi-primary);
+  box-shadow: var(--shadow-hover);
+}
+
+.knowledge-card-img-box {
+  width: 100%;
+  height: 180px;
+  background-color: var(--visi-background-soft);
+  border-bottom: 1px solid var(--visi-border);
+}
+
+.knowledge-card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 12. FOOTER --- */
+.visi-footer {
+  background-color: var(--visi-primary-dark);
+  color: #FFFFFF;
+  padding: 56px 0 28px;
+}
+
+.visi-footer a {
+  color: #DDEFEF;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.visi-footer a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.visi-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 20px;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #BAE6FD;
+}
+
+/* --- 13. AI TRỢ LÝ SƠ CỨU MẮT (Section 1, 11, 12, 13) --- */
+.ai-assistant-container {
+  width: 100%;
+}
+
+/* Nút Microphone trung tâm lớn */
+.ai-mic-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ai-mic-pulse-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.ai-mic-pulse-ring.active::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border-radius: 50%;
+  background: rgba(198, 40, 40, 0.15);
+  animation: medicalMicPulse 1.6s infinite ease-out;
+  pointer-events: none;
+}
+
+.ai-mic-pulse-ring.active::after {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  right: -24px;
+  bottom: -24px;
+  border-radius: 50%;
+  background: rgba(198, 40, 40, 0.08);
+  animation: medicalMicPulse 1.6s infinite ease-out 0.4s;
+  pointer-events: none;
+}
+
+@keyframes medicalMicPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+.ai-mic-large-btn {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(11, 127, 134, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.ai-mic-large-btn:hover {
+  transform: scale(1.05);
+}
+
+.ai-mic-large-btn:active {
+  transform: scale(0.95);
+}
+
+.ai-mic-icon {
+  font-size: 36px;
+  line-height: 1;
+}
+
+/* Trạng thái IDLE */
+.ai-mic-btn-idle {
+  background-color: var(--visi-primary);
+  color: #FFFFFF;
+}
+
+.ai-mic-btn-idle:hover {
+  background-color: var(--visi-primary-dark);
+}
+
+/* Trạng thái LISTENING */
+.ai-mic-btn-listening {
+  background-color: var(--emergency);
+  color: #FFFFFF;
+  box-shadow: 0 8px 28px rgba(198, 40, 40, 0.45);
+}
+
+/* Trạng thái PROCESSING */
+.ai-mic-btn-processing {
+  background-color: var(--visi-primary-dark);
+  color: #FFFFFF;
+  cursor: not-allowed;
+}
+
+/* Trạng thái ERROR */
+.ai-mic-btn-error {
+  background-color: #DC3545;
+  color: #FFFFFF;
+}
+
+/* Nút outline phong cách VISI */
+.btn-outline-visi-primary {
+  color: var(--visi-primary);
+  border: 2px solid var(--visi-primary);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-visi-primary:hover,
+.btn-outline-visi-primary:focus {
+  background-color: var(--visi-primary);
+  color: #FFFFFF;
+}
+
+/* Video Player container */
+.ai-video-box .ratio iframe {
+  border-radius: 12px;
+}
+
+/* Helper utility classes for VISI branding */
+.bg-visi-primary {
+  background-color: var(--visi-primary) !important;
+  color: #FFFFFF !important;
+}
+
+.text-visi-primary {
+  color: var(--visi-primary) !important;
+}
+
+

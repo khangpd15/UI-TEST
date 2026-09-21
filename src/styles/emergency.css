@@ -1,0 +1,361 @@
+/* ReMiCare - Emergency & Severity Stylesheet */
+
+/* --- SEVERITY BADGES & CARDS --- */
+.severity-emergency {
+  background-color: var(--emergency-bg);
+  border: 2px solid var(--emergency-color) !important;
+  color: #7F1D1D;
+}
+
+.severity-emergency .severity-tag {
+  background-color: var(--emergency-color);
+  color: #FFFFFF;
+}
+
+.severity-warning {
+  background-color: var(--warning-bg);
+  border: 2px solid var(--warning-color) !important;
+  color: #78350F;
+}
+
+.severity-warning .severity-tag {
+  background-color: var(--warning-color);
+  color: #FFFFFF;
+}
+
+.severity-safe {
+  background-color: var(--safe-bg);
+  border: 2px solid var(--safe-color) !important;
+  color: #14532D;
+}
+
+.severity-safe .severity-tag {
+  background-color: var(--safe-color);
+  color: #FFFFFF;
+}
+
+/* Badge styling */
+.severity-badge-component {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: calc(1rem * var(--text-scale));
+  letter-spacing: 0.5px;
+}
+
+.badge-emergency {
+  background-color: var(--emergency-color);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+}
+
+.badge-warning {
+  background-color: var(--warning-color);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
+}
+
+.badge-safe {
+  background-color: var(--safe-color);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+
+/* --- EMERGENCY FLOATING ACTION BUTTON --- */
+.emergency-floating-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.emergency-floating-btn {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 520px;
+  min-height: 64px;
+  background-color: var(--emergency-color);
+  color: #FFFFFF;
+  border: 3px solid #FFFFFF;
+  border-radius: 999px;
+  font-size: calc(1.2rem * var(--text-scale));
+  font-weight: 900;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.emergency-floating-btn:hover, .emergency-floating-btn:focus {
+  background-color: var(--emergency-dark);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.emergency-floating-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- VOICE ASSISTANT FLOATING BUTTON --- */
+.voice-assistant-floating-btn {
+  position: fixed;
+  bottom: 96px;
+  right: 20px;
+  z-index: 1040;
+  background-color: #FFFFFF;
+  color: var(--medical-primary-dark);
+  border: 3px solid var(--medical-primary);
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-height: 52px;
+  font-weight: 700;
+  font-size: calc(1rem * var(--text-scale));
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.voice-assistant-floating-btn:hover {
+  background-color: var(--medical-primary-light);
+  transform: translateY(-2px);
+}
+
+.voice-icon-pulse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--medical-primary);
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+/* --- EMERGENCY STEP CARDS --- */
+.step-card {
+  background-color: #FFFFFF;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  box-shadow: var(--box-shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.step-card.step-card-emergency {
+  border-color: var(--emergency-border);
+  background-color: #FFFFFF;
+}
+
+.step-card.step-card-emergency:hover {
+  border-color: var(--emergency-color);
+}
+
+.step-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--emergency-color);
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.step-icon-large {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.step-title-bold {
+  font-size: calc(1.35rem * var(--text-scale));
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.step-detail-text {
+  font-size: calc(1.1rem * var(--text-scale));
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* --- DO & DONT SECTION --- */
+.dodont-card {
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  height: 100%;
+}
+
+.dodont-card-do {
+  background-color: #F0FDF4;
+  border: 3px solid #16A34A;
+}
+
+.dodont-card-dont {
+  background-color: #FEF2F2;
+  border: 3px solid #DC2626;
+}
+
+.dodont-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: calc(1.4rem * var(--text-scale));
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.dodont-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: calc(1.15rem * var(--text-scale));
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.dodont-item:last-child {
+  margin-bottom: 0;
+}
+
+.dodont-item-icon-check {
+  color: #16A34A;
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.dodont-item-icon-cross {
+  color: #DC2626;
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* --- AUDIO GUIDE PLAYER COMPONENT --- */
+.audio-guide-box {
+  background-color: #F8FAFC;
+  border: 2px solid var(--medical-primary);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  box-shadow: var(--box-shadow-card);
+}
+
+.audio-guide-btn {
+  min-height: 56px;
+  font-size: calc(1.2rem * var(--text-scale));
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 999px;
+}
+
+.audio-transcript-bubble {
+  background-color: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: var(--border-radius-md);
+  padding: 16px;
+  font-size: calc(1.1rem * var(--text-scale));
+  line-height: 1.6;
+  color: var(--text-main);
+  margin-top: 14px;
+}
+
+/* Sound wave animation while reading */
+.sound-wave-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+}
+
+.sound-wave-bar {
+  width: 4px;
+  background-color: var(--medical-primary);
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.sound-wave-bar:nth-child(2) { animation-delay: 0.2s; height: 18px; }
+.sound-wave-bar:nth-child(3) { animation-delay: 0.4s; height: 24px; }
+.sound-wave-bar:nth-child(4) { animation-delay: 0.1s; height: 14px; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+/* --- EYE PROBLEM CARD --- */
+.eye-problem-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-md);
+  background-color: #FFFFFF;
+  overflow: hidden;
+  border: 2px solid #CBD5E1;
+}
+
+.eye-problem-card:hover {
+  border-color: var(--medical-primary);
+}
+
+.eye-card-image-box {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #E2E8F0;
+  position: relative;
+  overflow: hidden;
+}
+
+.eye-card-image-box svg, .eye-card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eye-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.eye-card-title {
+  font-size: calc(1.2rem * var(--text-scale));
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}

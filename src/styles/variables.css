@@ -1,0 +1,46 @@
+/* ReMiCare - VISI Medical Group Brand Design Tokens */
+
+:root {
+  /* VISI Brand Color Palette */
+  --visi-primary: #0B7F86;
+  --visi-primary-dark: #075F66;
+  --visi-primary-light: #E8F5F5;
+  --visi-secondary: #DDEFEF;
+  --visi-text: #173B40;
+  --visi-text-muted: #64777A;
+  --visi-background: #FFFFFF;
+  --visi-background-soft: #F6FAFA;
+  --visi-border: #DCE7E8;
+
+  /* Status Colors */
+  --emergency: #C62828;
+  --emergency-light: #FDECEC;
+  --emergency-dark: #9B1C1C;
+  --emergency-border: #F8B4B4;
+
+  --warning: #C88A00;
+  --warning-light: #FFF6DD;
+  --warning-dark: #946600;
+  --warning-border: #FDE68A;
+
+  --success: #2E7D5B;
+  --success-light: #EAF6F0;
+  --success-dark: #1E563E;
+  --success-border: #A7F3D0;
+
+  /* Typography & Sizing */
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --line-height-base: 1.6;
+  --text-scale: 1;
+
+  /* Border Radius & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-subtle: 0 4px 16px rgba(11, 127, 134, 0.06);
+  --shadow-card: 0 4px 12px rgba(23, 59, 64, 0.05);
+  --shadow-hover: 0 10px 25px rgba(11, 127, 134, 0.12);
+  --shadow-emergency: 0 8px 24px rgba(198, 40, 40, 0.35);
+}
