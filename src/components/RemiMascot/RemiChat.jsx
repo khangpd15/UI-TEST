@@ -293,7 +293,7 @@ export default function RemiChat({
       <div className="remi-chat-header d-flex align-items-center justify-content-between p-3 border-bottom">
         <div className="d-flex align-items-center gap-2">
           <div className="remi-header-avatar">
-            <RemiPenguin size={36} animation="idle" />
+            <RemiPenguin size={40} animation="peeking" />
           </div>
           <div>
             <div className="d-flex align-items-center gap-1">
@@ -327,7 +327,7 @@ export default function RemiChat({
           >
             {msg.sender === 'remi' && (
               <div className="remi-msg-avatar me-2 align-self-end">
-                <RemiPenguin size={28} animation="idle" />
+                <RemiPenguin size={32} animation="waving" />
               </div>
             )}
 
@@ -386,8 +386,9 @@ export default function RemiChat({
         ))}
 
         {isListening && (
-          <div className="remi-listening-pulse p-2 rounded-3 bg-light border text-center mb-2">
-            <span className="spinner-grow spinner-grow-sm text-danger me-2" role="status"></span>
+          <div className="remi-listening-pulse p-2 rounded-3 bg-light border d-flex align-items-center justify-content-center gap-2 mb-2 shadow-sm">
+            <RemiPenguin size={36} animation="listening" />
+            <span className="spinner-grow spinner-grow-sm text-danger" role="status"></span>
             <span className="small fw-bold text-danger">Remi đang lắng nghe bạn nói...</span>
           </div>
         )}

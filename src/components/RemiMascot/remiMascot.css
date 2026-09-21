@@ -418,27 +418,82 @@
 }
 
 /* ==========================================================================
-   BÓNG THOẠI NÓI CÂU TREND & "ĐỐ ANH BẮT ĐƯỢC EM" (SPEECH BUBBLE)
+   HOẠT ẢNH CHO BỘ HÌNH ẢNH MINH HỌA MASCOT REMI MỚI (10 TƯ THẾ)
+   ========================================================================== */
+.remi-penguin-img {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Tư thế chạy: nhún chân nhịp nhàng */
+.remi-anim-running .remi-penguin-img {
+  animation: remiBobRun 0.22s infinite alternate ease-in-out;
+}
+
+@keyframes remiBobRun {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-4px) rotate(2deg); }
+}
+
+/* Tư thế nhảy vui mừng */
+.remi-anim-jump .remi-penguin-img,
+.remi-anim-jumping .remi-penguin-img {
+  animation: remiJoyBounce 0.45s infinite alternate ease-in-out;
+}
+
+@keyframes remiJoyBounce {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-10px) scale(1.05); }
+}
+
+/* Tư thế ngủ ngoan với zzz */
+.remi-anim-sleeping .remi-penguin-img {
+  animation: remiSleepBreathe 2s infinite ease-in-out;
+}
+
+@keyframes remiSleepBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.92; }
+  50% { transform: scale(1.03) translateY(-2px); opacity: 1; }
+}
+
+/* Tư thế giơ bảng Hỏi Remi */
+.remi-anim-suggest .remi-penguin-img {
+  animation: remiSuggestFloat 1.2s infinite ease-in-out;
+}
+
+@keyframes remiSuggestFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+/* ==========================================================================
+   BÓNG THOẠI NÓI CÂU TREND & "ĐỐ ANH BẮT ĐƯỢC EM" (SPEECH BUBBLE - SIÊU TƯƠNG PHẢN)
    ========================================================================== */
 .remi-greeting-bubble {
   position: absolute;
   bottom: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%);
-  background: #FFFFFF;
-  color: #075F66;
-  border: 2px solid #0B7F86;
-  border-radius: 18px;
-  padding: 7px 14px;
+  background: linear-gradient(145deg, #075F66 0%, #0F172A 100%) !important;
+  color: #FFFFFF !important;
+  border: 2px solid #38BDF8 !important;
+  border-radius: 22px;
+  padding: 8px 16px;
   white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(7, 95, 102, 0.22);
-  font-size: 0.88rem;
-  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.45), 0 0 12px rgba(56, 189, 248, 0.4);
+  font-size: 0.94rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
   line-height: 1.35;
   cursor: pointer;
   z-index: 1049;
   animation: remiBubblePopIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   pointer-events: auto;
+}
+
+.remi-greeting-bubble span {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* Đuôi bóng thoại chỉ xuống đầu Remi */
@@ -450,14 +505,16 @@
   transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: #FFFFFF;
-  border-bottom: 2px solid #0B7F86;
-  border-right: 2px solid #0B7F86;
+  background: #0F172A;
+  border-bottom: 2px solid #38BDF8;
+  border-right: 2px solid #38BDF8;
 }
 
 .remi-greeting-bubble:hover {
-  background: #F0FDF4;
-  transform: translateX(-50%) scale(1.05);
+  background: linear-gradient(145deg, #0E7490 0%, #1E293B 100%) !important;
+  border-color: #67E8F9 !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.55), 0 0 16px rgba(103, 232, 249, 0.55);
+  transform: translateX(-50%) scale(1.06);
 }
 
 @keyframes remiBubblePopIn {
@@ -651,11 +708,16 @@
 }
 
 .remi-bot-bubble {
-  background-color: #F0F9F9;
-  color: #1E293B;
-  border: 1px solid #D5EFEF;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  border: 1.5px solid #CBD5E1;
   border-radius: 16px 16px 16px 4px;
-  box-shadow: 0 2px 6px rgba(11, 127, 134, 0.05);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.remi-bot-bubble .remi-msg-text {
+  color: #0F172A;
+  font-weight: 500;
 }
 
 .remi-user-bubble {
