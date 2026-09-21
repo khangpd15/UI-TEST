@@ -51,6 +51,20 @@ export const eyeIllustrations = {
   bluntTrauma: '/images/mat_bi_va_dap.jpg',             // EM-05: Chấn thương do va đập
   uvWelding: '/images/uv_mat.png',                     // EM-06: Tia hàn / tia UV
 
+  // 12 hình ảnh bệnh lý mắt chuẩn hóa (DIS-01 đến DIS-10)
+  myopia: '/images/01_can_thi.png',                          // DIS-01: Cận thị
+  hyperopia: '/images/03_vien_thi.png',                      // DIS-02: Viễn thị
+  astigmatism: '/images/04_loan_thi.png',                    // DIS-03: Loạn thị
+  presbyopia: '/images/02_lao_thi.png',                      // DIS-04: Lão thị
+  cataract: '/images/05_duc_thuy_tinh_the.png',              // DIS-05: Đục thủy tinh thể
+  glaucoma: '/images/06_glocom_cuom_nuoc.png',               // DIS-06: Glôcôm góc mở
+  dryEye: '/images/07_kho_mat.png',                          // DIS-07: Khô mắt
+  bacterialConjunctivitis: '/images/08_viem_ket_mac_vi_khuan.png', // DIS-08A: Viêm kết mạc vi khuẩn
+  viralConjunctivitis: '/images/09_viem_ket_mac_do_virus.png',     // DIS-08B: Viêm kết mạc virus
+  allergicConjunctivitis: '/images/10_viem_ket_mac_di_ung.png',    // DIS-08C: Viêm kết mạc dị ứng
+  diabeticRetinopathy: '/images/11_vong_mac_dai_thao_duong.png',   // DIS-09: Võng mạc đái tháo đường
+  macularDegeneration: '/images/12_AMD.png',                 // DIS-10: Thoái hóa hoàng điểm tuổi già (AMD)
+
   // Aliases tương thích ngược
   foreignObject: '/images/vat_sac_nhon.png',
   eyeBurn: '/images/bong_nhiet_o_mat.png',
