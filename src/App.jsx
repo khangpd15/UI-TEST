@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import EmergencyFloatingButton from './components/EmergencyFloatingButton';
 import VoiceAssistant from './components/VoiceAssistant';
 import RemiMascot from './components/RemiMascot/RemiMascot';
-import DeviceViewSwitcher from './components/DeviceViewSwitcher';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -24,13 +23,9 @@ export default function App() {
     document.body.classList.add(`scale-${textScale}`);
   }, [textScale]);
 
-  // Cuộn lên đầu trang (hỗ trợ cả cuộn cửa sổ và cuộn khung mobile viewport)
+  // Cuộn lên đầu trang
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    const mobileViewport = document.getElementById('mobile-viewport-scroll');
-    if (mobileViewport) {
-      mobileViewport.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   };
 
   // Điều hướng tới trang cấp cứu chi tiết
@@ -61,8 +56,7 @@ export default function App() {
   };
 
   return (
-    <DeviceViewSwitcher>
-      <div className="d-flex flex-column min-vh-100 position-relative w-100">
+    <div className="d-flex flex-column min-vh-100 position-relative w-100">
         {/* 1. Header Navigation & Accessibility Controls (Section 4) */}
         <Navbar
           activePage={activePage}
@@ -127,6 +121,5 @@ export default function App() {
           hotline="0916973161"
         />
       </div>
-    </DeviceViewSwitcher>
   );
 }
