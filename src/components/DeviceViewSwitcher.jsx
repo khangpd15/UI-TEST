@@ -24,6 +24,14 @@ export default function DeviceViewSwitcher({ children }) {
     return () => clearInterval(timer);
   }, []);
 
+  // Đánh dấu thẻ html/body khi đang chạy trong iframe điện thoại để tối ưu thanh cuộn
+  useEffect(() => {
+    if (isInsideIframe) {
+      document.documentElement.classList.add('is-inside-iframe');
+      document.body.classList.add('is-inside-iframe');
+    }
+  }, [isInsideIframe]);
+
   // Nếu đang chạy bên trong iframe mô phỏng điện thoại, chỉ hiển thị ứng dụng không lặp lại thanh toolbar
   if (isInsideIframe) {
     return <div className="embedded-mobile-root">{children}</div>;

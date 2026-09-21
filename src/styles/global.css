@@ -9,6 +9,70 @@ html, body {
   max-width: 100vw;
 }
 
+/* Triệt tiêu triệt để hiện tượng 2 thanh cuộn khi Modal hiển thị */
+html.modal-open,
+body.modal-open,
+html:has(.modal.show),
+body:has(.modal.show) {
+  overflow: hidden !important;
+  padding-right: 0 !important;
+}
+
+/* Thanh cuộn mềm mại cho toàn bộ trang và Modal */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Khi chạy trong khung mô phỏng điện thoại (iframe): ẩn thanh cuộn thô của Windows */
+html.is-inside-iframe,
+body.is-inside-iframe {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+html.is-inside-iframe::-webkit-scrollbar,
+body.is-inside-iframe::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Khi modal mở trong iframe: chỉ cho phép modal cuộn, body và html hoàn toàn ẩn cuộn */
+html.is-inside-iframe.modal-open,
+body.is-inside-iframe.modal-open,
+html.is-inside-iframe:has(.modal.show),
+body.is-inside-iframe:has(.modal.show) {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+.modal {
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 transparent;
+}
+.modal::-webkit-scrollbar {
+  width: 4px;
+}
+.modal::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
 body {
   margin: 0;
   padding: 0;

@@ -195,10 +195,12 @@ export default function KnowledgePage() {
                       >
                         {selectedArticle.category === 'emergency' ? 'Cấp cứu mắt' : 'Bệnh lý mắt'}
                       </span>
-                      <SeverityBadge
-                        severity={selectedArticle.priority}
-                        customText={selectedArticle.priorityLabel}
-                      />
+                      {selectedArticle.category === 'emergency' && (
+                        <SeverityBadge
+                          severity={selectedArticle.priority}
+                          customText={selectedArticle.priorityLabel}
+                        />
+                      )}
                     </div>
                     <p className="fs-5 fw-bold text-dark mb-1">
                       {selectedArticle.summary}
