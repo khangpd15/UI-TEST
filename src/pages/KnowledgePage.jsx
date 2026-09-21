@@ -4,8 +4,9 @@ import KnowledgeCard from '../components/KnowledgeCard';
 import AudioGuide from '../components/AudioGuide';
 import SeverityBadge from '../components/SeverityBadge';
 import { eyeDiseases } from '../data/knowledgeData';
+import { findVideoByCategory } from '../data/videoLibrary';
 
-export default function KnowledgePage() {
+export default function KnowledgePage({ onSelectCase }) {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all'); // 'all' | 'disease_info' | 'emergency'
   const [searchQuery, setSearchQuery] = useState('');
@@ -215,6 +216,83 @@ export default function KnowledgePage() {
                   isEmergency={selectedArticle.category === 'emergency'}
                 />
 
+                {/* DÒNG BẤM CHUYỂN SANG TRANG CÓ VIDEO HƯỚNG DẪN SƠ CỨU CHI TIẾT */}
+                {selectedArticle.category === 'emergency' && (
+                  <div
+                    className="p-3 my-3 rounded-3 d-flex align-items-center justify-content-between flex-wrap gap-2 shadow-sm text-decoration-none"
+                    style={{
+                      backgroundColor: '#FEF2F2',
+                      border: '2px solid #F87171',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onClick={() => {
+                      const targetId = selectedArticle.id || selectedArticle.audio_id;
+                      setSelectedArticle(null);
+                      if (onSelectCase) onSelectCase(targetId);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const targetId = selectedArticle.id || selectedArticle.audio_id;
+                        setSelectedArticle(null);
+                        if (onSelectCase) onSelectCase(targetId);
+                      }
+                    }}
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      <div
+                        className="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm flex-shrink-0"
+                        style={{ width: '42px', height: '42px' }}
+                      >
+                        <i className="bi bi-play-fill fs-4 ms-1"></i>
+                      </div>
+                      <div>
+                        <div className="fw-bold text-danger fs-6 mb-0">
+                          ▶ Bấm vào đây để chuyển sang trang có VIDEO hướng dẫn sơ cứu
+                        </div>
+                        <div className="small text-muted">
+                          Mở trang hướng dẫn chuyên sâu có video thực hành & trợ lý AI ReMi
+                        </div>
+                      </div>
+                    </div>
+                    <span className="badge bg-danger text-white px-3 py-2 fw-bold text-nowrap rounded-pill d-flex align-items-center gap-1 shadow-sm">
+                      <span>Xem video ngay</span>
+                      <i className="bi bi-arrow-right"></i>
+                    </span>
+                  </div>
+                )}
+
+                {/* VIDEO HƯỚNG DẪN TRỰC TIẾP TRONG MODAL */}
+                {selectedArticle.category === 'emergency' && findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.embedUrl && (
+                  <div className="my-3 p-3 bg-light rounded-3 border">
+                    <div className="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-1">
+                      <div className="fw-bold text-dark small d-flex align-items-center gap-2">
+                        <i className="bi bi-youtube text-danger fs-5"></i>
+                        <span>Video hướng dẫn: {findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.title}</span>
+                      </div>
+                      {findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.duration && (
+                        <span className="badge bg-secondary text-white small">
+                          {findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.duration}
+                        </span>
+                      )}
+                    </div>
+                    <div
+                      className="ratio ratio-16x9 rounded-3 overflow-hidden border bg-dark shadow-sm"
+                      style={{ borderRadius: '12px' }}
+                    >
+                      <iframe
+                        src={`${findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.embedUrl}?rel=0&modestbranding=1`}
+                        title={findVideoByCategory(selectedArticle.id || selectedArticle.audio_id)?.title || 'Video hướng dẫn'}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                )}
+
                 {/* CẤU TRÚC CHI TIẾT BỆNH LÝ (GROUP A) */}
                 {selectedArticle.category === 'disease_info' && (
                   <div className="p-3 rounded-3 mt-3" style={{ backgroundColor: 'var(--visi-background-soft)', border: '1.5px solid var(--visi-border)' }}>
@@ -271,14 +349,32 @@ export default function KnowledgePage() {
                 </div>
               </Modal.Body>
 
-              <Modal.Footer className="border-top-0 py-2">
-                <button
-                  type="button"
-                  className="btn btn-visi-primary w-100 py-2 fw-bold fs-5"
-                  onClick={() => setSelectedArticle(null)}
-                >
-                  ĐÃ HIỂU, ĐÓNG LẠI
-                </button>
+              <Modal.Footer className="border-top-0 pt-2 pb-3 px-4">
+                <div className="w-100 d-flex flex-column gap-2">
+                  {selectedArticle.category === 'emergency' && (
+                    <button
+                      type="button"
+                      className="btn btn-danger w-100 py-2 fw-bold fs-6 d-flex align-items-center justify-content-center gap-2 shadow"
+                      style={{ borderRadius: '12px', minHeight: '46px' }}
+                      onClick={() => {
+                        const targetId = selectedArticle.id || selectedArticle.audio_id;
+                        setSelectedArticle(null);
+                        if (onSelectCase) onSelectCase(targetId);
+                      }}
+                    >
+                      <i className="bi bi-play-circle-fill fs-5"></i>
+                      <span>CHUYỂN SANG TRANG CÓ VIDEO HƯỚNG DẪN SƠ CỨU →</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary w-100 py-2 fw-bold fs-6"
+                    style={{ borderRadius: '12px', minHeight: '44px' }}
+                    onClick={() => setSelectedArticle(null)}
+                  >
+                    ĐÃ HIỂU, ĐÓNG LẠI
+                  </button>
+                </div>
               </Modal.Footer>
             </>
           )}

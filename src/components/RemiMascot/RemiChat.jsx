@@ -20,30 +20,30 @@ export default function RemiChat({
 
   // Khởi tạo lời chào theo Context (Mục 11 & 12)
   useEffect(() => {
-    let initialGreeting = "👋 Xin chào! Remi đây. Bạn đang gặp vấn đề gì với mắt, hay muốn tìm hiểu thông tin sơ cứu/bệnh lý nào?";
+    let initialGreeting = "👋 Chào bạn! Cần Remi tư vấn gì về mắt hông?";
     let initialSuggestions = [
-      "Bụi bay vào mắt cộm xót",
+      "Bụi bay vào mắt",
       "Hóa chất bắn vào mắt",
-      "Mắt bị va đập bầm tím",
-      "Đau mắt đỏ có ghèn"
+      "Va đập bầm mắt",
+      "Đau mắt đỏ"
     ];
 
     // Nếu đang ở màn hình sơ cứu một ca cụ thể (selectedCase !== null)
     if (activePage === 'emergency' && selectedCaseId) {
       const foundCase = firstAidMap[selectedCaseId] || firstAidMap[String(selectedCaseId).toUpperCase()];
       if (foundCase) {
-        initialGreeting = `🐧 Remi chào bạn! Bạn đang xem hướng dẫn sơ cứu **${foundCase.title}** (${foundCase.id || selectedCaseId}). Bạn muốn Remi giải thích thêm điều gì về tình huống này không?`;
+        initialGreeting = `🐧 Bạn cần hỗ trợ gì về sơ cứu **${foundCase.title}** không?`;
         initialSuggestions = [
-          "Khi nào cần đi cấp cứu ngay?",
+          "Khi nào cần đi cấp cứu?",
           "Có được dụi mắt không?",
           "Cần làm gì đầu tiên?"
         ];
       }
     } else if (activePage === 'knowledge') {
-      initialGreeting = "👋 Chào bạn! Remi đang cùng bạn xem thư viện kiến thức mắt. Bạn muốn hỏi về tật khúc xạ (cận, viễn, loạn) hay các bệnh như đục thủy tinh thể, glôcôm?";
+      initialGreeting = "👋 Chào bạn! Bạn muốn tìm hiểu bệnh mắt hay tật khúc xạ nào?";
       initialSuggestions = [
         "Dấu hiệu bệnh Glôcôm",
-        "Cách phòng ngừa cận thị",
+        "Phòng ngừa cận thị",
         "Mắt khô mỏi nên làm gì?"
       ];
     }

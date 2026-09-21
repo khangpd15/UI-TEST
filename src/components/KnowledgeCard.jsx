@@ -154,8 +154,9 @@ export default function KnowledgeCard({ item, onSelect }) {
               <span>{buttonLabel}</span>
             </button>
 
-            <span className="fw-bold small text-visi-primary text-nowrap">
-              Xem chi tiết →
+            <span className={`fw-bold small ${isEmergency ? 'text-danger' : 'text-visi-primary'} text-nowrap d-flex align-items-center gap-1`}>
+              {isEmergency && <i className="bi bi-play-circle-fill"></i>}
+              <span>{isEmergency ? 'Xem video & chi tiết →' : 'Xem chi tiết →'}</span>
             </span>
           </div>
 

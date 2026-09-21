@@ -118,12 +118,20 @@ export function findVideoByCategory(categoryId) {
     return eyeCareVideos.find(v => v.id === 'V005' || v.category === 'PENETRATING_OBJECT');
   }
   // EM-03: Hóa chất bắn vào mắt sang V002
-  if (categoryId === 'CHEMICAL_EYE_EXPOSURE' || categoryId === 'EM-03') {
+  if (categoryId === 'CHEMICAL_EYE_EXPOSURE' || categoryId === 'EM-03' || categoryId === 'chemical-splash') {
     return eyeCareVideos.find(v => v.id === 'V002' || v.category === 'CHEMICAL_EYE_EXPOSURE');
   }
+  // EM-04: Bỏng nhiệt ở mắt
+  if (categoryId === 'THERMAL_EYE_BURN' || categoryId === 'THERMAL_BURN' || categoryId === 'EM-04' || categoryId === 'thermal-burn') {
+    return eyeCareVideos.find(v => v.category === 'THERMAL_EYE_BURN') || eyeCareVideos.find(v => v.id === 'V002') || eyeCareVideos[1];
+  }
   // EM-05: Chấn thương do va đập sang V003
-  if (categoryId === 'BLUNT_EYE_TRAUMA' || categoryId === 'EM-05') {
+  if (categoryId === 'BLUNT_EYE_TRAUMA' || categoryId === 'EM-05' || categoryId === 'blunt-trauma') {
     return eyeCareVideos.find(v => v.id === 'V003' || v.category === 'BLUNT_EYE_TRAUMA');
+  }
+  // EM-06: Tia hàn UV sang V004
+  if (categoryId === 'WELDING_UV_EXPOSURE' || categoryId === 'EM-06' || categoryId === 'welding-uv') {
+    return eyeCareVideos.find(v => v.id === 'V004' || v.category === 'WELDING_UV_EXPOSURE');
   }
   return eyeCareVideos.find(v => v.category === categoryId) || null;
 }

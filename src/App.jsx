@@ -103,7 +103,9 @@ export default function App() {
           )}
 
           {activePage === 'knowledge' && (
-            <KnowledgePage />
+            <KnowledgePage
+              onSelectCase={handleSelectProblem}
+            />
           )}
         </main>
 

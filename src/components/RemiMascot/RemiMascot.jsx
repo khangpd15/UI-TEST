@@ -3,34 +3,34 @@ import RemiPenguin from './RemiPenguin';
 import RemiChat from './RemiChat';
 import './remiMascot.css';
 
-// Danh sách câu nói khi chạy tới chính giữa màn hình (Ưu tiên câu user yêu cầu)
+// Danh sách câu nói ngắn gọn khi chạy tới chính giữa màn hình (Ưu tiên câu user yêu cầu)
 const CENTER_QUOTES = [
   "😜 Đố anh bắt được em!",
   "😜 Đố anh bắt được em!", // Tăng trọng số xuất hiện
-  "🏃‍♂️ Đố bạn bắt được Remi!",
-  "💨 Bắt hụt rùi nha lêu lêu!",
-  "⚡ Nhanh như một cơn gió!",
-  "😎 Thử bắt Remi xem nào!",
-  "🐧 Chạy ngay đi trước khi mắt mỏi!"
+  "🏃 Đố bắt được tui!",
+  "💨 Lêu lêu, hụt rùi!",
+  "⚡ Nhanh như chớp!",
+  "😎 Bắt tui thử coi!",
+  "🐧 Đố bắt được nè!"
 ];
 
-// Danh sách câu nói trend / mẹo chăm sóc mắt thú vị ở các vị trí khác
+// Danh sách câu nói trend / mẹo chăm sóc mắt ngắn gọn, súc tích
 const TREND_QUOTES = [
-  "👀 Mắt sáng ngời ngời dáng xinh nha!",
-  "🧊 20-20-20: Nhìn xa 6m thư giãn đi bạn!",
-  "✨ Đừng nhìn màn hình lâu quá đó nha!",
-  "🐧 Tui chỉ là chú chim cánh cụt thui mà!",
-  "💖 Bắt được Remi có thưởng lớn nha!",
-  "👁️ Giữ khoảng cách 50cm với màn hình nghen!",
-  "🌿 Cho mắt nghỉ ngơi 30 giây đi bạn ui!",
-  "🔥 Mắt khỏe để đu trend nha!",
-  "💧 Mỏi mắt thì chớp mắt vài cái nha!"
+  "👀 Mắt sáng xinh nha!",
+  "🧊 Nhìn xa 20s nhé!",
+  "✨ Nghỉ mắt tí nè!",
+  "🐧 Remi cánh cụt nè!",
+  "💖 Bắt tui có quà nha!",
+  "👁️ Đừng nhìn sát quá!",
+  "🌿 Thư giãn mắt tí!",
+  "🔥 Mắt khỏe đu trend!",
+  "💧 Chớp mắt vài cái!"
 ];
 
 const HOME_QUOTES = [
-  "👋 Cần Remi tư vấn mắt gì không?",
-  "🐧 Bạn muốn hỏi gì cứ bấm Remi nha!",
-  "💡 Cần sơ cứu mắt gì cứ hỏi Remi nghen!"
+  "👋 Cần Remi giúp hông?",
+  "🐧 Bấm tui để hỏi nha!",
+  "💡 Cần sơ cứu hỏi tui!"
 ];
 
 /**
@@ -53,7 +53,7 @@ export default function RemiMascot({
   const [restAction, setRestAction] = useState('idle'); // 'idle' | 'jump' | 'tilt'
   const [isFeetActive, setIsFeetActive] = useState(false); // Quạt chân khi đang chạy
   const [showBubble, setShowBubble] = useState(false);
-  const [bubbleText, setBubbleText] = useState('👋 Xin chào! Cần Remi giúp gì không?');
+  const [bubbleText, setBubbleText] = useState('👋 Chào bạn nè!');
   const [isMobile, setIsMobile] = useState(false);
 
   const timersRef = useRef([]);
@@ -85,9 +85,9 @@ export default function RemiMascot({
   useEffect(() => {
     clearAllTimers();
 
-    let initialGreeting = '👋 Xin chào! Cần Remi giúp gì không?';
+    let initialGreeting = '👋 Chào bạn nè!';
     if (activePage === 'emergency' && selectedCaseId) {
-      initialGreeting = '🐧 Bạn cần Remi hỗ trợ tình huống này không?';
+      initialGreeting = '🐧 Cần Remi giúp hông?';
     }
 
     setMode('entering');
