@@ -1,6 +1,7 @@
 /* ==========================================================================
    REMI FLOATING MASCOT & CHATBOT STYLES
    Mascot chim cánh cụt Remi - Bạn đồng hành chăm sóc mắt
+   Tích hợp hiệu ứng chạy ngang màn hình (Full Screen Sprint) và Khói/Bụi (Smoke/Dust Puffs)
    ========================================================================== */
 
 /* --- Biến màu & thiết lập chung --- */
@@ -13,24 +14,126 @@
   --remi-shadow-chat: 0 16px 48px rgba(7, 95, 102, 0.24);
 }
 
-/* --- Container Mascot Floating --- */
-.remi-mascot-wrapper {
+/* --- Trục đường chạy ngang màn hình (Mascot Track) --- */
+.remi-mascot-track {
   position: fixed;
+  left: 20px;
   right: 20px;
   bottom: 86px;
+  height: 80px;
   z-index: 1048;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
   pointer-events: none;
 }
 
-/* Cho phép click vào các thành phần bên trong */
-.remi-mascot-wrapper > * {
+/* Khung chứa mascot di chuyển dọc theo trục */
+.remi-runner-container {
+  position: absolute;
+  bottom: 0;
   pointer-events: auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
 }
 
-/* Nút Mascot Trigger */
+/* Khi đang nghỉ tại căn cứ góc phải */
+.remi-runner-container.remi-at-home {
+  left: calc(100% - 75px);
+  transform: scaleX(1);
+}
+
+/* Khi chạy từ ngoài màn hình vào lúc mở trang */
+.remi-runner-container.remi-entering {
+  animation: remiEntranceAcross 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes remiEntranceAcross {
+  0% {
+    left: calc(100% + 80px);
+    transform: scaleX(-1);
+  }
+  75% {
+    left: calc(100% - 75px);
+    transform: scaleX(-1);
+  }
+  88% {
+    left: calc(100% - 75px);
+    transform: scaleX(1) translateY(-10px);
+  }
+  100% {
+    left: calc(100% - 75px);
+    transform: scaleX(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
+   HÀNH ĐỘNG CHẠY TỪ CUỐI MÀN HÌNH BÊN NÀY QUA BÊN KIA (FULL SCREEN SPRINT)
+   ========================================================================== */
+.remi-runner-container.remi-sprinting-across {
+  animation: remiSprintAcrossTrack 14s infinite ease-in-out;
+}
+
+/* Tạm dừng chạy khi rê chuột vào để người dùng dễ bấm */
+.remi-runner-container.remi-sprinting-across:hover,
+.remi-runner-container.remi-sprinting-across:hover * {
+  animation-play-state: paused !important;
+}
+
+@keyframes remiSprintAcrossTrack {
+  /* 1. Bắt đầu từ mép phải màn hình, quay mặt sang trái */
+  0% {
+    left: calc(100% - 75px);
+    transform: scaleX(-1);
+  }
+  /* 2. Lon ton chạy hết tốc lực từ phải sang tận cùng bên trái màn hình */
+  2% {
+    left: calc(100% - 75px);
+    transform: scaleX(-1);
+  }
+  40% {
+    left: 8px;
+    transform: scaleX(-1);
+  }
+  /* 3. Phanh lại ở mép trái, quay mặt chính diện chào người dùng */
+  42% {
+    left: 8px;
+    transform: scaleX(1) translateY(0);
+  }
+  /* 4. Nhảy mừng rỡ tại mép trái màn hình */
+  46% {
+    left: 8px;
+    transform: scaleX(1) translateY(-16px);
+  }
+  50% {
+    left: 8px;
+    transform: scaleX(1) translateY(0);
+  }
+  /* 5. Đứng thở, quan sát một chút */
+  54% {
+    left: 8px;
+    transform: scaleX(1);
+  }
+  /* 6. Quay người sang phải và bắt đầu chạy trở lại mép phải */
+  56% {
+    left: 8px;
+    transform: scaleX(1);
+  }
+  94% {
+    left: calc(100% - 75px);
+    transform: scaleX(1);
+  }
+  /* 7. Phanh lại ở mép phải, nhảy nhẹ mừng rỡ hoàn thành vòng chạy */
+  96% {
+    left: calc(100% - 75px);
+    transform: scaleX(1) translateY(-10px);
+  }
+  100% {
+    left: calc(100% - 75px);
+    transform: scaleX(1) translateY(0);
+  }
+}
+
+/* Nút bấm Mascot */
 .remi-trigger-btn {
   position: relative;
   background: transparent;
@@ -43,8 +146,8 @@
   outline: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: filter 0.2s ease;
-  filter: drop-shadow(0 8px 18px rgba(7, 95, 102, 0.26));
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0 8px 18px rgba(7, 95, 102, 0.28));
 }
 
 .remi-trigger-btn:focus-visible {
@@ -54,7 +157,269 @@
 }
 
 .remi-trigger-btn:hover {
-  filter: drop-shadow(0 12px 24px rgba(7, 95, 102, 0.35));
+  transform: translateY(-4px) scale(1.08);
+  filter: drop-shadow(0 12px 26px rgba(7, 95, 102, 0.4));
+}
+
+/* ==========================================================================
+   HIỆU ỨNG KHÓI / BỤI PHÌ PHÌ SAU GÓT CHÂN (CARTOON SMOKE & DUST PUFFS)
+   ========================================================================== */
+.remi-smoke-trail {
+  position: absolute;
+  bottom: 6px;
+  left: -24px; /* Nằm ngay phía sau gót chân */
+  width: 64px;
+  height: 36px;
+  pointer-events: none;
+  z-index: -1;
+  /* Khói chỉ hiện trong các giai đoạn đang chạy của chu kỳ */
+  animation: remiSprintSmokeCycle 14s infinite ease-in-out;
+}
+
+/* Ẩn khói khi đứng yên */
+.remi-at-home .remi-smoke-trail {
+  display: none;
+}
+
+@keyframes remiSprintSmokeCycle {
+  0%, 1.9% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  2%, 39.9% {
+    opacity: 1;
+    visibility: visible;
+  }
+  40%, 55.9% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  56%, 93.9% {
+    opacity: 1;
+    visibility: visible;
+  }
+  94%, 100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Từng đám mây khói tròn cuồn cuộn bay ra */
+.remi-puff {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #E0F2FE 45%, #BAE6FD 80%, rgba(186, 230, 253, 0) 100%);
+  border: 1px solid rgba(14, 116, 144, 0.22);
+  box-shadow: 0 2px 8px rgba(11, 127, 134, 0.18);
+  opacity: 0;
+}
+
+.puff-1 {
+  width: 18px;
+  height: 16px;
+  left: 0;
+  animation: remiDustBillow 0.4s infinite ease-out;
+  animation-delay: 0s;
+}
+
+.puff-2 {
+  width: 24px;
+  height: 20px;
+  left: 10px;
+  animation: remiDustBillow 0.4s infinite ease-out;
+  animation-delay: 0.08s;
+}
+
+.puff-3 {
+  width: 28px;
+  height: 22px;
+  left: 20px;
+  animation: remiDustBillow 0.4s infinite ease-out;
+  animation-delay: 0.16s;
+}
+
+.puff-4 {
+  width: 20px;
+  height: 18px;
+  left: 32px;
+  animation: remiDustBillow 0.4s infinite ease-out;
+  animation-delay: 0.24s;
+}
+
+.puff-5 {
+  width: 15px;
+  height: 14px;
+  left: 42px;
+  animation: remiDustBillow 0.4s infinite ease-out;
+  animation-delay: 0.32s;
+}
+
+@keyframes remiDustBillow {
+  0% {
+    transform: scale(0.25) translate(0, 0);
+    opacity: 0.95;
+  }
+  40% {
+    transform: scale(1.1) translate(14px, -6px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.5) translate(28px, -14px);
+    opacity: 0;
+  }
+}
+
+/* Vệt tia tốc độ khi chạy */
+.remi-spark {
+  position: absolute;
+  height: 2.5px;
+  background: #0284C7;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+.spark-1 {
+  width: 16px;
+  bottom: 8px;
+  left: 4px;
+  animation: remiSparkFly 0.35s infinite ease-out;
+}
+
+.spark-2 {
+  width: 11px;
+  bottom: 18px;
+  left: 16px;
+  animation: remiSparkFly 0.35s infinite ease-out 0.16s;
+}
+
+@keyframes remiSparkFly {
+  0% {
+    transform: translateX(0);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(26px);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   HOẠT ẢNH CHÂN & CÁNH ĐẦY SỐNG ĐỘNG (KHÔNG BỊ ĐƠ)
+   ========================================================================== */
+
+/* Chân đạp liên tục tốc độ cao (Looney Tunes style pitter-patter) */
+.remi-is-sprinting .remi-foot-left {
+  animation: remiSprintFootLeft 0.16s infinite alternate ease-in-out;
+  transform-origin: 40px 88px;
+}
+
+.remi-is-sprinting .remi-foot-right {
+  animation: remiSprintFootRight 0.16s infinite alternate ease-in-out;
+  transform-origin: 60px 88px;
+}
+
+@keyframes remiSprintFootLeft {
+  0% {
+    transform: translate(-5px, 1px) rotate(-20deg);
+  }
+  100% {
+    transform: translate(6px, -8px) rotate(25deg);
+  }
+}
+
+@keyframes remiSprintFootRight {
+  0% {
+    transform: translate(6px, -8px) rotate(25deg);
+  }
+  100% {
+    transform: translate(-5px, 1px) rotate(-20deg);
+  }
+}
+
+/* Thân người chúi về phía trước khi phi nước đại */
+.remi-is-sprinting .remi-penguin-svg {
+  animation: remiSprintLean 0.16s infinite alternate ease-in-out;
+  transform-origin: 50px 88px;
+}
+
+@keyframes remiSprintLean {
+  0% {
+    transform: rotate(8deg) translateY(0);
+  }
+  100% {
+    transform: rotate(14deg) translateY(-5px);
+  }
+}
+
+/* Cánh đập lia lịa giữ thăng bằng khi chạy */
+.remi-is-sprinting .remi-wing-left {
+  animation: remiSprintWingLeft 0.16s infinite alternate ease-in-out;
+  transform-origin: 24px 52px;
+}
+
+.remi-is-sprinting .remi-wing-right {
+  animation: remiSprintWingRight 0.16s infinite alternate ease-in-out;
+  transform-origin: 76px 52px;
+}
+
+@keyframes remiSprintWingLeft {
+  0% {
+    transform: rotate(-28deg);
+  }
+  100% {
+    transform: rotate(22deg);
+  }
+}
+
+@keyframes remiSprintWingRight {
+  0% {
+    transform: rotate(28deg);
+  }
+  100% {
+    transform: rotate(-22deg);
+  }
+}
+
+/* ==========================================================================
+   CÁC TRẠNG THÁI NGHỈ / NHẢY / NGHIÊNG ĐẦU KHI Ở GÓC
+   ========================================================================== */
+
+/* Nhảy nhẹ tại chỗ */
+.remi-anim-jump {
+  animation: remiJumpAnim 1.1s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes remiJumpAnim {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  30% {
+    transform: translateY(-14px) scale(0.96, 1.08);
+  }
+  55% {
+    transform: translateY(0) scale(1.05, 0.93);
+  }
+  75% {
+    transform: translateY(-4px) scale(0.99, 1.01);
+  }
+}
+
+/* Nghiêng đầu tò mò */
+.remi-anim-tilt {
+  animation: remiTiltAnim 1.5s ease-in-out;
+}
+
+@keyframes remiTiltAnim {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(-10deg);
+  }
+  70% {
+    transform: rotate(8deg);
+  }
 }
 
 /* Vòng badge thông báo nhỏ trên đầu Remi */
@@ -86,7 +451,7 @@
 .remi-greeting-bubble {
   position: absolute;
   bottom: calc(100% + 12px);
-  right: 4px;
+  right: -8px;
   background: #FFFFFF;
   color: #0F172A;
   border: 1.5px solid #C4E5E5;
@@ -102,12 +467,11 @@
   z-index: 1048;
 }
 
-/* Đuôi bóng thoại */
 .remi-greeting-bubble::after {
   content: '';
   position: absolute;
   bottom: -7px;
-  right: 22px;
+  right: 24px;
   width: 12px;
   height: 12px;
   background: #FFFFFF;
@@ -132,236 +496,8 @@
 }
 
 /* ==========================================================================
-   HÀNH ĐỘNG CHẠY QUA CHẠY LẠI & CỬ ĐỘNG MASCOT (Mục 4 & 5)
+   KHUNG CHAT PANEL (REMI CHAT)
    ========================================================================== */
-
-/* 1. Hành động bước vào khi mở trang (Entrance Walk) */
-.remi-entrance-walk {
-  animation: remiEntranceWalkAnim 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes remiEntranceWalkAnim {
-  0% {
-    opacity: 0;
-    transform: translateX(90px) scaleX(-1);
-  }
-  20% {
-    opacity: 1;
-    transform: translateX(65px) scaleX(-1) translateY(-3px);
-  }
-  40% {
-    transform: translateX(45px) scaleX(-1) translateY(0);
-  }
-  60% {
-    transform: translateX(20px) scaleX(-1) translateY(-3px);
-  }
-  80% {
-    transform: translateX(0px) scaleX(-1) translateY(0);
-  }
-  90% {
-    transform: translateX(0px) scaleX(1) translateY(-6px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px) scaleX(1) translateY(0);
-  }
-}
-
-/* 2. Hành động chạy qua chạy lại một đoạn trên màn hình (Patrol Walk) */
-.remi-anim-patrol {
-  animation: remiPatrolWalk 5s ease-in-out forwards;
-}
-
-@keyframes remiPatrolWalk {
-  0% {
-    transform: translateX(0) scaleX(1);
-  }
-  /* Quay mặt sang trái */
-  4% {
-    transform: translateX(0) scaleX(-1);
-  }
-  /* Lon ton chạy sang trái */
-  12% {
-    transform: translateX(-18px) scaleX(-1) translateY(-3px);
-  }
-  20% {
-    transform: translateX(-36px) scaleX(-1) translateY(0);
-  }
-  28% {
-    transform: translateX(-54px) scaleX(-1) translateY(-3px);
-  }
-  36% {
-    transform: translateX(-70px) scaleX(-1) translateY(0);
-  }
-  /* Dừng lại ở bên trái, quay mặt chính diện và nhảy nhẹ chào người dùng */
-  42% {
-    transform: translateX(-70px) scaleX(1) translateY(0);
-  }
-  48% {
-    transform: translateX(-70px) scaleX(1) translateY(-8px);
-  }
-  54% {
-    transform: translateX(-70px) scaleX(1) translateY(0);
-  }
-  58% {
-    /* Đứng quan sát một chút */
-    transform: translateX(-70px) scaleX(1) translateY(0);
-  }
-  /* Quay người sang phải và bắt đầu chạy về */
-  62% {
-    transform: translateX(-70px) scaleX(1);
-  }
-  70% {
-    transform: translateX(-52px) scaleX(1) translateY(-3px);
-  }
-  78% {
-    transform: translateX(-34px) scaleX(1) translateY(0);
-  }
-  86% {
-    transform: translateX(-16px) scaleX(1) translateY(-3px);
-  }
-  94% {
-    transform: translateX(0) scaleX(1) translateY(-2px);
-  }
-  100% {
-    transform: translateX(0) scaleX(1) translateY(0);
-  }
-}
-
-/* Các vi chuyển động chân, cánh, thân hình khi Remi chạy */
-.remi-anim-patrol .remi-foot-left,
-.remi-entrance-walk .remi-foot-left {
-  animation: remiFootPatterLeft 0.28s infinite alternate ease-in-out;
-  transform-origin: 40px 88px;
-}
-
-.remi-anim-patrol .remi-foot-right,
-.remi-entrance-walk .remi-foot-right {
-  animation: remiFootPatterRight 0.28s infinite alternate ease-in-out;
-  transform-origin: 60px 88px;
-}
-
-@keyframes remiFootPatterLeft {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-4px) scaleY(0.9);
-  }
-}
-
-@keyframes remiFootPatterRight {
-  0% {
-    transform: translateY(-4px) scaleY(0.9);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.remi-anim-patrol .remi-wing-left,
-.remi-entrance-walk .remi-wing-left {
-  animation: remiWingFlapLeft 0.28s infinite alternate ease-in-out;
-  transform-origin: 24px 52px;
-}
-
-.remi-anim-patrol .remi-wing-right,
-.remi-entrance-walk .remi-wing-right {
-  animation: remiWingFlapRight 0.28s infinite alternate ease-in-out;
-  transform-origin: 76px 52px;
-}
-
-@keyframes remiWingFlapLeft {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-14deg);
-  }
-}
-
-@keyframes remiWingFlapRight {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(14deg);
-  }
-}
-
-.remi-anim-patrol .remi-body-group,
-.remi-entrance-walk .remi-body-group {
-  animation: remiBodyWaddle 0.28s infinite alternate ease-in-out;
-  transform-origin: 50px 80px;
-}
-
-@keyframes remiBodyWaddle {
-  0% {
-    transform: rotate(-3.5deg);
-  }
-  100% {
-    transform: rotate(3.5deg);
-  }
-}
-
-/* 3. Nhảy nhẹ (Jump) */
-.remi-anim-jump {
-  animation: remiJumpAnim 1.1s cubic-bezier(0.28, 0.84, 0.42, 1);
-}
-
-@keyframes remiJumpAnim {
-  0%, 100% {
-    transform: translateY(0) scale(1, 1);
-  }
-  30% {
-    transform: translateY(-12px) scale(0.96, 1.06);
-  }
-  55% {
-    transform: translateY(0) scale(1.04, 0.94);
-  }
-  75% {
-    transform: translateY(-4px) scale(0.99, 1.01);
-  }
-}
-
-/* 4. Nghiêng đầu tò mò (Tilt) */
-.remi-anim-tilt {
-  animation: remiTiltAnim 1.5s ease-in-out;
-}
-
-@keyframes remiTiltAnim {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  35% {
-    transform: rotate(-9deg);
-  }
-  70% {
-    transform: rotate(7deg);
-  }
-}
-
-/* 5. Lắc lư nhẹ tại chỗ (Waddle in place) */
-.remi-anim-waddle {
-  animation: remiWaddleAnim 1.6s ease-in-out;
-}
-
-@keyframes remiWaddleAnim {
-  0%, 100% {
-    transform: rotate(0deg) translateX(0);
-  }
-  25% {
-    transform: rotate(-5deg) translateX(-4px);
-  }
-  50% {
-    transform: rotate(0deg) translateX(0);
-  }
-  75% {
-    transform: rotate(5deg) translateX(4px);
-  }
-}
-
-/* --- Khung Chat Panel (RemiChat) --- */
 .remi-chat-panel {
   position: fixed;
   bottom: 86px;
@@ -448,7 +584,6 @@
   background-color: #FBFDFD;
 }
 
-/* Tùy chỉnh thanh cuộn body chat */
 .remi-chat-body::-webkit-scrollbar {
   width: 5px;
 }
@@ -596,32 +731,14 @@
 
 /* --- Hỗ trợ Thiết bị Di Động & Trình Giả Lập Điện Thoại --- */
 @media (max-width: 576px) {
-  .remi-mascot-wrapper {
-    right: 14px;
+  .remi-mascot-track {
+    left: 10px;
+    right: 10px;
     bottom: 82px;
   }
 
-  /* Giảm biên độ chạy trên màn hình nhỏ để không tràn */
-  @keyframes remiPatrolWalk {
-    0% { transform: translateX(0) scaleX(1); }
-    4% { transform: translateX(0) scaleX(-1); }
-    15% { transform: translateX(-14px) scaleX(-1) translateY(-2px); }
-    30% { transform: translateX(-38px) scaleX(-1) translateY(0); }
-    40% { transform: translateX(-38px) scaleX(1) translateY(0); }
-    48% { transform: translateX(-38px) scaleX(1) translateY(-6px); }
-    54% { transform: translateX(-38px) scaleX(1) translateY(0); }
-    62% { transform: translateX(-38px) scaleX(1); }
-    75% { transform: translateX(-16px) scaleX(1) translateY(-2px); }
-    92% { transform: translateX(0) scaleX(1) translateY(-2px); }
-    100% { transform: translateX(0) scaleX(1) translateY(0); }
-  }
-
-  @keyframes remiEntranceWalkAnim {
-    0% { opacity: 0; transform: translateX(60px) scaleX(-1); }
-    60% { opacity: 1; transform: translateX(15px) scaleX(-1) translateY(-2px); }
-    85% { transform: translateX(0px) scaleX(-1) translateY(0); }
-    92% { transform: translateX(0px) scaleX(1) translateY(-5px); }
-    100% { opacity: 1; transform: translateX(0px) scaleX(1) translateY(0); }
+  .remi-runner-container.remi-at-home {
+    left: calc(100% - 60px);
   }
 
   .remi-chat-panel {
@@ -642,9 +759,10 @@
 }
 
 /* Tích hợp an toàn với Device Simulator (khung điện thoại) */
-.phone-mockup-frame .remi-mascot-wrapper {
+.phone-mockup-frame .remi-mascot-track {
   position: absolute;
-  right: 14px;
+  left: 10px;
+  right: 10px;
   bottom: 80px;
   z-index: 95;
 }
@@ -660,9 +778,11 @@
 
 /* --- Tôn trọng Accessibility: prefers-reduced-motion --- */
 @media (prefers-reduced-motion: reduce) {
-  .remi-entrance-walk,
-  .remi-anim-patrol,
-  .remi-anim-waddle,
+  .remi-runner-container.remi-sprinting-across,
+  .remi-runner-container.remi-entering,
+  .remi-smoke-trail,
+  .remi-puff,
+  .remi-spark,
   .remi-anim-jump,
   .remi-anim-tilt,
   .remi-badge-ping,
@@ -673,10 +793,9 @@
   .remi-foot-right,
   .remi-wing-left,
   .remi-wing-right,
-  .remi-body-group {
+  .remi-penguin-svg {
     animation: none !important;
     transition: none !important;
-    transform: none !important;
   }
 
   .remi-trigger-btn:hover {

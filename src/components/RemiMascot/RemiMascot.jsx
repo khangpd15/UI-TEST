@@ -6,7 +6,11 @@ import './remiMascot.css';
 /**
  * RemiMascot: Floating Mascot Chatbot "Remi"
  * Chú chim cánh cụt nhỏ đồng hành chăm sóc mắt cho REMiCare
- * Có khả năng chạy lon ton qua lại trên màn hình, nhảy và tương tác thân thiện
+ * Khả năng:
+ * - Chạy từ mép màn hình bên này sang bên kia màn hình (Full Screen Sprint)
+ * - Tỏa khói/bụi chân phì phì sau gót chân cực kỳ sống động
+ * - Dừng lại nhảy mừng rỡ, ngó nghiêng chào người dùng
+ * - Click vào bất cứ lúc nào để mở khung chat tư vấn
  */
 export default function RemiMascot({
   activePage = 'home',
@@ -14,16 +18,17 @@ export default function RemiMascot({
   onSelectCase
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  // Trạng thái hoạt ảnh: 'entrance' | 'idle' | 'patrol' | 'jump' | 'tilt'
-  const [animState, setAnimState] = useState('entrance');
+  // Trạng thái: 'entering' | 'resting' | 'sprinting'
+  const [mode, setMode] = useState('entering');
+  const [restAction, setRestAction] = useState('idle'); // 'idle' | 'jump' | 'tilt'
   const [showGreeting, setShowGreeting] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [greetingText, setGreetingText] = useState('👋 Xin chào! Cần Remi giúp gì không?');
   const greetingTimerRef = useRef(null);
-  const idleIntervalRef = useRef(null);
-  const animResetTimerRef = useRef(null);
+  const sprintCycleTimerRef = useRef(null);
+  const restActionTimerRef = useRef(null);
 
-  // 1. Kiểm tra kích thước màn hình để responsive kích cỡ mascot (Desktop 64-80px, Mobile 52-64px)
+  // 1. Kiểm tra kích thước màn hình để responsive kích cỡ mascot (Desktop 70px, Mobile 56px)
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 576);
@@ -33,87 +38,73 @@ export default function RemiMascot({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // 2. Hiệu ứng bước vào màn hình (Entrance Walk) khi tải trang + Speech Bubble
+  // 2. Hiệu ứng xuất hiện (Entrance) khi mở trang + Speech Bubble
   useEffect(() => {
-    // Nếu đang ở trang sơ cứu một case cụ thể, cập nhật câu chào ngữ cảnh
     if (activePage === 'emergency' && selectedCaseId) {
       setGreetingText('🐧 Bạn cần Remi hỗ trợ tình huống này không?');
     } else {
       setGreetingText('👋 Xin chào! Cần Remi giúp gì không?');
     }
 
-    // Remi chạy từ ngoài vào vị trí trong 1.8s
-    setAnimState('entrance');
-    const entranceTimer = setTimeout(() => {
-      setAnimState('idle');
+    setMode('entering');
+    const enterTimer = setTimeout(() => {
+      setMode('resting');
       setShowGreeting(true);
 
       // Tự biến mất speech bubble sau 4.5 giây
       greetingTimerRef.current = setTimeout(() => {
         setShowGreeting(false);
+        // Bắt đầu chu kỳ chạy qua lại màn hình kèm khói
+        setMode('sprinting');
       }, 4500);
     }, 1800);
 
     return () => {
-      clearTimeout(entranceTimer);
+      clearTimeout(enterTimer);
       if (greetingTimerRef.current) clearTimeout(greetingTimerRef.current);
     };
   }, [activePage, selectedCaseId]);
 
-  // 3. Chu kỳ hoạt động sống động: Chạy qua chạy lại (Patrol), Nhảy (Jump), Nghiêng đầu (Tilt)
+  // 3. Chu kỳ chuyển đổi giữa Chạy hết màn hình (Sprinting) và Nghỉ tại căn cứ (Resting)
   useEffect(() => {
-    if (isOpen) {
-      setAnimState('idle');
-      return;
+    if (isOpen || mode === 'entering') return;
+
+    if (mode === 'sprinting') {
+      // Một vòng chạy qua chạy lại hết 14 giây
+      sprintCycleTimerRef.current = setTimeout(() => {
+        // Sau 1 vòng chạy hết màn hình, Remi dừng nghỉ 5 giây tại căn cứ
+        setMode('resting');
+        setRestAction('jump');
+
+        restActionTimerRef.current = setTimeout(() => {
+          setRestAction('idle');
+        }, 1500);
+      }, 14000);
+    } else if (mode === 'resting') {
+      // Nghỉ 5 giây rồi tiếp tục phi nước đại qua lại màn hình
+      sprintCycleTimerRef.current = setTimeout(() => {
+        setMode('sprinting');
+      }, 5000);
     }
 
-    // Danh sách các hành động có trọng số để ưu tiên chạy qua chạy lại (patrol)
-    const actionPool = ['patrol', 'patrol', 'patrol', 'jump', 'tilt'];
-    let actionIndex = 0;
-
-    // Bắt đầu chu kỳ cử động sau khi lời chào ban đầu kết thúc
-    const startIdleCycle = () => {
-      idleIntervalRef.current = setInterval(() => {
-        const nextAction = actionPool[actionIndex % actionPool.length];
-        actionIndex++;
-        setAnimState(nextAction);
-
-        // Thời gian reset về idle tương ứng theo từng chuyển động
-        let duration = 5000; // 'patrol' kéo dài 5s
-        if (nextAction === 'jump') duration = 1200;
-        if (nextAction === 'tilt') duration = 1500;
-
-        if (animResetTimerRef.current) clearTimeout(animResetTimerRef.current);
-        animResetTimerRef.current = setTimeout(() => {
-          setAnimState('idle');
-        }, duration);
-      }, 8500);
-    };
-
-    // Khởi động chu kỳ sau 5 giây để không chồng chéo với entrance
-    const initialDelay = setTimeout(startIdleCycle, 5000);
-
     return () => {
-      clearTimeout(initialDelay);
-      if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
-      if (animResetTimerRef.current) clearTimeout(animResetTimerRef.current);
+      if (sprintCycleTimerRef.current) clearTimeout(sprintCycleTimerRef.current);
+      if (restActionTimerRef.current) clearTimeout(restActionTimerRef.current);
     };
-  }, [isOpen]);
+  }, [mode, isOpen]);
 
-  // Mở Chat khi click vào Remi
+  // Mở Chat khi click vào Remi ở bất cứ vị trí nào trên đường chạy
   const handleToggleChat = () => {
     if (!isOpen) {
-      // Dừng ngay mọi cử động chạy và nhảy nhẹ mở chat
-      if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
-      if (animResetTimerRef.current) clearTimeout(animResetTimerRef.current);
-      setAnimState('jump');
+      if (sprintCycleTimerRef.current) clearTimeout(sprintCycleTimerRef.current);
+      if (restActionTimerRef.current) clearTimeout(restActionTimerRef.current);
       setShowGreeting(false);
-      if (greetingTimerRef.current) clearTimeout(greetingTimerRef.current);
+      setMode('resting');
+      setRestAction('jump');
 
       setTimeout(() => {
         setIsOpen(true);
-        setAnimState('idle');
-      }, 250);
+      }, 200);
     } else {
       setIsOpen(false);
     }
@@ -122,18 +113,25 @@ export default function RemiMascot({
   // Đóng Chat
   const handleCloseChat = () => {
     setIsOpen(false);
-    setAnimState('idle');
+    setMode('resting');
+    setRestAction('idle');
   };
 
-  // Kích cỡ mascot: Desktop: 70px (trong khoảng 64–80px), Mobile: 56px (trong khoảng 52–64px)
+  // Kích cỡ mascot
   const mascotSize = isMobile ? 56 : 70;
 
-  // Lớp CSS theo trạng thái cử động
-  const getAnimationClass = () => {
-    if (animState === 'entrance') return 'remi-entrance-walk';
-    if (animState === 'patrol') return 'remi-anim-patrol';
-    if (animState === 'jump') return 'remi-anim-jump';
-    if (animState === 'tilt') return 'remi-anim-tilt';
+  // Lớp CSS của khung chạy dọc theo trục màn hình
+  const getRunnerClass = () => {
+    if (mode === 'entering') return 'remi-entering';
+    if (mode === 'sprinting') return 'remi-sprinting-across';
+    return 'remi-at-home';
+  };
+
+  // Lớp CSS của nút mascot
+  const getButtonClass = () => {
+    if (mode === 'sprinting') return 'remi-is-sprinting';
+    if (mode === 'resting' && restAction === 'jump') return 'remi-anim-jump';
+    if (mode === 'resting' && restAction === 'tilt') return 'remi-anim-tilt';
     return '';
   };
 
@@ -149,38 +147,52 @@ export default function RemiMascot({
         />
       )}
 
-      {/* Floating Mascot Button */}
-      <div className="remi-mascot-wrapper">
-        {/* Speech Bubble hiển thị ngắn khi vào trang (chỉ hiện khi không đang chạy) */}
-        {!isOpen && showGreeting && animState !== 'patrol' && (
-          <div
-            className="remi-greeting-bubble"
-            onClick={handleToggleChat}
-            role="status"
-            aria-live="polite"
-          >
-            <span className="fw-semibold">{greetingText}</span>
+      {/* Trục đường chạy ngang màn hình (Mascot Track từ cuối màn hình này qua bên kia) */}
+      {!isOpen && (
+        <div className="remi-mascot-track" aria-label="Mascot Remi đang tuần tra">
+          <div className={`remi-runner-container ${getRunnerClass()}`}>
+            {/* Speech Bubble hiển thị khi Remi đang nghỉ ở góc */}
+            {showGreeting && mode === 'resting' && (
+              <div
+                className="remi-greeting-bubble"
+                onClick={handleToggleChat}
+                role="status"
+                aria-live="polite"
+              >
+                <span className="fw-semibold">{greetingText}</span>
+              </div>
+            )}
+
+            {/* Nút Mascot Trigger có thể click bất cứ lúc nào */}
+            <button
+              type="button"
+              className={`remi-trigger-btn ${getButtonClass()}`}
+              onClick={handleToggleChat}
+              aria-label="Mở trợ lý chăm sóc mắt Remi"
+              title="Bấm vào Remi để hỏi về mắt!"
+            >
+              {/* Hiệu ứng khói / bụi chân chạy phì phì (Cartoon Dust/Smoke Trail) */}
+              <div className="remi-smoke-trail" aria-hidden="true">
+                <span className="remi-puff puff-1"></span>
+                <span className="remi-puff puff-2"></span>
+                <span className="remi-puff puff-3"></span>
+                <span className="remi-puff puff-4"></span>
+                <span className="remi-puff puff-5"></span>
+                <span className="remi-spark spark-1"></span>
+                <span className="remi-spark spark-2"></span>
+              </div>
+
+              <RemiPenguin
+                size={mascotSize}
+                animation={mode === 'sprinting' ? 'waddle' : restAction}
+              />
+
+              {/* Chấm tròn báo hiệu sẵn sàng khi nghỉ */}
+              {mode === 'resting' && <span className="remi-badge-ping" aria-hidden="true"></span>}
+            </button>
           </div>
-        )}
-
-        {/* Nút Mascot Trigger với animation chạy qua chạy lại */}
-        <button
-          type="button"
-          className={`remi-trigger-btn ${getAnimationClass()}`}
-          onClick={handleToggleChat}
-          aria-label={isOpen ? "Đóng trợ lý Remi" : "Mở trợ lý chăm sóc mắt Remi"}
-          aria-expanded={isOpen}
-          title="Trợ lý Remi - Bạn đồng hành chăm sóc mắt"
-        >
-          <RemiPenguin
-            size={mascotSize}
-            animation={isOpen ? 'idle' : animState}
-          />
-
-          {/* Chấm tròn báo hiệu sẵn sàng */}
-          {!isOpen && <span className="remi-badge-ping" aria-hidden="true"></span>}
-        </button>
-      </div>
+        </div>
+      )}
     </>
   );
 }
