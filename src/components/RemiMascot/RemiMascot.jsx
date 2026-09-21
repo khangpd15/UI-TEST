@@ -158,7 +158,7 @@ export default function RemiMascot({
         setShowBubble(true);
       }, 15000);
 
-      // Hoàn thành vòng chạy 16s, chuyển sang nghỉ ngơi
+      // Hoàn thành vòng chạy 16s, chuyển sang trạng thái nghỉ 30 giây
       addTimer(() => {
         setMode('resting');
         setRestAction('jump');
@@ -166,16 +166,35 @@ export default function RemiMascot({
         addTimer(() => {
           setRestAction('idle');
         }, 1500);
-
-        // Sau 4 giây nghỉ, ẩn bubble và bắt đầu chu kỳ chạy tiếp theo
-        addTimer(() => {
-          setShowBubble(false);
-          setMode('sprinting');
-        }, 4500);
       }, 16000);
 
     } else if (mode === 'resting') {
       setIsFeetActive(false);
+
+      // --- CHU KỲ NGHỈ 30 GIÂY TRƯỚC LƯỢT CHẠY TIẾP THEO ---
+      // 1. Sau 3 giây, ẩn bóng thoại chào (nếu có)
+      addTimer(() => {
+        setShowBubble(false);
+      }, 3000);
+
+      // 2. Trong 30s chờ, Remi thỉnh thoảng cử động nhẹ ở góc để không bị đơ
+      // Giây thứ 10: nhảy nhẹ
+      addTimer(() => {
+        setRestAction('jump');
+        addTimer(() => setRestAction('idle'), 1200);
+      }, 10000);
+
+      // Giây thứ 20: nghiêng đầu tò mò
+      addTimer(() => {
+        setRestAction('tilt');
+        addTimer(() => setRestAction('idle'), 1500);
+      }, 20000);
+
+      // 3. Đúng 30 giây: kích hoạt lượt chạy tiếp theo!
+      addTimer(() => {
+        setShowBubble(false);
+        setMode('sprinting');
+      }, 30000);
     }
 
     return () => clearAllTimers();
