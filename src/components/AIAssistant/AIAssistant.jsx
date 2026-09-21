@@ -293,13 +293,7 @@ export default function AIAssistant({
             {/* 2. Tiêu đề xác nhận tình huống (KẾT QUẢ SƠ CỨU) */}
             <SituationResult analysisResult={analysisResult} />
 
-            {/* 3. CÁC BƯỚC HÀNH ĐỘNG VÀNG: LÀM GÌ NGAY? & KHÔNG ĐƯỢC LÀM GÌ? */}
-            <FirstAidSteps steps={analysisResult.steps} />
-
-            {/* 4. KHI NÀO CẦN ĐI CẤP CỨU? (Báo động đỏ & Hotline) */}
-            <WarningSigns warningSigns={analysisResult.warningSigns} hotline={hotline} />
-
-            {/* 5. Action Âm thanh: 🔊 NGHE HƯỚNG DẪN SƠ CỨU (gọn gàng trong context) */}
+            {/* 3. Action Âm thanh: 🔊 NGHE HƯỚNG DẪN SƠ CỨU (Đưa lên đầu ngay dưới tiêu đề tình huống) */}
             {analysisResult.audioScript && (
               <div className="p-3 p-md-4 bg-white rounded-4 border shadow-sm mb-4">
                 <AudioGuide
@@ -310,6 +304,12 @@ export default function AIAssistant({
                 />
               </div>
             )}
+
+            {/* 4. CÁC BƯỚC HÀNH ĐỘNG VÀNG: LÀM GÌ NGAY? & KHÔNG ĐƯỢC LÀM GÌ? */}
+            <FirstAidSteps steps={analysisResult.steps} />
+
+            {/* 5. KHI NÀO CẦN ĐI CẤP CỨU? (Báo động đỏ & Hotline) */}
+            <WarningSigns warningSigns={analysisResult.warningSigns} hotline={hotline} />
 
             {/* 6. Video hướng dẫn sơ cứu (YouTube Embed) */}
             <VideoGuide video={analysisResult.video} />
