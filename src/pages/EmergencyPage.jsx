@@ -19,6 +19,7 @@ export default function EmergencyPage({ caseId = 'EM-03', onBack, onSelectOtherC
         <AIAssistant
           initialCaseId={caseId}
           onBack={onBack}
+          onReset={() => onSelectOtherCase && onSelectOtherCase(null)}
           hotline="0395 151 151"
         />
 

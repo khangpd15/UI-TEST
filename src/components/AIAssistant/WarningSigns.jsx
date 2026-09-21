@@ -13,12 +13,12 @@ export default function WarningSigns({ warningSigns = [], hotline = "0395 151 15
       <div className="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
         <span style={{ fontSize: '20px' }} aria-hidden="true">⚠️</span>
         <h3 className="h5 fw-heavy text-dark mb-0">
-          KHI NÀO CẦN ĐI KHÁM BÁC SĨ MẮT?
+          KHI NÀO CẦN ĐI CẤP CỨU?
         </h3>
       </div>
 
       <p className="text-muted small mb-3">
-        Hãy đến ngay bệnh viện chuyên khoa mắt nếu xuất hiện một trong các dấu hiệu cảnh báo dưới đây:
+        Hãy đến ngay bệnh viện hoặc cơ sở y tế chuyên khoa mắt nếu xuất hiện một trong các dấu hiệu cảnh báo dưới đây:
       </p>
 
       <div className="d-flex flex-column gap-2 mb-3">

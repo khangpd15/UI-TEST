@@ -13,18 +13,29 @@ import WarningSigns from './WarningSigns';
 import { analyzeEyeSituation } from '../../services/aiService';
 import { EYE_CARE_CATEGORIES } from '../../data/eyeCareCategories';
 import { findVideoByCategory } from '../../data/videoLibrary';
+import { stopSpeaking } from '../../utils/speechUtils';
 
 /**
- * AIAssistant Master Component (Mục 10, 12, 13, 14, 15)
- * Quản lý state machine:
- * "idle" -> "listening" -> "review" -> "processing" -> "question" -> "result" / "redFlag" -> "error"
- * Hỗ trợ:
- * - Desktop: 2 cột song song (Interaction bên trái, Result Panel bên phải)
- * - Mobile: Stacked thẳng đứng
+ * AIAssistant Master Component
+ * Flow UX chuẩn hóa:
+ * - Khi CHƯA chọn tình huống (selectedCase === null):
+ *   Hiển thị trung tâm: Microphone + "Nói với trợ lý" + Nhập tình huống văn bản + Tình huống mẫu
+ * - Khi ĐÃ chọn tình huống (selectedCase !== null):
+ *   Ẩn toàn bộ khu vực microphone/input/quick sample.
+ *   Tập trung toàn bộ màn hình vào KẾT QUẢ SƠ CỨU:
+ *   [Tên tình huống / Mức độ / Disclaimer]
+ *   LÀM GÌ NGAY?
+ *   KHÔNG ĐƯỢC LÀM GÌ?
+ *   KHI NÀO CẦN ĐI CẤP CỨU?
+ *   Action [ 🔊 NGHE HƯỚNG DẪN SƠ CỨU ]
+ *   Action [ 🎬 VIDEO HƯỚNG DẪN ]
+ *   Action [ ☎ GỌI HỖ TRỢ KHẨN CẤP ]
+ *   Nút [ 🔄 NÓI VỀ SỰ CỐ MẮT KHÁC ] để quay lại trạng thái chọn tình huống.
  */
 export default function AIAssistant({
   initialCaseId = null,
   onBack,
+  onReset,
   hotline = "0395 151 151"
 }) {
   const [mode, setMode] = useState('idle'); // idle | listening | review | processing | question | result | redFlag | error
@@ -34,40 +45,46 @@ export default function AIAssistant({
   const [followUpAnswers, setFollowUpAnswers] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Khởi tạo nếu có caseId truyền vào sẵn (ví dụ: 'EM-01', 'EM-03', 'chemical-splash')
+  // Hàm tải dữ liệu tình huống theo ID (EM-01 đến EM-06 hoặc DIS-01 đến DIS-10)
+  const loadCase = (caseIdentifier) => {
+    if (!caseIdentifier) return;
+    let categoryKey = 'FOREIGN_BODY_DUST';
+    const idStr = String(caseIdentifier).toLowerCase();
+    if (idStr.includes('em-03') || idStr.includes('chemical')) categoryKey = 'CHEMICAL_EYE_EXPOSURE';
+    else if (idStr.includes('em-02') || idStr.includes('object') || idStr.includes('fishhook') || idStr.includes('metal')) categoryKey = 'PENETRATING_OBJECT';
+    else if (idStr.includes('em-01') || idStr.includes('dust')) categoryKey = 'FOREIGN_BODY_DUST';
+    else if (idStr.includes('em-04') || idStr.includes('thermal') || idStr.includes('burn')) categoryKey = 'THERMAL_BURN';
+    else if (idStr.includes('em-05') || idStr.includes('blunt') || idStr.includes('trauma')) categoryKey = 'BLUNT_EYE_TRAUMA';
+    else if (idStr.includes('em-06') || idStr.includes('welding') || idStr.includes('uv')) categoryKey = 'WELDING_UV_EXPOSURE';
+    else if (idStr.includes('red-eye')) categoryKey = 'RED_EYE_INFECTION';
+
+    const catData = EYE_CARE_CATEGORIES[categoryKey] || EYE_CARE_CATEGORIES.FOREIGN_BODY_DUST;
+    const matchedVideo = findVideoByCategory(catData.id);
+
+    setAnalysisResult({
+      category: catData.id,
+      audio_id: catData.audio_id || catData.caseId,
+      confidence: 0.95,
+      needsMoreQuestions: false,
+      redFlags: (catData.severity === 'emergency' || catData.severity === 'critical') ? ['Tình huống khẩn cấp cần xử trí ngay'] : [],
+      summary: catData.title,
+      subtitle: catData.subtitle,
+      severity: catData.severity,
+      severityLabel: catData.severityLabel,
+      recommendedVideoId: matchedVideo ? matchedVideo.id : null,
+      video: matchedVideo,
+      steps: catData.steps,
+      warningSigns: catData.warningSigns,
+      audioScript: catData.audioScript
+    });
+
+    setMode('result');
+  };
+
+  // Khởi tạo nếu có caseId truyền vào sẵn
   useEffect(() => {
     if (initialCaseId) {
-      // Map caseId từ firstAid sang eyeCareCategory
-      let categoryKey = 'FOREIGN_BODY_DUST';
-      const idStr = (initialCaseId || '').toLowerCase();
-      if (idStr.includes('em-03') || idStr.includes('chemical')) categoryKey = 'CHEMICAL_EYE_EXPOSURE';
-      else if (idStr.includes('em-02') || idStr.includes('object') || idStr.includes('fishhook') || idStr.includes('metal')) categoryKey = 'PENETRATING_OBJECT';
-      else if (idStr.includes('em-01') || idStr.includes('dust')) categoryKey = 'FOREIGN_BODY_DUST';
-      else if (idStr.includes('em-04') || idStr.includes('thermal') || idStr.includes('burn')) categoryKey = 'THERMAL_BURN';
-      else if (idStr.includes('em-05') || idStr.includes('blunt') || idStr.includes('trauma')) categoryKey = 'BLUNT_EYE_TRAUMA';
-      else if (idStr.includes('em-06') || idStr.includes('welding') || idStr.includes('uv')) categoryKey = 'WELDING_UV_EXPOSURE';
-      else if (idStr.includes('red-eye')) categoryKey = 'RED_EYE_INFECTION';
-
-      const catData = EYE_CARE_CATEGORIES[categoryKey] || EYE_CARE_CATEGORIES.FOREIGN_BODY_DUST;
-      const matchedVideo = findVideoByCategory(catData.id);
-
-      setAnalysisResult({
-        category: catData.id,
-        confidence: 0.95,
-        needsMoreQuestions: false,
-        redFlags: (catData.severity === 'emergency' || catData.severity === 'critical') ? ['Tình huống khẩn cấp cần xử trí ngay'] : [],
-        summary: catData.title,
-        subtitle: catData.subtitle,
-        severity: catData.severity,
-        severityLabel: catData.severityLabel,
-        recommendedVideoId: matchedVideo ? matchedVideo.id : null,
-        video: matchedVideo,
-        steps: catData.steps,
-        warningSigns: catData.warningSigns,
-        audioScript: catData.audioScript
-      });
-
-      setMode('result');
+      loadCase(initialCaseId);
     }
   }, [initialCaseId]);
 
@@ -117,20 +134,20 @@ export default function AIAssistant({
 
       setAnalysisResult(response);
 
-      // Nếu cần hỏi thêm câu hỏi làm rõ (Section 6 - Flow 2)
+      // Nếu cần hỏi thêm câu hỏi làm rõ (Section 6)
       if (response.needsMoreQuestions && response.followUpQuestions && response.followUpQuestions.length > 0) {
         setPendingFollowUps(response.followUpQuestions);
         setMode('question');
         return;
       }
 
-      // Nếu có Red Flag nguy hiểm (Section 4 - Flow 3)
+      // Nếu có Red Flag nguy hiểm
       if (response.redFlags && response.redFlags.length > 0) {
         setMode('redFlag');
         return;
       }
 
-      // Thành công bình thường (Section 5 - Flow 1)
+      // Thành công bình thường
       setMode('result');
     } catch (err) {
       console.error('AI Analysis error:', err);
@@ -150,22 +167,25 @@ export default function AIAssistant({
     setMode('result');
   };
 
-  // Bắt đầu lại lượt tương tác mới
+  // Bắt đầu lại lượt tương tác mới - Quay lại màn hình chọn tình huống
   const handleReset = () => {
+    stopSpeaking();
     setMode('idle');
     setTranscript('');
     setAnalysisResult(null);
     setFollowUpAnswers({});
     setPendingFollowUps([]);
     setErrorMessage(null);
+    if (onReset) onReset();
   };
 
-  const hasResult = analysisResult && (mode === 'result' || mode === 'redFlag');
+  // Kiểm tra đã có tình huống sơ cứu cụ thể được chọn chưa
+  const hasSelectedCase = Boolean(analysisResult && (mode === 'result' || mode === 'redFlag'));
 
   return (
     <div className="ai-assistant-container py-3 py-md-4 animate__animated animate__fadeIn">
-      {/* Nút quay lại nếu có */}
-      {onBack && (
+      {/* Nút quay lại trang trước nếu có */}
+      {onBack && !hasSelectedCase && (
         <div className="mb-3">
           <button
             type="button"
@@ -197,58 +217,70 @@ export default function AIAssistant({
         </div>
       )}
 
-      {/* CẤU TRÚC GIAO DIỆN (Desktop 2 cột, Mobile 1 cột - Mục 12 & 13) */}
-      <div className="row g-3 g-lg-4 align-items-start">
-        {/* CỘT TRÁI (LEFT): TƯƠNG TÁC GIỌNG NÓI & CONVERSATION */}
-        <div className={`col-12 ${hasResult ? 'col-lg-5' : 'col-lg-8 mx-auto'}`}>
-          {/* 1. Bộ thu âm giọng nói trung tâm */}
-          <VoiceRecorder
-            mode={mode}
-            onStartListening={handleStartListening}
-            onStopListening={handleStopListening}
-            onTranscriptChange={handleTranscriptChange}
-            onSubmitManualText={handleSubmitManualText}
-          />
-
-          {/* 2. Hiển thị Transcript Realtime & Review */}
-          <SpeechTranscript
-            mode={mode}
-            transcript={transcript}
-            onStopListening={handleStopListening}
-            onResetVoice={handleReset}
-            onConfirmTranscript={handleConfirmTranscript}
-          />
-
-          {/* 3. Trạng thái phân tích AI */}
-          {mode === 'processing' && <AIProcessing />}
-
-          {/* 4. Câu hỏi làm rõ thông tin nếu mơ hồ */}
-          {mode === 'question' && (
-            <FollowUpQuestion
-              questions={pendingFollowUps}
-              onAnswerComplete={handleFollowUpAnswerComplete}
+      {/* TRẠNG THÁI 1: CHƯA CHỌN TÌNH HUỐNG (selectedCase === null) */}
+      {!hasSelectedCase && (
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-8">
+            {/* 1. Bộ thu âm giọng nói trung tâm + Gõ chữ + Câu mẫu */}
+            <VoiceRecorder
+              mode={mode}
+              onStartListening={handleStartListening}
+              onStopListening={handleStopListening}
+              onTranscriptChange={handleTranscriptChange}
+              onSubmitManualText={handleSubmitManualText}
             />
-          )}
 
-          {/* Nút đặt câu hỏi mới khi đã có kết quả */}
-          {hasResult && (
-            <div className="mt-3 text-center">
+            {/* 2. Hiển thị Transcript Realtime & Review */}
+            <SpeechTranscript
+              mode={mode}
+              transcript={transcript}
+              onStopListening={handleStopListening}
+              onResetVoice={handleReset}
+              onConfirmTranscript={handleConfirmTranscript}
+            />
+
+            {/* 3. Trạng thái phân tích AI */}
+            {mode === 'processing' && <AIProcessing />}
+
+            {/* 4. Câu hỏi làm rõ thông tin nếu mơ hồ */}
+            {mode === 'question' && (
+              <FollowUpQuestion
+                questions={pendingFollowUps}
+                onAnswerComplete={handleFollowUpAnswerComplete}
+              />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* TRẠNG THÁI 2: ĐÃ CHỌN TÌNH HUỐNG SƠ CỨU CỤ THỂ (selectedCase !== null) */}
+      {hasSelectedCase && (
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-10 col-xl-9 animate__animated animate__fadeIn">
+            {/* Top Navigation Bar: Nút "Nói về sự cố mắt khác" & Quay lại */}
+            <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
               <button
                 type="button"
-                className="btn btn-outline-secondary w-100 fw-bold py-2 d-inline-flex align-items-center justify-content-center gap-2"
+                className="btn btn-outline-secondary fw-bold py-2 px-3 d-inline-flex align-items-center gap-2 shadow-sm"
                 onClick={handleReset}
-                style={{ minHeight: '46px', borderRadius: '12px' }}
+                style={{ minHeight: '44px', borderRadius: '12px' }}
               >
-                <i className="bi bi-arrow-repeat"></i>
+                <i className="bi bi-arrow-repeat fs-5 text-visi-primary"></i>
                 <span>NÓI VỀ SỰ CỐ MẮT KHÁC</span>
               </button>
-            </div>
-          )}
-        </div>
 
-        {/* CỘT PHẢI (RIGHT): KẾT QUẢ SƠ CỨU, VIDEO, GIỌNG ĐỌC, CÁC BƯỚC */}
-        {hasResult && (
-          <div className="col-12 col-lg-7 animate__animated animate__fadeIn">
+              {onBack && (
+                <button
+                  type="button"
+                  className="btn btn-link text-decoration-none text-muted fw-bold d-inline-flex align-items-center gap-1"
+                  onClick={onBack}
+                >
+                  <i className="bi bi-arrow-left"></i>
+                  <span>Về trang chủ</span>
+                </button>
+              )}
+            </div>
+
             {/* 1. Nếu có Red Flag nguy cấp */}
             {mode === 'redFlag' && (
               <RedFlagAlert
@@ -258,32 +290,45 @@ export default function AIAssistant({
               />
             )}
 
-            {/* 2. Tiêu đề xác nhận tình huống */}
+            {/* 2. Tiêu đề xác nhận tình huống (KẾT QUẢ SƠ CỨU) */}
             <SituationResult analysisResult={analysisResult} />
 
-            {/* 3. Video hướng dẫn sơ cứu (YouTube Embed) */}
-            <VideoGuide video={analysisResult.video} />
+            {/* 3. CÁC BƯỚC HÀNH ĐỘNG VÀNG: LÀM GÌ NGAY? & KHÔNG ĐƯỢC LÀM GÌ? */}
+            <FirstAidSteps steps={analysisResult.steps} />
 
-            {/* 4. Hướng dẫn bằng giọng đọc y tế tiếng Việt */}
+            {/* 4. KHI NÀO CẦN ĐI CẤP CỨU? (Báo động đỏ & Hotline) */}
+            <WarningSigns warningSigns={analysisResult.warningSigns} hotline={hotline} />
+
+            {/* 5. Action Âm thanh: 🔊 NGHE HƯỚNG DẪN SƠ CỨU (gọn gàng trong context) */}
             {analysisResult.audioScript && (
-              <div className="p-3 bg-white rounded-4 border shadow-sm mb-4">
+              <div className="p-3 p-md-4 bg-white rounded-4 border shadow-sm mb-4">
                 <AudioGuide
-                  title="HƯỚNG DẪN XỬ LÝ"
+                  title="HƯỚNG DẪN SƠ CỨU"
                   conditionName={analysisResult.summary}
                   text={analysisResult.audioScript}
-                  isEmergency={analysisResult.severity === 'emergency' || analysisResult.severity === 'critical' || analysisResult.severity === 'high'}
+                  isEmergency={true}
                 />
               </div>
             )}
 
-            {/* 5. Các bước xử lý chuẩn y tế */}
-            <FirstAidSteps steps={analysisResult.steps} />
+            {/* 6. Video hướng dẫn sơ cứu (YouTube Embed) */}
+            <VideoGuide video={analysisResult.video} />
 
-            {/* 6. Khi nào cần đi khám */}
-            <WarningSigns warningSigns={analysisResult.warningSigns} hotline={hotline} />
+            {/* 7. Nút quay lại trạng thái chọn tình huống ở chân trang */}
+            <div className="mt-4 pt-3 border-top text-center">
+              <button
+                type="button"
+                className="btn btn-outline-primary fw-bold px-4 py-2 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm"
+                onClick={handleReset}
+                style={{ minHeight: '48px', borderRadius: '12px', fontSize: '1rem' }}
+              >
+                <i className="bi bi-arrow-repeat fs-5"></i>
+                <span>NÓI VỀ SỰ CỐ MẮT KHÁC</span>
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
