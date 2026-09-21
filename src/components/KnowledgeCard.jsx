@@ -75,12 +75,11 @@ export default function KnowledgeCard({ item, onSelect }) {
       }}
       aria-label={`${title}. ${summary || description}`}
     >
-      {/* 1. Ảnh y tế lớn với badge mã Audio ID và Priority */}
-      <div className="knowledge-card-img-box position-relative">
-        <img src={image} alt={`Minh họa ${title}`} loading="lazy" />
-        <div className="position-absolute top-0 start-0 m-2 d-flex flex-wrap gap-1" style={{ zIndex: 2, pointerEvents: 'none' }}>
+      {/* 1. Header phân loại & mã chuẩn y tế (Tách riêng biệt trên đầu, không che hình) */}
+      <div className="card-badge-header px-3 py-2 d-flex align-items-center justify-content-between border-bottom bg-white">
+        <div className="d-flex align-items-center gap-1">
           {audio_id && (
-            <span className="badge bg-dark text-white px-2 py-1 font-monospace" style={{ fontSize: '0.8rem' }}>
+            <span className="badge bg-dark text-white px-2 py-1 font-monospace" style={{ fontSize: '0.78rem' }}>
               {audio_id}
             </span>
           )}
@@ -89,15 +88,18 @@ export default function KnowledgeCard({ item, onSelect }) {
             style={{
               backgroundColor: isEmergency ? 'var(--visi-emergency)' : 'var(--visi-primary)',
               color: '#FFFFFF',
-              fontSize: '0.8rem'
+              fontSize: '0.78rem'
             }}
           >
             {isEmergency ? 'Cấp cứu' : 'Bệnh lý'}
           </span>
         </div>
-        <div className="position-absolute top-0 end-0 m-2" style={{ zIndex: 2, pointerEvents: 'none' }}>
-          <SeverityBadge severity={priority} customText={priorityLabel} />
-        </div>
+        <SeverityBadge severity={priority} customText={priorityLabel} />
+      </div>
+
+      {/* 2. Ảnh y tế lớn, trọn vẹn, to rõ thấy trọn hình chim cánh cụt */}
+      <div className="knowledge-card-img-box">
+        <img src={image} alt={`Minh họa ${title}`} loading="lazy" />
       </div>
 
       {/* 2. Thân card: Cấu trúc nội dung chuẩn y tế */}

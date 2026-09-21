@@ -568,31 +568,40 @@
   box-shadow: var(--shadow-hover);
 }
 
+.card-badge-header {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--visi-border);
+  min-height: 42px;
+}
+
 .knowledge-card-img-box {
   width: 100%;
-  height: 200px;
-  background-color: #F8FAFC;
+  height: 230px;
+  background-color: #F4F8FA;
   border-bottom: 1px solid var(--visi-border);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 44px 16px 12px;
+  padding: 4px;
   overflow: hidden;
 }
 
 .knowledge-card-img-box img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  border-radius: 8px;
   transition: transform 0.25s ease;
 }
 
 .knowledge-service-card:hover .knowledge-card-img-box img {
-  transform: scale(1.05);
+  transform: scale(1.04);
+}
+
+@media (max-width: 575.98px) {
+  .knowledge-card-img-box {
+    height: 200px;
+  }
 }
 
 /* --- 12. FOOTER --- */
