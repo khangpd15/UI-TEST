@@ -1,52 +1,75 @@
 import { eyeIllustrations } from './eyeImages';
 
+/**
+ * eyeProblems.js - Danh mục các tình huống cấp cứu thường gặp trên Trang chủ (HomePage)
+ * Chuẩn hóa 21/09/2026: Đồng bộ ID và mức độ ưu tiên theo chuẩn EM-01 đến EM-06
+ */
+
 export const eyeProblems = [
   {
     id: 1,
-    caseId: "blunt-trauma",
+    caseId: "EM-05",
+    audio_id: "EM-05",
     title: "Mắt bị va đập",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
+    category: "emergency",
+    priority: "high",
+    severity: "high",
+    badgeText: "Khẩn cấp",
     image: eyeIllustrations.bluntTrauma
   },
   {
     id: 2,
-    caseId: "foreign-object",
-    title: "Dị vật vào mắt",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
+    caseId: "EM-02",
+    audio_id: "EM-02",
+    title: "Dị vật nhọn / cắm vào mắt",
+    category: "emergency",
+    priority: "critical",
+    severity: "critical",
+    badgeText: "Cực kỳ khẩn cấp",
     image: eyeIllustrations.foreignObject
   },
   {
     id: 3,
-    caseId: "chemical-splash",
-    title: "Hóa chất vào mắt",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
+    caseId: "EM-03",
+    audio_id: "EM-03",
+    title: "Hóa chất bắn vào mắt",
+    category: "emergency",
+    priority: "critical",
+    severity: "critical",
+    badgeText: "Cực kỳ khẩn cấp",
     image: eyeIllustrations.chemicalSplash
   },
   {
     id: 4,
-    caseId: "red-eye",
-    title: "Mắt đỏ + ghèn",
-    severity: "warning",
-    badgeText: "Cần được khám",
-    image: eyeIllustrations.redEye
+    caseId: "EM-01",
+    audio_id: "EM-01",
+    title: "Dị vật nhỏ / Bụi vào mắt",
+    category: "emergency",
+    priority: "high",
+    severity: "high",
+    badgeText: "Khẩn cấp",
+    image: eyeIllustrations.foreignObject
   },
   {
     id: 5,
-    caseId: "blurry-vision",
-    title: "Nhìn mờ",
-    severity: "warning",
-    badgeText: "Cần được khám",
-    image: eyeIllustrations.blurryVision
+    caseId: "EM-04",
+    audio_id: "EM-04",
+    title: "Bỏng nhiệt ở mắt",
+    category: "emergency",
+    priority: "high",
+    severity: "high",
+    badgeText: "Khẩn cấp",
+    image: eyeIllustrations.eyeBurn
   },
   {
     id: 6,
-    caseId: "dry-fatigue",
-    title: "Mắt khô / mỏi",
-    severity: "safe",
-    badgeText: "Chăm sóc tại nhà",
-    image: eyeIllustrations.dryFatigueEye
+    caseId: "EM-06",
+    audio_id: "EM-06",
+    title: "Tổn thương do tia hàn / UV",
+    category: "emergency",
+    priority: "medium",
+    severity: "medium",
+    badgeText: "Cần lưu ý",
+    image: eyeIllustrations.eyeBurn
   }
 ];

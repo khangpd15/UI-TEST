@@ -45,6 +45,7 @@ export default function FirstAidPage({ onSelectCase }) {
                     className="position-absolute top-0 start-0 m-2 badge bg-white text-dark shadow-sm border px-2 py-1 fs-6 d-flex align-items-center gap-1"
                   >
                     <span>{item.icon}</span>
+                    <span className="badge bg-dark text-white font-monospace me-1">{item.audio_id || item.id}</span>
                     <span className="fw-bold">{item.title}</span>
                   </div>
                 </div>

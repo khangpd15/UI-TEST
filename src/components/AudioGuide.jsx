@@ -9,11 +9,14 @@ import { speakText, stopSpeaking } from '../utils/speechUtils';
  * - Mặc định KHÔNG hiển thị transcript dài
  * - Thay thế bằng collapsible "▸ Xem nội dung giọng đọc" / "▾ Thu gọn nội dung giọng đọc"
  */
-export default function AudioGuide({ text, title = "HƯỚNG DẪN XỬ LÝ", conditionName = "" }) {
+export default function AudioGuide({ text, title = "HƯỚNG DẪN XỬ LÝ", conditionName = "", isEmergency = false }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasEnded, setHasEnded] = useState(false);
   const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
 
   useEffect(() => {
+    setHasEnded(false);
+    setIsPlaying(false);
     return () => {
       stopSpeaking();
     };
@@ -26,12 +29,38 @@ export default function AudioGuide({ text, title = "HƯỚNG DẪN XỬ LÝ", co
     } else {
       speakText(
         text,
-        () => setIsPlaying(true),
-        () => setIsPlaying(false),
-        () => setIsPlaying(false)
+        () => {
+          setIsPlaying(true);
+          setHasEnded(false);
+        },
+        () => {
+          setIsPlaying(false);
+          setHasEnded(true);
+        },
+        () => {
+          setIsPlaying(false);
+          setHasEnded(false);
+        }
       );
     }
   };
+
+  // Xác định tình huống có phải cấp cứu không
+  const isEmergencyContext = isEmergency || 
+    title.toLowerCase().includes('cấp cứu') || 
+    title.toLowerCase().includes('sơ cứu') ||
+    title.toLowerCase().includes('hóa chất') ||
+    title.toLowerCase().includes('dị vật') ||
+    title.toLowerCase().includes('va đập') ||
+    title.toLowerCase().includes('bỏng');
+
+  // Xác định nhãn nút theo chuẩn Mục 10
+  let buttonLabel = isEmergencyContext ? '🔊 Nghe hướng dẫn sơ cứu' : '▶ Nghe hướng dẫn';
+  if (isPlaying) {
+    buttonLabel = '⏸ Tạm dừng';
+  } else if (hasEnded) {
+    buttonLabel = '▶ Nghe lại';
+  }
 
   // Tách tiêu đề: Dòng 1 "HƯỚNG DẪN XỬ LÝ", Dòng 2 "Bụi vào mắt"
   let categoryTitle = title;
@@ -75,10 +104,9 @@ export default function AudioGuide({ text, title = "HƯỚNG DẪN XỬ LÝ", co
         className={`btn ${isPlaying ? 'btn-emergency-red' : 'audio-guide-btn-teal'} shadow-sm`}
         onClick={handleTogglePlay}
         aria-pressed={isPlaying}
-        aria-label={isPlaying ? 'Dừng phát hướng dẫn' : 'Phát hướng dẫn bằng giọng nói'}
+        aria-label={isPlaying ? 'Tạm dừng hướng dẫn' : buttonLabel}
       >
-        <span aria-hidden="true" style={{ fontSize: '1.2rem' }}>{isPlaying ? '⏹' : '▶'}</span>
-        <span>{isPlaying ? 'DỪNG HƯỚNG DẪN' : 'PHÁT HƯỚNG DẪN'}</span>
+        <span>{buttonLabel}</span>
       </button>
 
       {/* 3. Accordion/Collapsible: Mặc định đóng, click để mở xem transcript */}

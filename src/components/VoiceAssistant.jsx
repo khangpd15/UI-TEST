@@ -89,12 +89,14 @@ export default function VoiceAssistant({ onSelectCase }) {
   };
 
   const samplePrompts = [
-    "Hóa chất vào mắt",
-    "Bụi bay vào cộm xót",
-    "Mắt bị va đập bầm tím",
-    "Dị vật găm vào mắt",
-    "Mắt đỏ nhiều ghèn",
-    "Nhìn mờ đột ngột"
+    "Hóa chất bắn vào mắt",
+    "Dị vật nhọn cắm vào mắt",
+    "Bụi bay vào mắt cộm xót",
+    "Mắt bị va đập",
+    "Bỏng nhiệt do dầu mỡ sôi",
+    "Tia hàn chói rát mắt",
+    "Cận thị nhìn xa mờ",
+    "Đau mắt đỏ có ghèn"
   ];
 
   return (
@@ -176,17 +178,22 @@ export default function VoiceAssistant({ onSelectCase }) {
                     />
                   </div>
 
-                  <p className="condition-instruction text-danger">
+                  <p className="condition-instruction text-dark fw-medium mb-3">
                     {diagnosisResult.advice}
                   </p>
+
+                  <div className="text-muted small fst-italic mb-3" style={{ fontSize: '0.8rem' }}>
+                    <i className="bi bi-info-circle-fill text-visi-primary me-1"></i>
+                    <strong>Lưu ý:</strong> Thông tin hỗ trợ sơ cứu ban đầu, không thay thế chẩn đoán hoặc tư vấn của bác sĩ.
+                  </div>
 
                   {diagnosisResult.caseId && (
                     <button
                       type="button"
-                      className="condition-action btn btn-emergency-red"
+                      className="condition-action btn btn-emergency-red w-100 fw-bold"
                       onClick={handleGoToCase}
                     >
-                      XEM HƯỚNG DẪN SƠ CỨU
+                      XEM HƯỚNG DẪN XỬ LÝ CHI TIẾT →
                     </button>
                   )}
                 </div>

@@ -23,16 +23,16 @@ export default function SituationResult({ analysisResult }) {
 
   return (
     <div className="ai-situation-result mb-4 p-3 p-md-4 bg-white rounded-4 border shadow-sm">
-      {/* 1. Header trạng thái xác định thành công */}
+      {/* 1. Header trạng thái nhận diện triệu chứng */}
       <div className="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
         <span className="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-bold d-inline-flex align-items-center gap-2">
-          <i className="bi bi-check-circle-fill"></i>
-          <span>ĐÃ XÁC ĐỊNH TÌNH HUỐNG</span>
+          <i className="bi bi-info-circle-fill"></i>
+          <span>THÔNG TIN THAM KHẢO BAN ĐẦU</span>
         </span>
 
         {/* Chỉ số confidence của hệ thống (Mục 9) */}
         <span className="badge bg-light text-muted border px-2 py-1 small" title="Độ tin cậy phân loại của thuật toán khớp từ khóa">
-          Độ khớp phân loại: {confidencePercent}%
+          Độ khớp từ khóa: {confidencePercent}%
         </span>
       </div>
 
@@ -55,11 +55,15 @@ export default function SituationResult({ analysisResult }) {
         />
       </div>
 
-      {/* 4. Disclaimer y tế bắt buộc (Mục 18) */}
+      {/* 4. Disclaimer y tế bắt buộc (Mục 12, 18) */}
       <div className="p-3 bg-light rounded-3 border" style={{ fontSize: '0.85rem', color: '#555' }}>
         <i className="bi bi-info-circle-fill text-visi-primary me-2"></i>
         <span>
-          <strong>Lưu ý y tế:</strong> AI chỉ cung cấp hướng dẫn hỗ trợ ban đầu theo khuyến cáo y khoa cộng đồng, không thay thế chẩn đoán hoặc tư vấn trực tiếp từ nhân viên y tế chuyên khoa mắt.
+          <strong>Lưu ý:</strong> {severity === 'critical'
+            ? 'Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.'
+            : (severity === 'high' || severity === 'emergency' || severity === 'medium')
+            ? 'Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.'
+            : 'Thông tin này nhằm mục đích giáo dục và không thay thế chẩn đoán hoặc tư vấn của bác sĩ.'}
         </span>
       </div>
     </div>

@@ -34,17 +34,19 @@ export default function AIAssistant({
   const [followUpAnswers, setFollowUpAnswers] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Khởi tạo nếu có caseId truyền vào sẵn (ví dụ: 'dust-in-eye' hay 'chemical-splash')
+  // Khởi tạo nếu có caseId truyền vào sẵn (ví dụ: 'EM-01', 'EM-03', 'chemical-splash')
   useEffect(() => {
     if (initialCaseId) {
       // Map caseId từ firstAid sang eyeCareCategory
       let categoryKey = 'FOREIGN_BODY_DUST';
-      if (initialCaseId.includes('chemical')) categoryKey = 'CHEMICAL_EYE_EXPOSURE';
-      else if (initialCaseId.includes('welding') || initialCaseId.includes('burn')) categoryKey = 'WELDING_UV_EXPOSURE';
-      else if (initialCaseId.includes('blunt') || initialCaseId.includes('trauma')) categoryKey = 'BLUNT_EYE_TRAUMA';
-      else if (initialCaseId.includes('scratch')) categoryKey = 'CORNEAL_SCRATCH';
-      else if (initialCaseId.includes('fishhook')) categoryKey = 'FISH_HOOK_INJURY';
-      else if (initialCaseId.includes('red-eye')) categoryKey = 'RED_EYE_INFECTION';
+      const idStr = (initialCaseId || '').toLowerCase();
+      if (idStr.includes('em-03') || idStr.includes('chemical')) categoryKey = 'CHEMICAL_EYE_EXPOSURE';
+      else if (idStr.includes('em-02') || idStr.includes('object') || idStr.includes('fishhook') || idStr.includes('metal')) categoryKey = 'PENETRATING_OBJECT';
+      else if (idStr.includes('em-01') || idStr.includes('dust')) categoryKey = 'FOREIGN_BODY_DUST';
+      else if (idStr.includes('em-04') || idStr.includes('thermal') || idStr.includes('burn')) categoryKey = 'THERMAL_BURN';
+      else if (idStr.includes('em-05') || idStr.includes('blunt') || idStr.includes('trauma')) categoryKey = 'BLUNT_EYE_TRAUMA';
+      else if (idStr.includes('em-06') || idStr.includes('welding') || idStr.includes('uv')) categoryKey = 'WELDING_UV_EXPOSURE';
+      else if (idStr.includes('red-eye')) categoryKey = 'RED_EYE_INFECTION';
 
       const catData = EYE_CARE_CATEGORIES[categoryKey] || EYE_CARE_CATEGORIES.FOREIGN_BODY_DUST;
       const matchedVideo = findVideoByCategory(catData.id);
@@ -53,7 +55,7 @@ export default function AIAssistant({
         category: catData.id,
         confidence: 0.95,
         needsMoreQuestions: false,
-        redFlags: catData.severity === 'emergency' ? ['Tình huống khẩn cấp cần xử trí ngay'] : [],
+        redFlags: (catData.severity === 'emergency' || catData.severity === 'critical') ? ['Tình huống khẩn cấp cần xử trí ngay'] : [],
         summary: catData.title,
         subtitle: catData.subtitle,
         severity: catData.severity,
@@ -269,6 +271,7 @@ export default function AIAssistant({
                   title="HƯỚNG DẪN XỬ LÝ"
                   conditionName={analysisResult.summary}
                   text={analysisResult.audioScript}
+                  isEmergency={analysisResult.severity === 'emergency' || analysisResult.severity === 'critical' || analysisResult.severity === 'high'}
                 />
               </div>
             )}

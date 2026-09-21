@@ -1,363 +1,402 @@
 import { eyeIllustrations } from './eyeImages';
 
-export const firstAidCases = {
-  "foreign-object": {
-    id: "foreign-object",
-    title: "Dị vật găm vào mắt",
-    leadHeading: "KHÔNG TỰ RÚT DỊ VẬT",
-    instruction: "Tuyệt đối không tự rút dị vật - Che nhẹ mắt bằng cốc giấy sạch!",
-    image: eyeIllustrations.foreignObject,
-    severity: "emergency",
-    badgeLabel: "CỰC KỲ KHẨN CẤP",
-    audioScript: "Hướng dẫn xử lý khẩn cấp khi có dị vật găm vào mắt: Bước một, tuyệt đối không dụi mắt. Bước hai, tuyệt đối không tự ý rút dị vật ra ngoài. Bước ba, che chắn mắt nhẹ nhàng bằng cốc giấy sạch và đến ngay cơ sở y tế mắt gần nhất.",
-    steps: [
-      {
-        num: "01",
-        icon: "👁️",
-        title: "KHÔNG DỤI MẮT",
-        desc: "Dụi mắt làm dị vật cào xước sâu hơn vào lòng đen gây thủng nhãn cầu."
-      },
-      {
-        num: "02",
-        icon: "🪝",
-        title: "KHÔNG TỰ RÚT DỊ VẬT",
-        desc: "Rút dị vật không đúng kỹ thuật sẽ kéo theo mô mắt và dịch kính."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐẾN CƠ SỞ Y TẾ NGAY",
-        desc: "Che nhẹ mắt bằng cốc giấy sạch, đến ngay bệnh viện chuyên khoa mắt."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Che chắn mắt nhẹ nhàng bằng cốc giấy hoặc gạc sạch" },
-      { icon: "🏥", text: "Đến cơ sở y tế chuyên khoa mắt ngay lập tức" },
-      { icon: "☎", text: "Gọi hỗ trợ cấp cứu 0395 151 151" }
-    ],
-    dontList: [
-      { icon: "👁️", text: "Không dụi mắt dưới bất kỳ hình thức nào" },
-      { icon: "🪝", text: "Không tự rút dị vật hoặc dùng nhíp gắp" },
-      { icon: "💊", text: "Không tự dùng thuốc nhỏ hay đắp thuốc lá dân gian" }
-    ]
-  },
+/**
+ * firstAidData.js - Chuẩn hóa kịch bản cấp cứu nhãn khoa REMiCare (Đồng bộ 21/09/2026)
+ * Cấu trúc ưu tiên: LÀM GÌ NGAY? -> KHÔNG ĐƯỢC LÀM GÌ? -> KHI NÀO CẦN ĐI CẤP CỨU?
+ * Danh mục: EM-01 đến EM-06
+ */
 
-  "blunt-trauma": {
-    id: "blunt-trauma",
-    title: "Mắt bị va đập",
-    leadHeading: "KHÔNG DỤI MẮT - CHƯỜM LẠNH NHẸ",
-    instruction: "Không dụi mắt hay tì đè - Chườm lạnh nhẹ quanh hốc mắt!",
-    image: eyeIllustrations.bluntTrauma,
-    severity: "emergency",
-    badgeLabel: "CỰC KỲ KHẨN CẤP",
-    audioScript: "Hướng dẫn sơ cứu mắt bị va đập: Bước một, không được dụi mắt hay tì đè lên mắt. Bước hai, chườm lạnh nhẹ nhàng xung quanh hốc mắt. Bước ba, đến bệnh viện chuyên khoa mắt ngay lập tức để kiểm tra đáy mắt.",
-    steps: [
-      {
-        num: "01",
-        icon: "👁️",
-        title: "KHÔNG DỤI MẮT",
-        desc: "Tuyệt đối không lấy tay day, dụi hoặc ấn mạnh lên nhãn cầu đang sưng."
-      },
-      {
-        num: "02",
-        icon: "🧊",
-        title: "CHƯỜM LẠNH NHẸ",
-        desc: "Dùng khăn bọc đá chườm quanh hốc mắt để giảm sưng phù nề."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐẾN CƠ SỞ Y TẾ NGAY",
-        desc: "Khám chuyên khoa mắt để tầm soát xuất huyết tiền phòng và rách võng mạc."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Nghỉ ngơi ở nơi thoáng mát, thả lỏng cơ thể" },
-      { icon: "🧊", text: "Chườm mát quanh vùng xương ổ mắt để giảm sưng bầm" },
-      { icon: "🏥", text: "Đến bệnh viện chuyên khoa mắt kiểm tra sớm" }
-    ],
-    dontList: [
-      { icon: "👁️", text: "Không dụi tay hoặc ấn đè vật nặng lên mắt" },
-      { icon: "💊", text: "Không tự ý uống thuốc aspirin gây chảy máu thêm" },
-      { icon: "🥊", text: "Không tiếp tục vận động mạnh hay làm việc nặng" }
-    ]
-  },
-
-  "chemical-splash": {
-    id: "chemical-splash",
-    title: "Hóa chất vào mắt",
-    leadHeading: "XỐI RỬA NƯỚC SẠCH LIÊN TỤC 15 - 20 PHÚT",
-    instruction: "Cần xối nước sạch liên tục ngay lập tức trong 15–20 phút!",
-    image: eyeIllustrations.chemicalSplash,
-    severity: "emergency",
-    badgeLabel: "CỰC KỲ KHẨN CẤP",
-    audioScript: "Hướng dẫn cấp cứu hóa chất vào mắt: Bước một, rửa mắt ngay lập tức dưới vòi nước sạch chảy liên tục từ 15 đến 20 phút. Bước hai, vạch mi mắt chớp liên tục trong dòng nước. Bước ba, mang theo vỏ hóa chất và đến viện cấp cứu ngay.",
-    steps: [
-      {
-        num: "01",
-        icon: "🧴",
-        title: "RỬA NƯỚC LIÊN TỤC",
-        desc: "Xối nước sạch hoặc nước muối sinh lý vào mắt ngay trong 15-20 phút không chần chừ."
-      },
-      {
-        num: "02",
-        icon: "👁️",
-        title: "CHỚP MẮT TRONG NƯỚC",
-        desc: "Mở to mi mắt để dòng nước rửa trôi toàn bộ hóa chất đọng lại ở cùng đồ kết mạc."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐẾN BỆNH VIỆN NGAY",
-        desc: "Mang theo bao bì hóa chất và tới cơ sở y tế mắt cấp cứu tức thì."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Xối rửa bằng nước sạch liên tục ngay lập tức" },
-      { icon: "👁️", text: "Vạch mi mắt cho nước rửa sạch toàn bộ túi cùng" },
-      { icon: "🏥", text: "Mang theo nhãn hóa chất đưa bệnh nhân đi cấp cứu" }
-    ],
-    dontList: [
-      { icon: "👁️", text: "Không dụi mắt làm hóa chất ngấm sâu hơn" },
-      { icon: "🧪", text: "Không cố trung hòa bằng các dung dịch hóa học khác" },
-      { icon: "🩹", text: "Không băng kín mắt sau khi dính hóa chất" }
-    ]
-  },
-
-  "dust-in-eye": {
-    id: "dust-in-eye",
-    title: "Bụi vào mắt",
-    leadHeading: "KHÔNG DỤI MẮT - NHỎ NƯỚC MUỐI SINH LÝ",
-    instruction: "Không dụi mắt. Nhỏ nước muối sinh lý nhiều lần hoặc chớp mắt trong bát nước sạch.",
-    image: eyeIllustrations.foreignObject,
-    severity: "warning",
-    badgeLabel: "CẦN ĐƯỢC KHÁM",
-    audioScript: "Hướng dẫn xử trí bụi vào mắt: Bước một, tuyệt đối không dụi mắt. Bước hai, nhỏ nhiều nước muối sinh lý hoặc úp mặt chớp mắt trong bát nước sạch. Bước ba, nếu mắt vẫn cộm xót sau 30 phút, hãy đến cơ sở chuyên khoa mắt kiểm tra.",
-    steps: [
-      {
-        num: "01",
-        icon: "👁️",
-        title: "KHÔNG DỤI MẮT",
-        desc: "Dụi tay làm hạt bụi, hạt cát chà xát cào xước biểu mô giác mạc gây viêm loét."
-      },
-      {
-        num: "02",
-        icon: "🧴",
-        title: "NHỎ NƯỚC MUỐI SINH LÝ",
-        desc: "Nhỏ liên tục dung dịch NaCl 0.9% hoặc úp mặt chớp mắt trong bát nước sạch để bụi trôi ra."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐI KHÁM NẾU CÒN CỘM",
-        desc: "Nếu sau 30 phút mắt vẫn cộm rát hoặc đỏ chảy nước mắt, cần đến khám bác sĩ chuyên khoa."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Nhỏ nhiều giọt nước muối sinh lý NaCl 0.9%" },
-      { icon: "👁️", text: "Chớp mắt trong bát nước sạch để đẩy dị vật ra khóe mắt" },
-      { icon: "🏥", text: "Đến khám bác sĩ mắt nếu cảm giác cộm xót kéo dài" }
-    ],
-    dontList: [
-      { icon: "👁️", text: "Tuyệt đối không dùng tay hay góc khăn áo dụi mắt" },
-      { icon: "🪝", text: "Không dùng tăm bông chọc ngoáy vào lòng đen" },
-      { icon: "💨", text: "Không nhờ người khác thổi vào mắt kẻo lây vi khuẩn" }
-    ]
-  },
-
-  "red-eye": {
-    id: "red-eye",
-    title: "Mắt đỏ + ghèn",
-    leadHeading: "VỆ SINH NƯỚC MUỐI - DÙNG KHĂN RIÊNG",
-    instruction: "Vệ sinh bằng nước muối sinh lý NaCl 0.9% - Khám chuyên khoa mắt!",
-    image: eyeIllustrations.redEye,
-    severity: "warning",
-    badgeLabel: "CẦN ĐƯỢC KHÁM",
-    audioScript: "Hướng dẫn khi bị mắt đỏ có ghèn: Nhỏ nước muối sinh lý thường xuyên. Dùng khăn mặt riêng và rửa tay sạch sẽ. Đi khám bác sĩ mắt để được kê đơn thuốc nhỏ phù hợp.",
-    steps: [
-      {
-        num: "01",
-        icon: "🧴",
-        title: "VỆ SINH NƯỚC MUỐI",
-        desc: "Nhỏ nước muối NaCl 0.9% từ 4-6 lần/ngày để rửa sạch ghèn mắt ứ đọng."
-      },
-      {
-        num: "02",
-        icon: "🧼",
-        title: "DÙNG ĐỒ DÙNG RIÊNG",
-        desc: "Dùng khăn mặt riêng, giặt sạch phơi nắng để tránh lây nhiễm cho người thân."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐI KHÁM BÁC SĨ MẮT",
-        desc: "Bác sĩ nhãn khoa VISI sẽ kê đơn kháng khuẩn phù hợp đúng nguyên nhân."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Nhỏ nước muối sinh lý NaCl 0.9% đều đặn" },
-      { icon: "🧼", text: "Rửa tay sạch trước và sau khi chạm vùng mắt" },
-      { icon: "🏥", text: "Khám chuyên khoa mắt nếu sau 2 ngày không thuyên giảm" }
-    ],
-    dontList: [
-      { icon: "👁️", text: "Không dùng chung khăn mặt, gối với người khác" },
-      { icon: "💊", text: "Không tự ý mua thuốc nhỏ chứa corticoid/dexamethasone" },
-      { icon: "🌿", text: "Không đắp lá trầu hay xông hơi lá vào mắt" }
-    ]
-  },
-
-  "blurry-vision": {
-    id: "blurry-vision",
-    title: "Nhìn mờ đột ngột",
-    leadHeading: "NGỪNG LÀM VIỆC - ĐI KHÁM CHUYÊN SÂU",
-    instruction: "Ngừng ngay các hoạt động nguy hiểm - Khám chuyên sâu đáy mắt!",
-    image: eyeIllustrations.blurryVision,
-    severity: "warning",
-    badgeLabel: "CẦN ĐƯỢC KHÁM",
-    audioScript: "Hướng dẫn khi nhìn mờ: Ngừng lái xe hoặc làm việc nặng. Ngồi nghỉ ngơi và theo dõi xem có đau nhức đầu hay quầng hào quang không. Hãy đến bệnh viện mắt kiểm tra nhãn áp và đáy mắt.",
-    steps: [
-      {
-        num: "01",
-        icon: "🛑",
-        title: "NGỪNG LÀM VIỆC / LÁI XE",
-        desc: "Ngồi nghỉ ở nơi an toàn, không cố gắng điều khiển xe khi thị lực suy giảm."
-      },
-      {
-        num: "02",
-        icon: "⚠️",
-        title: "THEO DÕI TRIỆU CHỨNG",
-        desc: "Nếu kèm đau nhức nửa đầu dữ dội, cảnh giác cơn glôcôm cấp cần hạ nhãn áp."
-      },
-      {
-        num: "03",
-        icon: "🏥",
-        title: "ĐẾN BỆNH VIỆN MẮT",
-        desc: "Khám soi đáy mắt và đo thị trường để bảo tồn thị giác kịp thời."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Nghỉ ngơi, nhờ người nhà đưa đi khám mắt" },
-      { icon: "📋", text: "Mang theo đơn thuốc huyết áp, tiểu đường nếu có" },
-      { icon: "🏥", text: "Đo nhãn áp và kiểm tra thị lực tại bệnh viện" }
-    ],
-    dontList: [
-      { icon: "🚗", text: "Không tự lái xe khi mắt đang nhìn mờ" },
-      { icon: "💊", text: "Không tự mua thuốc nhỏ giãn đồng tử" },
-      { icon: "👁️", text: "Không xoa bóp hoặc day mạnh nhãn cầu" }
-    ]
-  },
-
-  "dry-fatigue": {
-    id: "dry-fatigue",
-    title: "Mắt khô / mỏi",
-    leadHeading: "CHĂM SÓC MẮT TẠI NHÀ & NGHỈ NGƠI",
-    instruction: "Cho mắt nghỉ theo quy tắc 20-20-20 và nhỏ nước mắt nhân tạo!",
-    image: eyeIllustrations.dryFatigueEye,
-    severity: "safe",
-    badgeLabel: "CHĂM SÓC THÔNG THƯỜNG",
-    audioScript: "Hướng dẫn chăm sóc mắt khô và mỏi mắt: Cho mắt nghỉ ngơi theo quy tắc 20-20-20. Nhỏ nước mắt nhân tạo và chườm ấm mi mắt 5 đến 10 phút vào buổi tối.",
-    steps: [
-      {
-        num: "01",
-        icon: "⏱️",
-        title: "QUY TẮC 20-20-20",
-        desc: "Cứ 20 phút nhìn màn hình, nhìn xa 6 mét trong vòng 20 giây."
-      },
-      {
-        num: "02",
-        icon: "🧴",
-        title: "NHỎ NƯỚC MẮT NHÂN TẠO",
-        desc: "Bổ sung độ ẩm cho màng phim nước mắt bằng dung dịch nhỏ không chất bảo quản."
-      },
-      {
-        num: "03",
-        icon: "☕",
-        title: "CHƯỜM ẤM MI MẮT",
-        desc: "Chườm ấm nhẹ nhàng 5-10 phút giúp thông tuyến dầu meibomius trên mí."
-      }
-    ],
-    doList: [
-      { icon: "🧴", text: "Nhỏ nước mắt nhân tạo 3-4 lần mỗi ngày" },
-      { icon: "👁️", text: "Chớp mắt thường xuyên khi sử dụng máy tính, điện thoại" },
-      { icon: "💤", text: "Ngủ đủ giấc và uống đủ nước mỗi ngày" }
-    ],
-    dontList: [
-      { icon: "💻", text: "Không nhìn màn hình liên tục nhiều giờ trong phòng tối" },
-      { icon: "👁️", text: "Không dụi mắt mạnh khi thấy cộm rát" },
-      { icon: "💨", text: "Không ngồi đối diện luồng gió điều hòa thổi thẳng vào mặt" }
-    ]
-  }
+const em01 = {
+  id: "EM-01",
+  audio_id: "EM-01",
+  title: "Sơ cứu dị vật nhỏ vào mắt",
+  leadHeading: "RỬA MẮT BẰNG NƯỚC SẠCH HOẶC NƯỚC MUỐI SINH LÝ",
+  instruction: "Tuyệt đối không dụi mắt. Rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý.",
+  image: eyeIllustrations.foreignObject,
+  category: "emergency",
+  priority: "high",
+  severity: "high",
+  priorityLabel: "Khẩn cấp",
+  badgeLabel: "KHẨN CẤP",
+  audioScript: "Khi bị bụi, cát hoặc dị vật nhỏ bay vào mắt, hãy thực hiện ngay các bước sau: Trước hết, tuyệt đối không dụi mắt vì có thể làm xước bề mặt mắt. Hãy rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý. Nếu sau khi rửa mà vẫn còn cảm giác cộm, đau rát, nhìn mờ hoặc sợ ánh sáng, bạn cần đến ngay cơ sở y tế để được bác sĩ kiểm tra. Tuyệt đối không tự ý dùng kim, tăm hoặc các dụng cụ khác để lấy dị vật ra. Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp.",
+  script: "Khi bị bụi, cát hoặc dị vật nhỏ bay vào mắt, hãy thực hiện ngay các bước sau: Trước hết, tuyệt đối không dụi mắt vì có thể làm xước bề mặt mắt. Hãy rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý. Nếu sau khi rửa mà vẫn còn cảm giác cộm, đau rát, nhìn mờ hoặc sợ ánh sáng, bạn cần đến ngay cơ sở y tế để được bác sĩ kiểm tra. Tuyệt đối không tự ý dùng kim, tăm hoặc các dụng cụ khác để lấy dị vật ra. Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp.",
+  steps: [
+    {
+      num: "01",
+      icon: "💧",
+      title: "LÀM GÌ NGAY: RỬA MẮT NGAY LẬP TỨC",
+      desc: "Rửa mắt ngay bằng nước sạch hoặc nước muối sinh lý NaCl 0.9%, chớp mắt trong bát nước sạch để cuốn trôi dị vật."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: TUYỆT ĐỐI KHÔNG DỤI MẮT",
+      desc: "Không dùng tay day dụi vì hạt bụi sẽ cào xước bề mặt giác mạc. Không dùng kim, tăm hay dụng cụ gắp dị vật."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: CÒN CỘM RÁT KÉO DÀI",
+      desc: "Nếu sau khi rửa vẫn còn cảm giác cộm xót, đau rát, nhìn mờ hoặc sợ ánh sáng, cần đến cơ sở y tế kiểm tra ngay."
+    }
+  ],
+  doList: [
+    { icon: "💧", text: "Rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý" },
+    { icon: "👁️", text: "Chớp mắt nhẹ nhàng trong bát nước sạch để dị vật trôi ra ngoài" },
+    { icon: "🏥", text: "Đến cơ sở y tế nếu vẫn còn cảm giác cộm xót sau khi rửa" }
+  ],
+  dontList: [
+    { icon: "🚫", text: "Tuyệt đối không dụi mắt dưới bất kỳ hình thức nào" },
+    { icon: "🪝", text: "Không tự ý dùng kim, tăm hay dụng cụ khác để lấy dị vật ra" },
+    { icon: "💨", text: "Không nhờ người khác thổi mạnh vào mắt tránh lây nhiễm khuẩn" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp."
 };
 
+const em02 = {
+  id: "EM-02",
+  audio_id: "EM-02",
+  title: "Sơ cứu dị vật nhọn / Vật cắm vào mắt",
+  leadHeading: "TUYỆT ĐỐI KHÔNG TỰ Ý RÚT DỊ VẬT RA NGOÀI",
+  instruction: "KHÔNG RÚT DỊ VẬT - KHÔNG XOAY - KHÔNG ẤN - KHÔNG BĂNG ÉP LÊN NHÃN CẦU!",
+  image: eyeIllustrations.foreignObject,
+  category: "emergency",
+  priority: "critical",
+  severity: "critical",
+  priorityLabel: "Cực kỳ khẩn cấp",
+  badgeLabel: "CỰC KỲ KHẨN CẤP",
+  audioScript: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
+  script: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
+  steps: [
+    {
+      num: "01",
+      icon: "🛡️",
+      title: "LÀM GÌ NGAY: CHE CHẮN BẢO VỆ MẮT BẰNG CỐC SẠCH",
+      desc: "Đặt nhẹ một chiếc cốc giấy sạch hình vòm úp trùm lên mắt để bảo vệ dị vật khỏi va quẹt bên ngoài, không tì đè lên mắt."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: KHÔNG RÚT - KHÔNG XOAY - KHÔNG BĂNG ÉP",
+      desc: "Tuyệt đối không cố rút dị vật, không kéo, không xoay, không chạm tay vào dị vật và không băng ép đè lên nhãn cầu."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: CHUYỂN VIỆN MẮT KHẨN CẤP TỨC THÌ",
+      desc: "Đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt để bác sĩ vi phẫu xử lý."
+    }
+  ],
+  doList: [
+    { icon: "🛡️", text: "Che chắn nhẹ nhàng bằng cốc giấy sạch hình vòm, không tạo áp lực" },
+    { icon: "🩹", text: "Dán băng dính cố định vành cốc quanh xương hốc mắt" },
+    { icon: "🏥", text: "Đưa người bị nạn đến cơ sở chuyên khoa mắt cấp cứu ngay" }
+  ],
+  dontList: [
+    { icon: "🚫", text: "Tuyệt đối không cố tự lấy dị vật ra, không kéo, không xoay" },
+    { icon: "✋", text: "Không chạm bất kỳ dụng cụ nào vào dị vật đang cắm" },
+    { icon: "🩹", text: "Không ấn hoặc băng ép trực tiếp lên nhãn cầu" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
+};
+
+const em03 = {
+  id: "EM-03",
+  audio_id: "EM-03",
+  title: "Sơ cứu hóa chất bắn vào mắt",
+  leadHeading: "RỬA MẮT NGAY LẬP TỨC DƯỚI NƯỚC SẠCH LIÊN TỤC 15 - 20 PHÚT",
+  instruction: "RỬA MẮT NGAY LẬP TỨC - TUYỆT ĐỐI KHÔNG CHỜ ĐẾN BỆNH VIỆN MỚI BẮT ĐẦU RỬA!",
+  image: eyeIllustrations.chemicalSplash,
+  category: "emergency",
+  priority: "critical",
+  severity: "critical",
+  priorityLabel: "Cực kỳ khẩn cấp",
+  badgeLabel: "CỰC KỲ KHẨN CẤP",
+  audioScript: "Hóa chất bắn vào mắt là một cấp cứu tối khẩn cấp. Nếu chuyện này xảy ra, bạn hãy rửa mắt ngay lập tức bằng thật nhiều nước sạch có sẵn. Tuyệt đối không chờ đến khi đến bệnh viện mới bắt đầu rửa mắt. Trong lúc rửa, hãy cố gắng mở mắt và tiếp tục rửa liên tục. Không tự ý dùng các chất khác để trung hòa hóa chất, không dụi mắt và không áp dụng các phương pháp dân gian. Sau khi rửa mắt sơ cứu, hãy tìm kiếm chăm sóc y tế khẩn cấp ngay lập tức và tiếp tục rửa mắt trên đường đi nếu có thể. Tình huống này cần được đánh giá y tế khẩn cấp.",
+  script: "Hóa chất bắn vào mắt là một cấp cứu tối khẩn cấp. Nếu chuyện này xảy ra, bạn hãy rửa mắt ngay lập tức bằng thật nhiều nước sạch có sẵn. Tuyệt đối không chờ đến khi đến bệnh viện mới bắt đầu rửa mắt. Trong lúc rửa, hãy cố gắng mở mắt và tiếp tục rửa liên tục. Không tự ý dùng các chất khác để trung hòa hóa chất, không dụi mắt và không áp dụng các phương pháp dân gian. Sau khi rửa mắt sơ cứu, hãy tìm kiếm chăm sóc y tế khẩn cấp ngay lập tức và tiếp tục rửa mắt trên đường đi nếu có thể. Tình huống này cần được đánh giá y tế khẩn cấp.",
+  steps: [
+    {
+      num: "01",
+      icon: "💧",
+      title: "LÀM GÌ NGAY: RỬA MẮT NGAY LẬP TỨC THẬT NHIỀU NƯỚC",
+      desc: "Xối rửa mắt ngay lập tức bằng nguồn nước sạch gần nhất liên tục trong 15-20 phút. Cố gắng mở to mi mắt trong lúc rửa."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: KHÔNG CHỜ ĐẾN VIỆN - KHÔNG TRUNG HÒA",
+      desc: "Tuyệt đối không chờ đến viện mới rửa. Không tự ý dùng chất khác trung hòa (gây phản ứng nhiệt), không dụi mắt."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: ĐI CẤP CỨU NGAY SAU KHI RỬA",
+      desc: "Sau khi rửa sơ cứu, đến ngay cơ sở y tế khẩn cấp. Tiếp tục rửa mắt trên đường di chuyển nếu có thể."
+    }
+  ],
+  doList: [
+    { icon: "💧", text: "Rửa mắt ngay lập tức bằng thật nhiều nước sạch có sẵn trong 15-20 phút" },
+    { icon: "👁️", text: "Cố gắng mở to mi mắt và chớp liên tục trong dòng nước chảy" },
+    { icon: "🧪", text: "Mang theo bao bì hoặc mẫu hóa chất đến bệnh viện" }
+  ],
+  dontList: [
+    { icon: "⏳", text: "Tuyệt đối không chờ đến khi đến bệnh viện mới bắt đầu rửa mắt" },
+    { icon: "⚗️", text: "Không tự ý dùng các chất khác để trung hòa hóa chất" },
+    { icon: "🚫", text: "Không dụi mắt và không áp dụng các phương pháp dân gian" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
+};
+
+const em04 = {
+  id: "EM-04",
+  audio_id: "EM-04",
+  title: "Sơ cứu bỏng nhiệt ở mắt",
+  leadHeading: "LẬP TỨC LÀM MÁT VÀ RỬA MẮT BẰNG NƯỚC SẠCH",
+  instruction: "Lập tức làm mát và rửa bằng nước sạch - Đến ngay cơ sở y tế để bác sĩ đánh giá!",
+  image: eyeIllustrations.eyeBurn,
+  category: "emergency",
+  priority: "high",
+  severity: "high",
+  priorityLabel: "Khẩn cấp",
+  badgeLabel: "KHẨN CẤP",
+  audioScript: "Khi mắt bị bỏng do nhiệt như nước sôi hoặc dầu mỡ nóng, hãy lập tức làm mát và rửa mắt bằng nước sạch. Sau bước sơ cứu này, bạn cần đến ngay cơ sở y tế để bác sĩ đánh giá mức độ tổn thương của mắt. Tuyệt đối không dụi mắt và không tự ý bôi các chất theo quan niệm dân gian lên mắt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  script: "Khi mắt bị bỏng do nhiệt như nước sôi hoặc dầu mỡ nóng, hãy lập tức làm mát và rửa mắt bằng nước sạch. Sau bước sơ cứu này, bạn cần đến ngay cơ sở y tế để bác sĩ đánh giá mức độ tổn thương của mắt. Tuyệt đối không dụi mắt và không tự ý bôi các chất theo quan niệm dân gian lên mắt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  steps: [
+    {
+      num: "01",
+      icon: "🧊",
+      title: "LÀM GÌ NGAY: LẬP TỨC LÀM MÁT VÀ RỬA BẰNG NƯỚC SẠCH",
+      desc: "Dùng nước mát sạch chảy nhẹ nhàng rửa và làm mát vùng mắt bị bỏng nhiệt do nước sôi, dầu mỡ nóng."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: KHÔNG DỤI MẮT - KHÔNG BÔI MẸO DÂN GIAN",
+      desc: "Tuyệt đối không day dụi mắt. Không tự ý bôi mỡ trăn, lòng trắng trứng, kem đánh răng hay thuốc lá lên mắt."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: ĐẾN NGAY CƠ SỞ Y TẾ ĐÁNH GIÁ",
+      desc: "Sau bước làm mát ban đầu, cần đến ngay cơ sở y tế để bác sĩ chuyên khoa mắt đánh giá mức độ tổn thương."
+    }
+  ],
+  doList: [
+    { icon: "🧊", text: "Lập tức làm mát và rửa mắt bằng dòng nước sạch" },
+    { icon: "🧼", text: "Giữ sạch vùng da mi mắt bị bỏng nhiệt" },
+    { icon: "🏥", text: "Đến ngay cơ sở y tế để bác sĩ chuyên khoa đánh giá tổn thương" }
+  ],
+  dontList: [
+    { icon: "🚫", text: "Tuyệt đối không day dụi lên mắt đang bị bỏng" },
+    { icon: "🍳", text: "Không tự ý bôi mỡ trăn, lòng trắng trứng hay thảo dược dân gian" },
+    { icon: "💊", text: "Không tự ý nhỏ các loại thuốc mỡ khi chưa có chỉ định bác sĩ" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
+};
+
+const em05 = {
+  id: "EM-05",
+  audio_id: "EM-05",
+  title: "Sơ cứu chấn thương do va đập vào mắt",
+  leadHeading: "CHO NGHỈ NGƠI - CHƯỜM LẠNH NHẸ QUANH HỐC MẮT",
+  instruction: "Cho người bị nạn nghỉ ngơi - Chườm lạnh nhẹ quanh hốc mắt, không ấn lên nhãn cầu!",
+  image: eyeIllustrations.bluntTrauma,
+  category: "emergency",
+  priority: "high",
+  severity: "high",
+  priorityLabel: "Khẩn cấp",
+  badgeLabel: "KHẨN CẤP",
+  audioScript: "Nếu mắt bị chấn thương do va đập, như bị bóng đập vào, cú đấm hoặc tai nạn, hãy cho người bị nạn nghỉ ngơi và hạn chế tối đa tác động lên mắt. Bạn có thể chườm lạnh nhẹ nhàng quanh vùng hốc mắt để giảm sưng, nhưng không ấn trực tiếp lên nhãn cầu. Cần phải đưa người bị nạn đi cấp cứu ngay nếu có các dấu hiệu sau: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi hoặc thụt bất thường, hoặc không vận động mắt bình thường được. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  script: "Nếu mắt bị chấn thương do va đập, như bị bóng đập vào, cú đấm hoặc tai nạn, hãy cho người bị nạn nghỉ ngơi và hạn chế tối đa tác động lên mắt. Bạn có thể chườm lạnh nhẹ nhàng quanh vùng hốc mắt để giảm sưng, nhưng không ấn trực tiếp lên nhãn cầu. Cần phải đưa người bị nạn đi cấp cứu ngay nếu có các dấu hiệu sau: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi hoặc thụt bất thường, hoặc không vận động mắt bình thường được. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  steps: [
+    {
+      num: "01",
+      icon: "🧊",
+      title: "LÀM GÌ NGAY: CHO NGHỈ NGƠI VÀ CHƯỜM LẠNH NHẸ",
+      desc: "Cho người bị nạn nghỉ ngơi, hạn chế tối đa tác động lên mắt. Chườm lạnh nhẹ nhàng quanh hốc mắt bằng khăn bọc đá."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: KHÔNG ẤN TRỰC TIẾP LÊN NHÃN CẦU",
+      desc: "Không ấn hoặc tì đè vật nặng lên nhãn cầu. Không tự ý uống thuốc aspirin gây nguy cơ chảy máu nội nhãn."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: DẤU HIỆU BÁO ĐỘNG ĐỎ",
+      desc: "Cần đi cấp cứu ngay nếu: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi hoặc thụt bất thường, không vận động mắt được."
+    }
+  ],
+  doList: [
+    { icon: "🛋️", text: "Cho người bị nạn ngồi nghỉ ngơi, hạn chế cử động mắt" },
+    { icon: "🧊", text: "Chườm lạnh nhẹ nhàng quanh hốc mắt để giảm sưng bầm" },
+    { icon: "🏥", text: "Đưa đi cấp cứu ngay nếu có các dấu hiệu cảnh báo đỏ" }
+  ],
+  dontList: [
+    { icon: "🚫", text: "Không ấn trực tiếp lên nhãn cầu hoặc dụi mắt" },
+    { icon: "💊", text: "Không tự ý uống aspirin hay thuốc chống đông máu" },
+    { icon: "🏃", text: "Không để người bệnh tiếp tục vận động mạnh hay làm việc" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
+};
+
+const em06 = {
+  id: "EM-06",
+  audio_id: "EM-06",
+  title: "Tổn thương mắt do tia hàn / tia UV",
+  leadHeading: "RỜI KHỎI NGUỒN SÁNG - KHÔNG TỰ DÙNG THUỐC TÊ NHỎ MẮT",
+  instruction: "Rời khỏi nguồn sáng ngay, không dụi mắt. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt!",
+  image: eyeIllustrations.eyeBurn,
+  category: "emergency",
+  priority: "medium",
+  severity: "medium",
+  priorityLabel: "Cần lưu ý",
+  badgeLabel: "CẦN LƯU Ý",
+  audioScript: "Tổn thương mắt do ánh sáng mạnh như tia hàn hoặc tia cực tím thường không xuất hiện ngay mà sau vài giờ. Các triệu chứng bao gồm đau mắt, cộm rát, sợ ánh sáng, chảy nước mắt và khó mở mắt. Khi gặp tình trạng này, hãy rời khỏi nguồn sáng ngay lập tức, không dụi mắt và chườm mát nhẹ nhàng. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt hoặc các phương pháp dân gian. Nếu các triệu chứng nghiêm trọng hoặc không cải thiện, hãy tìm kiếm chăm sóc y tế. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  script: "Tổn thương mắt do ánh sáng mạnh như tia hàn hoặc tia cực tím thường không xuất hiện ngay mà sau vài giờ. Các triệu chứng bao gồm đau mắt, cộm rát, sợ ánh sáng, chảy nước mắt và khó mở mắt. Khi gặp tình trạng này, hãy rời khỏi nguồn sáng ngay lập tức, không dụi mắt và chườm mát nhẹ nhàng. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt hoặc các phương pháp dân gian. Nếu các triệu chứng nghiêm trọng hoặc không cải thiện, hãy tìm kiếm chăm sóc y tế. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+  steps: [
+    {
+      num: "01",
+      icon: "🕶️",
+      title: "LÀM GÌ NGAY: RỜI KHỎI NGUỒN SÁNG VÀ CHƯỜM MÁT",
+      desc: "Nghỉ ngơi trong phòng tối hoặc ánh sáng dịu, chườm mát nhẹ nhàng quanh mắt, nhỏ nước mắt nhân tạo không chất bảo quản."
+    },
+    {
+      num: "02",
+      icon: "🚫",
+      title: "KHÔNG ĐƯỢC LÀM: TUYỆT ĐỐI KHÔNG DÙNG THUỐC TÊ NHỎ MẮT",
+      desc: "Không dụi mắt. Tuyệt đối không tự ý mua thuốc tê nhỏ mắt vì gây ức chế lành biểu mô và loét thủng giác mạc không hồi phục."
+    },
+    {
+      num: "03",
+      icon: "🏥",
+      title: "KHI NÀO CẤP CỨU: TRIỆU CHỨNG KÉO DÀI KHÔNG ĐỠ",
+      desc: "Nếu triệu chứng đau rát dữ dội, giảm thị lực hoặc không cải thiện sau 12-24 giờ, hãy tìm kiếm chăm sóc y tế."
+    }
+  ],
+  doList: [
+    { icon: "🕶️", text: "Rời khỏi nguồn sáng ngay lập tức, đeo kính mát nghỉ ngơi" },
+    { icon: "🧊", text: "Chườm mát nhẹ nhàng quanh vùng mi mắt để làm dịu rát" },
+    { icon: "💧", text: "Nhỏ nước mắt nhân tạo không chất bảo quản để bôi trơn" }
+  ],
+  dontList: [
+    { icon: "🚫", text: "Tuyệt đối không dụi mắt làm bong rộng thêm biểu mô tổn thương" },
+    { icon: "💊", text: "Tuyệt đối không tự ý mua hoặc xin thuốc tê nhỏ mắt giảm đau" },
+    { icon: "🌿", text: "Không áp dụng các phương pháp xông lá hay đắp mẹo dân gian" }
+  ],
+  disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
+};
+
+// Object map hỗ trợ cả ID chuẩn (EM-01 -> EM-06) và ID cũ (alias) để không làm lỗi router/UI
+export const firstAidCases = {
+  // Chuẩn EM IDs
+  "EM-01": em01,
+  "EM-02": em02,
+  "EM-03": em03,
+  "EM-04": em04,
+  "EM-05": em05,
+  "EM-06": em06,
+
+  // Legacy aliases
+  "dust-in-eye": em01,
+  "foreign-body-dust": em01,
+  "foreign-object": em02,
+  "metal-foreign-body": em02,
+  "fishhook": em02,
+  "chemical-splash": em03,
+  "chemical-burn": em03,
+  "thermal-burn": em04,
+  "eye-burn": em04,
+  "blunt-trauma": em05,
+  "welding-uv": em06,
+  "WELDING_UV_EXPOSURE": em06
+};
+
+// Mảng danh sách sơ cứu cấp cứu chuẩn EM-01 đến EM-06
 export const firstAidList = [
   {
-    id: "blunt-trauma",
-    title: "Mắt bị va đập",
-    icon: "⚽",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
-    brief: "Bóng đập, ngã đập mặt, va chạm mạnh",
-    action: "Chườm lạnh nhẹ, không dụi mắt",
-    image: eyeIllustrations.bluntTrauma
-  },
-  {
-    id: "foreign-object",
-    title: "Dị vật vào mắt",
-    icon: "🪵",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
-    brief: "Mạt sắt, mảnh kính, dằm găm sâu",
-    action: "Không tự rút dị vật ra ngoài",
-    image: eyeIllustrations.foreignObject
-  },
-  {
-    id: "dust-in-eye",
-    title: "Bụi vào mắt",
+    id: "EM-01",
+    caseId: "EM-01",
+    audio_id: "EM-01",
+    title: "Sơ cứu dị vật nhỏ vào mắt",
     icon: "💨",
-    severity: "warning",
-    badgeText: "Cần được khám",
-    brief: "Cát bụi đường sá, hạt mạt bay vào mắt gây cộm xót",
-    action: "Không dụi mắt, nhỏ nhiều nước muối sinh lý",
+    priority: "high",
+    severity: "high",
+    priorityLabel: "Khẩn cấp",
+    badgeText: "Khẩn cấp",
+    brief: "Bụi, cát, hạt mạt nhỏ bay vào mắt gây cộm xót",
+    action: "Rửa bằng nước sạch hoặc nước muối sinh lý. Không dụi mắt.",
     image: eyeIllustrations.foreignObject
   },
   {
-    id: "chemical-splash",
-    title: "Hóa chất vào mắt",
+    id: "EM-02",
+    caseId: "EM-02",
+    audio_id: "EM-02",
+    title: "Sơ cứu dị vật nhọn / Vật cắm vào mắt",
+    icon: "🪵",
+    priority: "critical",
+    severity: "critical",
+    priorityLabel: "Cực kỳ khẩn cấp",
+    badgeText: "Cực kỳ khẩn cấp",
+    brief: "Mạt kim loại, mảnh kính, cành cây, vật nhọn cắm vào mắt",
+    action: "KHÔNG TỰ RÚT DỊ VẬT - Che bằng cốc giấy sạch, đi viện ngay.",
+    image: eyeIllustrations.foreignObject
+  },
+  {
+    id: "EM-03",
+    caseId: "EM-03",
+    audio_id: "EM-03",
+    title: "Sơ cứu hóa chất bắn vào mắt",
     icon: "🧪",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
-    brief: "Xà phòng, nước tẩy, axit, vôi bột",
-    action: "Xối nước rửa liên tục 15-20 phút",
+    priority: "critical",
+    severity: "critical",
+    priorityLabel: "Cực kỳ khẩn cấp",
+    badgeText: "Cực kỳ khẩn cấp",
+    brief: "Hóa chất tẩy rửa, axit, vôi, xà phòng, nước lau sàn",
+    action: "RỬA MẮT NGAY LẬP TỨC 15-20 phút, không chờ đến bệnh viện.",
     image: eyeIllustrations.chemicalSplash
   },
   {
-    id: "fishhook",
-    title: "Móc câu vào mắt",
-    icon: "🪝",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
-    brief: "Lưỡi câu cá có ngạnh sắc nhọn",
-    action: "Cắt dây cước, không giật móc",
-    image: eyeIllustrations.fishhook
-  },
-  {
-    id: "eye-burn",
-    title: "Bỏng mắt (Nhiệt / Hàn)",
+    id: "EM-04",
+    caseId: "EM-04",
+    audio_id: "EM-04",
+    title: "Sơ cứu bỏng nhiệt ở mắt",
     icon: "🔥",
-    severity: "emergency",
-    badgeText: "Cần xử lý ngay",
-    brief: "Hàn điện, tia lửa, dầu ăn sôi",
-    action: "Làm mát bằng nước sạch ngay",
+    priority: "high",
+    severity: "high",
+    priorityLabel: "Khẩn cấp",
+    badgeText: "Khẩn cấp",
+    brief: "Nước sôi, dầu mỡ nóng, tia lửa nhiệt",
+    action: "Lập tức làm mát và rửa bằng nước sạch, đến cơ sở y tế.",
     image: eyeIllustrations.eyeBurn
   },
   {
-    id: "red-eye",
-    title: "Mắt đỏ + ghèn",
-    icon: "👁️",
-    severity: "warning",
-    badgeText: "Cần được khám",
-    brief: "Viêm kết mạc, ghèn dính mí",
-    action: "Vệ sinh nước muối, khăn riêng",
-    image: eyeIllustrations.redEye
+    id: "EM-05",
+    caseId: "EM-05",
+    audio_id: "EM-05",
+    title: "Sơ cứu chấn thương do va đập vào mắt",
+    icon: "⚽",
+    priority: "high",
+    severity: "high",
+    priorityLabel: "Khẩn cấp",
+    badgeText: "Khẩn cấp",
+    brief: "Bị đấm, bóng đập, ngã đập vùng hốc mắt",
+    action: "Nghỉ ngơi, chườm lạnh nhẹ quanh hốc mắt, không ấn lên nhãn cầu.",
+    image: eyeIllustrations.bluntTrauma
+  },
+  {
+    id: "EM-06",
+    caseId: "EM-06",
+    audio_id: "EM-06",
+    title: "Tổn thương mắt do tia hàn / tia UV",
+    icon: "⚡",
+    priority: "medium",
+    severity: "medium",
+    priorityLabel: "Cần lưu ý",
+    badgeText: "Cần lưu ý",
+    brief: "Tia lửa hàn, hồ quang điện, đèn cực tím UV",
+    action: "Rời nguồn sáng, không dụi mắt, TUYỆT ĐỐI KHÔNG DÙNG THUỐC TÊ.",
+    image: eyeIllustrations.eyeBurn
   }
 ];

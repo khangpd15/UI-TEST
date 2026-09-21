@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import AIAssistant from '../components/AIAssistant/AIAssistant';
-import { firstAidCases } from '../data/firstAidData';
+import { firstAidList } from '../data/firstAidData';
 
 /**
- * EmergencyPage - Được nâng cấp toàn diện thành màn hình "AI TRỢ LÝ SƠ CỨU MẮT"
- * Thay vì người dùng phải tự tìm tình huống và đọc hướng dẫn, người dùng có thể nói
- * bằng tiếng Việt về tình huống đang gặp phải. Hệ thống sử dụng Speech-to-Text để
- * chuyển giọng nói thành văn bản, phân tích tình huống, xác định nhóm sự cố mắt phù hợp,
- * kiểm tra dấu hiệu cảnh báo, sau đó cung cấp hướng dẫn sơ cứu phù hợp kèm video và giọng đọc.
+ * EmergencyPage - AI Trợ lý sơ cứu mắt
  */
-export default function EmergencyPage({ caseId = 'dust-in-eye', onBack, onSelectOtherCase }) {
+export default function EmergencyPage({ caseId = 'EM-03', onBack, onSelectOtherCase }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     const mobileViewport = document.getElementById('mobile-viewport-scroll');
@@ -19,33 +15,32 @@ export default function EmergencyPage({ caseId = 'dust-in-eye', onBack, onSelect
   return (
     <div className="emergency-page py-3 py-md-4 animate__animated animate__fadeIn">
       <div className="container">
-        {/* 🤖 AI TRỢ LÝ SƠ CỨU MẮT (Thay thế màn hình hướng dẫn xử lý cũ) */}
+        {/* 🤖 AI TRỢ LÝ SƠ CỨU MẮT */}
         <AIAssistant
           initialCaseId={caseId}
           onBack={onBack}
           hotline="0395 151 151"
         />
 
-        {/* Chuyển nhanh sang trường hợp chấn thương mắt khác */}
+        {/* Chuyển nhanh sang trường hợp cấp cứu mắt khác (EM-01 đến EM-06) */}
         <div className="bg-white rounded-4 p-4 border my-4 shadow-sm">
           <h3 className="h6 fw-bold text-muted text-uppercase mb-3">
             <i className="bi bi-arrow-repeat text-visi-primary me-2"></i>
-            Hoặc chọn nhanh trường hợp mắt đã định danh trong hệ thống:
+            Hoặc chọn nhanh trường hợp cấp cứu chuẩn hóa (EM-01 → EM-06):
           </h3>
           <div className="d-flex flex-wrap gap-2">
-            {Object.keys(firstAidCases).map((key) => {
-              const c = firstAidCases[key];
-              if (key === caseId) return null;
+            {firstAidList.map((item) => {
+              if (item.id === caseId || item.audio_id === caseId) return null;
               return (
                 <button
-                  key={key}
+                  key={item.id}
                   type="button"
                   className="btn btn-outline-secondary btn-sm py-2 px-3 fw-bold bg-white"
-                  onClick={() => onSelectOtherCase && onSelectOtherCase(key)}
+                  onClick={() => onSelectOtherCase && onSelectOtherCase(item.id)}
                   style={{ minHeight: '40px', borderRadius: '10px' }}
                 >
-                  <span className="me-1">👉</span>
-                  <span>{c.title}</span>
+                  <span className="me-1">{item.icon}</span>
+                  <span>{item.title}</span>
                 </button>
               );
             })}

@@ -1,380 +1,392 @@
-// Danh mục phân loại sự cố mắt chuẩn y khoa ReMiCare
-// AI map câu nói tự nhiên của người dùng vào các category cố định này
+// Danh mục phân loại sự cố mắt chuẩn y khoa ReMiCare (Đồng bộ 21/09/2026)
+// Mapping câu nói tự nhiên của người dùng vào các tình huống chuẩn EM-01 đến EM-06 và DIS-01 đến DIS-10
 
 export const EYE_CARE_CATEGORIES = {
-  WELDING_UV_EXPOSURE: {
-    id: "WELDING_UV_EXPOSURE",
-    title: "Tiếp xúc với tia UV từ quá trình hàn",
-    subtitle: "Bỏng giác mạc do tia hồ quang điện, đèn UV, ánh sáng hàn",
-    severity: "warning",
-    severityLabel: "CẦN ĐƯỢC KHÁM",
-    recommendedVideoId: "V004",
-    keywords: ["hàn", "tia hàn", "hồ quang", "hàn sắt", "hàn điện", "bỏng hàn", "rát mắt sau khi hàn", "chói mắt", "tia uv"],
-    summary: "Mắt bị đau rát, chảy nước mắt, sợ ánh sáng do tổn thương biểu mô giác mạc từ tia UV hồ quang hàn.",
-    audioScript: "Hướng dẫn xử trí khi bị bỏng mắt do tia lửa hàn: Bước một, ngừng ngay công việc và nghỉ ngơi trong phòng tối. Bước hai, chườm lạnh nhẹ xung quanh mắt để giảm cảm giác nóng rát. Bước ba, nhỏ nhiều nước mắt nhân tạo không chất bảo quản và đến khám chuyên khoa mắt để được kê đơn thuốc giảm đau màng phim giác mạc an toàn.",
+  // EM-03: HÓA CHẤT BẮN VÀO MẮT (Critical - Tối khẩn cấp)
+  CHEMICAL_EYE_EXPOSURE: {
+    id: "CHEMICAL_EYE_EXPOSURE",
+    audio_id: "EM-03",
+    caseId: "EM-03",
+    title: "Sơ cứu hóa chất bắn vào mắt",
+    subtitle: "Xà phòng, nước lau sàn, axit, bazơ, thuốc nhuộm, nước tẩy bồn cầu, vôi",
+    severity: "critical",
+    priority: "critical",
+    severityLabel: "CỰC KỲ KHẨN CẤP",
+    priorityLabel: "Cực kỳ khẩn cấp",
+    recommendedVideoId: "V002",
+    keywords: ["hóa chất", "xà phòng", "nước tẩy", "axit", "bazo", "vôi", "nước rửa chén", "nước lau sàn", "thuốc tẩy", "bắn vào mắt", "EM-03"],
+    summary: "Cấp cứu tối khẩn cấp: Hóa chất có thể phá hủy mô mắt trong vòng vài phút. Cần xối rửa ngay lập tức!",
+    audioScript: "Hóa chất bắn vào mắt là một cấp cứu tối khẩn cấp. Nếu chuyện này xảy ra, bạn hãy rửa mắt ngay lập tức bằng thật nhiều nước sạch có sẵn. Tuyệt đối không chờ đến khi đến bệnh viện mới bắt đầu rửa mắt. Trong lúc rửa, hãy cố gắng mở mắt và tiếp tục rửa liên tục. Không tự ý dùng các chất khác để trung hòa hóa chất, không dụi mắt và không áp dụng các phương pháp dân gian. Sau khi rửa mắt sơ cứu, hãy tìm kiếm chăm sóc y tế khẩn cấp ngay lập tức và tiếp tục rửa mắt trên đường đi nếu có thể. Tình huống này cần được đánh giá y tế khẩn cấp.",
+    script: "Hóa chất bắn vào mắt là một cấp cứu tối khẩn cấp. Nếu chuyện này xảy ra, bạn hãy rửa mắt ngay lập tức bằng thật nhiều nước sạch có sẵn. Tuyệt đối không chờ đến khi đến bệnh viện mới bắt đầu rửa mắt. Trong lúc rửa, hãy cố gắng mở mắt và tiếp tục rửa liên tục. Không tự ý dùng các chất khác để trung hòa hóa chất, không dụi mắt và không áp dụng các phương pháp dân gian. Sau khi rửa mắt sơ cứu, hãy tìm kiếm chăm sóc y tế khẩn cấp ngay lập tức và tiếp tục rửa mắt trên đường đi nếu có thể. Tình huống này cần được đánh giá y tế khẩn cấp.",
     steps: [
       {
         num: "01",
-        title: "NGHỈ NGƠI TRONG PHÒNG TỐI",
-        desc: "Đeo kính râm hoặc ở nơi ánh sáng dịu, nhắm mắt nghỉ ngơi để giảm phản xạ co thắt đồng tử và sợ sáng.",
+        title: "LÀM GÌ NGAY: RỬA MẮT NGAY LẬP TỨC THẬT NHIỀU NƯỚC",
+        desc: "Đưa mắt ngay dưới vòi nước máy hoặc ca nước sạch. Xối rửa liên tục 15-20 phút, cố gắng mở to mắt khi rửa.",
         isDo: true
       },
       {
         num: "02",
-        title: "CHƯỜM MÁT QUANH MẮT",
-        desc: "Dùng khăn sạch bọc đá chườm nhẹ nhàng quanh vùng mi và hốc mắt để làm dịu cơn nóng rát dữ dội.",
-        isDo: true
-      },
-      {
-        num: "03",
-        title: "NHỎ NƯỚC MẮT NHÂN TẠO",
-        desc: "Bổ sung độ ẩm liên tục bằng nước mắt nhân tạo vô trùng dạng tép để hỗ trợ làm lành lớp biểu mô giác mạc.",
-        isDo: true
-      },
-      {
-        num: "04",
-        title: "TUYỆT ĐỐI KHÔNG DỤI MẮT",
-        desc: "Không dùng tay day dụi và không đắp các loại lá cây, nha đam hay sữa mẹ dân gian kẻo nhiễm trùng bội nhiễm.",
+        title: "KHÔNG ĐƯỢC LÀM: KHÔNG CHỜ ĐẾN VIỆN - KHÔNG TRUNG HÒA",
+        desc: "Tuyệt đối không chờ đến viện mới rửa. Không tự ý dùng chất khác để trung hòa hóa chất và không dụi mắt.",
         isDo: false
       },
       {
-        num: "05",
-        title: "ĐẾN BỆNH VIỆN MẮT KIỂM TRA",
-        desc: "Bác sĩ chuyên khoa mắt sẽ nhuộm huỳnh quang giác mạc kiểm tra độ trầy trợt và chỉ định thuốc giảm đau thích hợp.",
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: TÌM KIẾM CHĂM SÓC Y TẾ KHẨN CẤP",
+        desc: "Đến ngay cơ sở y tế khẩn cấp sau khi rửa sơ cứu và tiếp tục rửa mắt trên đường đi nếu có thể.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Mắt đau nhức buốt dữ dội kéo dài quá 12 tiếng không thuyên giảm",
-      "Thị lực suy giảm, nhìn mờ như qua màn sương",
-      "Xuất hiện mủ hoặc ghèn vàng dính chặt mi mắt",
-      "Nhạy cảm với ánh sáng cực độ không thể mở mắt"
-    ]
+      "Giác mạc chuyển sang màu trắng mờ đục",
+      "Không thể mở mắt, đau rát dữ dội lan lên nửa đầu",
+      "Mất thị lực hoặc chỉ thấy bóng mờ"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
   },
 
-  FOREIGN_BODY_DUST: {
-    id: "FOREIGN_BODY_DUST",
-    title: "Bụi hoặc dị vật nhỏ vào mắt",
-    subtitle: "Hạt cát, bụi đường, hạt mạt nhỏ bay vào mắt gây cộm xót",
-    severity: "warning",
-    severityLabel: "CẦN ĐƯỢC KHÁM",
-    recommendedVideoId: "V001",
-    keywords: ["bụi", "cát", "cộm", "xót", "dị vật nhỏ", "hạt bụi", "bụi đường", "chảy nước mắt", "bay vào mắt"],
-    summary: "Bụi hoặc hạt mạt nhỏ bám vào bề mặt kết mạc hoặc giác mạc gây cộm xót, đỏ và chảy nước mắt.",
-    audioScript: "Hướng dẫn sơ cứu bụi hoặc dị vật nhỏ vào mắt: Bước một, tuyệt đối không dụi mắt. Dụi mắt làm hạt bụi cào rách giác mạc. Bước hai, nhỏ liên tục nước muối sinh lý hoặc úp mặt chớp mắt trong bát nước sạch để bụi trôi ra ngoài. Bước ba, nếu sau ba mươi phút vẫn cộm xót, hãy đến bệnh viện chuyên khoa mắt.",
+  // EM-02: DỊ VẬT NHỌN / CẮM VÀO MẮT (Critical - Tối khẩn cấp)
+  PENETRATING_OBJECT: {
+    id: "PENETRATING_OBJECT",
+    audio_id: "EM-02",
+    caseId: "EM-02",
+    title: "Sơ cứu dị vật nhọn / Vật cắm vào mắt",
+    subtitle: "Mạt kim loại, mảnh kính, cành cây, móc câu, vật nhọn cắm vào nhãn cầu",
+    severity: "critical",
+    priority: "critical",
+    severityLabel: "CỰC KỲ KHẨN CẤP",
+    priorityLabel: "Cực kỳ khẩn cấp",
+    recommendedVideoId: "V005",
+    keywords: ["dị vật nhọn", "mạt sắt", "mảnh kính", "cành cây", "vật cắm vào mắt", "móc câu", "găm vào mắt", "xuyên thấu", "EM-02"],
+    summary: "Cấp cứu khẩn cấp: Tuyệt đối không cố tự lấy dị vật ra. Che chắn bảo vệ và chuyển viện ngay.",
+    audioScript: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
+    script: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
     steps: [
       {
         num: "01",
-        title: "TUYỆT ĐỐI KHÔNG DỤI MẮT",
-        desc: "Mọi động tác day, dụi sẽ chà xát hạt bụi sắc nhọn vào biểu mô giác mạc gây trầy xước và loét giác mạc.",
-        isDo: false
+        title: "LÀM GÌ NGAY: CHE CHẮN NHẸ NHÀNG BẰNG CỐC GIẤY SẠCH",
+        desc: "Dùng cốc giấy sạch hình vòm úp nhẹ lên mắt để bảo vệ dị vật, không tạo áp lực lên nhãn cầu.",
+        isDo: true
       },
       {
         num: "02",
-        title: "CHỚP MẮT TRONG NƯỚC SẠCH",
-        desc: "Nhỏ nhiều giọt nước muối sinh lý NaCl 0.9% hoặc chớp mắt trong cốc/bát nước sạch để kích thích dòng nước cuốn trôi bụi.",
-        isDo: true
-      },
-      {
-        num: "03",
-        title: "KÉO NHẸ MI MẮT TRÊN",
-        desc: "Nhìn xuống dưới, kéo nhẹ mi trên trùm ra ngoài mi dưới để lông mi gạt bớt dị vật đọng ở mặt trong mi.",
-        isDo: true
-      },
-      {
-        num: "04",
-        title: "KHÔNG DÙNG TĂM BÔNG NGOÁY",
-        desc: "Không dùng tăm bông, góc khăn hay lưỡi liếm để lấy bụi vì rất dễ gây xước lòng đen và nhiễm khuẩn nặng.",
+        title: "KHÔNG ĐƯỢC LÀM: KHÔNG RÚT - KHÔNG XOAY - KHÔNG BĂNG ÉP",
+        desc: "Tuyệt đối không tự ý rút dị vật ra, không dùng dụng cụ chạm vào dị vật và không ấn hay băng ép lên mắt.",
         isDo: false
       },
       {
-        num: "05",
-        title: "ĐI KHÁM NẾU CÒN CỘM RÁT",
-        desc: "Nếu sau 30 phút mắt vẫn cộm cấn, nhìn mờ hoặc đỏ, cần đến cơ sở y tế để bác sĩ gắp dị vật dưới kính hiển vi.",
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: ĐẾN NGAY CƠ SỞ CHUYÊN KHOA MẮT",
+        desc: "Đưa người bị nạn đến ngay bệnh viện chuyên khoa mắt càng sớm càng tốt để cấp cứu.",
+        isDo: true
+      }
+    ],
+    warningSigns: [
+      "Dị vật cắm sâu vào giác mạc hoặc củng mạc",
+      "Chảy dịch hoặc máu từ vết đâm",
+      "Đồng tử méo mó hoặc mất thị lực tức thì"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
+  },
+
+  // EM-01: DỊ VẬT NHỎ / BỤI VÀO MẮT (High - Khẩn cấp)
+  FOREIGN_BODY_DUST: {
+    id: "FOREIGN_BODY_DUST",
+    audio_id: "EM-01",
+    caseId: "EM-01",
+    title: "Sơ cứu dị vật nhỏ vào mắt",
+    subtitle: "Hạt cát, bụi đường, hạt mạt nhỏ bay vào mắt gây cộm xót",
+    severity: "high",
+    priority: "high",
+    severityLabel: "KHẨN CẤP",
+    priorityLabel: "Khẩn cấp",
+    recommendedVideoId: "V001",
+    keywords: ["bụi", "cát", "cộm", "xót", "dị vật nhỏ", "hạt bụi", "bụi đường", "chảy nước mắt", "bay vào mắt", "EM-01"],
+    summary: "Dị vật nhỏ bám vào bề mặt kết mạc/giác mạc gây cộm xót, đỏ và chảy nước mắt. Cần rửa sạch và không dụi mắt.",
+    audioScript: "Khi bị bụi, cát hoặc dị vật nhỏ bay vào mắt, hãy thực hiện ngay các bước sau: Trước hết, tuyệt đối không dụi mắt vì có thể làm xước bề mặt mắt. Hãy rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý. Nếu sau khi rửa mà vẫn còn cảm giác cộm, đau rát, nhìn mờ hoặc sợ ánh sáng, bạn cần đến ngay cơ sở y tế để được bác sĩ kiểm tra. Tuyệt đối không tự ý dùng kim, tăm hoặc các dụng cụ khác để lấy dị vật ra. Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp.",
+    script: "Khi bị bụi, cát hoặc dị vật nhỏ bay vào mắt, hãy thực hiện ngay các bước sau: Trước hết, tuyệt đối không dụi mắt vì có thể làm xước bề mặt mắt. Hãy rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý. Nếu sau khi rửa mà vẫn còn cảm giác cộm, đau rát, nhìn mờ hoặc sợ ánh sáng, bạn cần đến ngay cơ sở y tế để được bác sĩ kiểm tra. Tuyệt đối không tự ý dùng kim, tăm hoặc các dụng cụ khác để lấy dị vật ra. Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp.",
+    steps: [
+      {
+        num: "01",
+        title: "LÀM GÌ NGAY: RỬA MẮT BẰNG NƯỚC SẠCH HOẶC NƯỚC MUỐI",
+        desc: "Rửa mắt ngay lập tức bằng nước sạch hoặc nước muối sinh lý NaCl 0.9%, chớp mắt trong bát nước sạch.",
+        isDo: true
+      },
+      {
+        num: "02",
+        title: "KHÔNG ĐƯỢC LÀM: TUYỆT ĐỐI KHÔNG DỤI MẮT",
+        desc: "Không dụi mắt vì có thể làm xước bề mặt giác mạc. Không dùng kim, tăm hay dụng cụ gắp dị vật.",
+        isDo: false
+      },
+      {
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: ĐẾN CƠ SỞ Y TẾ NẾU VẪN CỘM RÁT",
+        desc: "Đến cơ sở y tế kiểm tra nếu sau khi rửa vẫn còn cảm giác cộm rát, đau buốt, sợ sáng hoặc nhìn mờ.",
         isDo: true
       }
     ],
     warningSigns: [
       "Vẫn còn cảm giác cộm xót như có gai đâm sau khi đã rửa mắt",
       "Mắt đỏ rực, phù nề mí mắt hoặc chảy ghèn",
-      "Nhìn mờ hoặc thị lực giảm rõ rệt",
-      "Đau nhức tăng dần khi chớp mắt"
-    ]
+      "Nhìn mờ hoặc thị lực giảm rõ rệt"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Nếu có dấu hiệu nghiêm trọng, hãy tìm kiếm chăm sóc y tế khẩn cấp."
   },
 
-  CHEMICAL_EYE_EXPOSURE: {
-    id: "CHEMICAL_EYE_EXPOSURE",
-    title: "Hóa chất bắn vào mắt",
-    subtitle: "Xà phòng, nước lau sàn, axit, bazo, thuốc nhuộm, nước tẩy bồn cầu",
-    severity: "emergency",
-    severityLabel: "CỰC KỲ KHẨN CẤP",
-    recommendedVideoId: "V002",
-    keywords: ["hóa chất", "xà phòng", "nước tẩy", "axit", "bazo", "vôi", "nước rửa chén", "nước lau sàn", "thuốc tẩy", "bắn vào mắt"],
-    summary: "Cấp cứu khẩn cấp: Hóa chất có thể phá hủy mô mắt trong vòng vài phút. Cần xối rửa ngay lập tức.",
-    audioScript: "Cảnh báo cấp cứu: Hóa chất bắn vào mắt cần hành động tức thì. Bước một, xối nước sạch liên tục vào mắt ngay lập tức trong mười lăm đến hai mươi phút không ngừng nghỉ. Bước hai, vạch mi mắt chớp liên tục trong dòng nước chảy. Bước ba, mang theo vỏ hóa chất và đến cơ sở y tế gần nhất.",
+  // EM-04: BỎNG NHIỆT Ở MẮT (High - Khẩn cấp)
+  THERMAL_BURN: {
+    id: "THERMAL_BURN",
+    audio_id: "EM-04",
+    caseId: "EM-04",
+    title: "Sơ cứu bỏng nhiệt ở mắt",
+    subtitle: "Nước sôi, dầu mỡ nóng, tia lửa nhiệt tạt vào mắt",
+    severity: "high",
+    priority: "high",
+    severityLabel: "KHẨN CẤP",
+    priorityLabel: "Khẩn cấp",
+    recommendedVideoId: "V004",
+    keywords: ["bỏng nhiệt", "nước sôi", "dầu mỡ nóng", "dầu ăn sôi", "tia lửa", "nóng rát", "bỏng mắt", "EM-04"],
+    summary: "Bỏng nhiệt làm tổn thương mi mắt và giác mạc. Cần làm mát và rửa mắt bằng nước sạch ngay.",
+    audioScript: "Khi mắt bị bỏng do nhiệt như nước sôi hoặc dầu mỡ nóng, hãy lập tức làm mát và rửa mắt bằng nước sạch. Sau bước sơ cứu này, bạn cần đến ngay cơ sở y tế để bác sĩ đánh giá mức độ tổn thương của mắt. Tuyệt đối không dụi mắt và không tự ý bôi các chất theo quan niệm dân gian lên mắt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+    script: "Khi mắt bị bỏng do nhiệt như nước sôi hoặc dầu mỡ nóng, hãy lập tức làm mát và rửa mắt bằng nước sạch. Sau bước sơ cứu này, bạn cần đến ngay cơ sở y tế để bác sĩ đánh giá mức độ tổn thương của mắt. Tuyệt đối không dụi mắt và không tự ý bôi các chất theo quan niệm dân gian lên mắt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
     steps: [
       {
         num: "01",
-        title: "XỐI NƯỚC SẠCH NGAY LẬP TỨC",
-        desc: "Đưa mắt ngay dưới vòi nước máy, vòi sen hoặc ca nước sạch. Xối rửa liên tục từ 15 đến 20 phút không được chậm trễ.",
+        title: "LÀM GÌ NGAY: LẬP TỨC LÀM MÁT VÀ RỬA BẰNG NƯỚC SẠCH",
+        desc: "Dùng nước mát sạch rửa và làm dịu ngay vùng mắt bị bỏng nhiệt do nước sôi hay dầu mỡ.",
         isDo: true
       },
       {
         num: "02",
-        title: "VẠCH MI MẮT KHI RỬA",
-        desc: "Dùng ngón tay mở to mi trên và mi dưới để nước rửa sạch toàn bộ hóa chất đọng lại ở cùng đồ kết mạc.",
-        isDo: true
-      },
-      {
-        num: "03",
-        title: "KHÔNG DÙNG DUNG DỊCH TRUNG HÒA",
-        desc: "Tuyệt đối không tìm chất kiềm để trung hòa axit hay ngược lại. Phản ứng sinh nhiệt sẽ làm cháy giác mạc nặng hơn.",
+        title: "KHÔNG ĐƯỢC LÀM: KHÔNG DỤI MẮT - KHÔNG BÔI MẸO DÂN GIAN",
+        desc: "Tuyệt đối không dụi mắt và không tự ý bôi mỡ trăn, lòng trắng trứng, kem đánh răng hay thuốc dân gian.",
         isDo: false
       },
       {
-        num: "04",
-        title: "MANG THEO NHÃN HÓA CHẤT",
-        desc: "Cầm theo bao bì, chai lọ hóa chất để bác sĩ nhận biết chính xác nồng độ pH và phác đồ điều trị.",
-        isDo: true
-      },
-      {
-        num: "05",
-        title: "ĐẾN BỆNH VIỆN CẤP CỨU NGAY",
-        desc: "Sau khi xối nước 15 phút, gọi cấp cứu hoặc đến bệnh viện mắt ngay lập tức.",
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: ĐẾN NGAY CƠ SỞ Y TẾ ĐỂ BÁC SĨ ĐÁNH GIÁ",
+        desc: "Đến ngay cơ sở y tế chuyên khoa để bác sĩ đánh giá mức độ tổn thương của giác mạc.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Giác mạc chuyển sang màu trắng đục (dấu hiệu hoại tử giác mạc)",
-      "Không thể mở mắt, sưng phù mí mắt dữ dội",
-      "Mất thị lực hoặc chỉ thấy bóng mờ",
-      "Đau nhức dữ dội lan lên nửa đầu"
-    ]
+      "Bỏng rộp mi mắt, sưng nề dữ dội",
+      "Giác mạc mờ đục hoặc đau rát không mở được mắt",
+      "Thị lực suy giảm đột ngột"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
   },
 
+  // EM-05: CHẤN THƯƠNG DO VA ĐẬP (High - Khẩn cấp)
   BLUNT_EYE_TRAUMA: {
     id: "BLUNT_EYE_TRAUMA",
-    title: "Chấn thương mắt do va đập",
+    audio_id: "EM-05",
+    caseId: "EM-05",
+    title: "Sơ cứu chấn thương do va đập vào mắt",
     subtitle: "Bị đấm, bóng đá / tennis đập vào mắt, té ngã va đập vào hốc mắt",
-    severity: "emergency",
-    severityLabel: "CỰC KỲ KHẨN CẤP",
+    severity: "high",
+    priority: "high",
+    severityLabel: "KHẨN CẤP",
+    priorityLabel: "Khẩn cấp",
     recommendedVideoId: "V003",
-    keywords: ["va đập", "bị đấm", "bóng đập", "đập vào mắt", "té ngã", "bầm tím", "sưng mắt", "chấn thương mắt", "đụng dập"],
-    summary: "Lực va chạm cơ học mạnh có thể gây xuất huyết tiền phòng, đứt chân mống mắt hoặc rách vỡ võng mạc.",
-    audioScript: "Hướng dẫn sơ cứu mắt bị va đập: Bước một, tuyệt đối không ấn tì hoặc dụi tay lên nhãn cầu. Bước hai, dùng khăn sạch bọc đá chườm lạnh nhẹ quanh vùng xương hốc mắt. Bước ba, đến bệnh viện chuyên khoa mắt ngay để soi đáy mắt và tầm soát xuất huyết.",
+    keywords: ["va đập", "bị đấm", "bóng đập", "đập vào mắt", "té ngã", "bầm tím", "sưng mắt", "chấn thương mắt", "đụng dập", "EM-05"],
+    summary: "Lực va chạm cơ học mạnh có thể gây xuất huyết, giảm thị lực hoặc tổn thương nội nhãn. Cần nghỉ ngơi và chườm lạnh nhẹ.",
+    audioScript: "Nếu mắt bị chấn thương do va đập, như bị bóng đập vào, cú đấm hoặc tai nạn, hãy cho người bị nạn nghỉ ngơi và hạn chế tối đa tác động lên mắt. Bạn có thể chườm lạnh nhẹ nhàng quanh vùng hốc mắt để giảm sưng, nhưng không ấn trực tiếp lên nhãn cầu. Cần phải đưa người bị nạn đi cấp cứu ngay nếu có các dấu hiệu sau: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi hoặc thụt bất thường, hoặc không vận động mắt bình thường được. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+    script: "Nếu mắt bị chấn thương do va đập, như bị bóng đập vào, cú đấm hoặc tai nạn, hãy cho người bị nạn nghỉ ngơi và hạn chế tối đa tác động lên mắt. Bạn có thể chườm lạnh nhẹ nhàng quanh vùng hốc mắt để giảm sưng, nhưng không ấn trực tiếp lên nhãn cầu. Cần phải đưa người bị nạn đi cấp cứu ngay nếu có các dấu hiệu sau: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi hoặc thụt bất thường, hoặc không vận động mắt bình thường được. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
     steps: [
       {
         num: "01",
-        title: "KHÔNG ẤN HOẶC TÌ ĐÈ LÊN MẮT",
-        desc: "Tuyệt đối không đè mạnh tay lên nhãn cầu vì có thể làm tăng áp lực nội nhãn và vỡ nhãn cầu kín.",
-        isDo: false
+        title: "LÀM GÌ NGAY: CHO NGHỈ NGƠI VÀ CHƯỜM LẠNH NHẸ",
+        desc: "Cho người bị nạn nghỉ ngơi, chườm lạnh nhẹ nhàng quanh vùng hốc mắt bằng khăn bọc đá để giảm sưng.",
+        isDo: true
       },
       {
         num: "02",
-        title: "CHƯỜM LẠNH NHẸ QUANH HỐC MẮT",
-        desc: "Bọc đá vào khăn mềm sạch, chườm quanh vùng xương gò má và cung mày để giảm phù nề và máu tụ.",
-        isDo: true
-      },
-      {
-        num: "03",
-        title: "NGỒI NGHỈ NỬA NẰM NỬA NGỒI",
-        desc: "Kê đầu cao khoảng 30–45 độ giúp máu đọng trong tiền phòng lắng xuống, hạn chế che khuất đồng tử.",
-        isDo: true
-      },
-      {
-        num: "04",
-        title: "KHÔNG DÙNG THUỐC ASPIRIN",
-        desc: "Không tự ý uống các loại thuốc chống đông máu như Aspirin hay Ibuprofen vì làm tăng nguy cơ chảy máu ồ ạt.",
+        title: "KHÔNG ĐƯỢC LÀM: KHÔNG ẤN TRỰC TIẾP LÊN NHÃN CẦU",
+        desc: "Tuyệt đối không ấn trực tiếp lên nhãn cầu, không day dụi và không tự uống thuốc aspirin gây chảy máu.",
         isDo: false
       },
       {
-        num: "05",
-        title: "KHÁM CHUYÊN KHOA MẮT TẦM SOÁT",
-        desc: "Đến viện mắt kiểm tra nhãn áp, tiền phòng và đáy mắt để phát hiện sớm bong võng mạc.",
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: DẤU HIỆU CẦN ĐI CẤP CỨU NGAY",
+        desc: "Cấp cứu ngay nếu: thị lực giảm, nhìn đôi, thấy máu trong mắt, mắt lồi/thụt bất thường, không vận động mắt được.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Nhìn thấy một lớp máu đỏ ngập trước lòng đen (xuất huyết tiền phòng)",
-      "Thị lực giảm sút rõ rệt, nhìn đôi (song thị)",
-      "Đồng tử méo mó hoặc không co nhỏ khi có ánh sáng",
-      "Đau nhức dữ dội kèm buồn nôn"
-    ]
+      "Thị lực giảm sút, nhìn đôi (song thị)",
+      "Thấy máu trong mắt (xuất huyết tiền phòng)",
+      "Mắt lồi hoặc thụt bất thường, không vận động mắt bình thường được"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
   },
 
-  CORNEAL_SCRATCH: {
-    id: "CORNEAL_SCRATCH",
-    title: "Trầy xước giác mạc / Cành cây quẹt",
-    subtitle: "Cành cây, lá mía, giấy cào, móng tay quẹt trúng tròng đen",
-    severity: "warning",
-    severityLabel: "CẦN ĐƯỢC KHÁM",
-    recommendedVideoId: "V006",
-    keywords: ["cây quẹt", "cành cây", "lá quẹt", "móng tay", "cào xước", "trầy xước giác mạc", "rách giác mạc", "xước mắt"],
-    summary: "Biểu mô giác mạc bị rách trợt do vật sắc quẹt qua, có nguy cơ cao nhiễm nấm và vi khuẩn mủ xanh.",
-    audioScript: "Hướng dẫn sơ cứu khi bị cành cây hay móng tay quẹt vào mắt: Bước một, không dụi mắt. Bước hai, nhỏ nước muối sinh lý làm sạch dịch tiết. Bước ba, nhắm mắt nghỉ ngơi và đến khám bác sĩ mắt để được kê đơn thuốc kháng sinh phòng nhiễm nấm giác mạc.",
+  // EM-06: TỔN THƯƠNG DO TIA HÀN / TIA UV (Medium - Cần lưu ý)
+  WELDING_UV_EXPOSURE: {
+    id: "WELDING_UV_EXPOSURE",
+    audio_id: "EM-06",
+    caseId: "EM-06",
+    title: "Tổn thương mắt do tia hàn / tia UV",
+    subtitle: "Bỏng giác mạc do tia hồ quang điện, đèn UV, ánh sáng hàn",
+    severity: "medium",
+    priority: "medium",
+    severityLabel: "CẦN LƯU Ý",
+    priorityLabel: "Cần lưu ý",
+    recommendedVideoId: "V004",
+    keywords: ["hàn", "tia hàn", "hồ quang", "hàn sắt", "hàn điện", "bỏng hàn", "rát mắt sau khi hàn", "chói mắt", "tia uv", "EM-06"],
+    summary: "Tổn thương do ánh sáng hàn/UV xuất hiện sau vài giờ gây đau mắt, cộm rát, sợ ánh sáng và chảy nước mắt.",
+    audioScript: "Tổn thương mắt do ánh sáng mạnh như tia hàn hoặc tia cực tím thường không xuất hiện ngay mà sau vài giờ. Các triệu chứng bao gồm đau mắt, cộm rát, sợ ánh sáng, chảy nước mắt và khó mở mắt. Khi gặp tình trạng này, hãy rời khỏi nguồn sáng ngay lập tức, không dụi mắt và chườm mát nhẹ nhàng. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt hoặc các phương pháp dân gian. Nếu các triệu chứng nghiêm trọng hoặc không cải thiện, hãy tìm kiếm chăm sóc y tế. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
+    script: "Tổn thương mắt do ánh sáng mạnh như tia hàn hoặc tia cực tím thường không xuất hiện ngay mà sau vài giờ. Các triệu chứng bao gồm đau mắt, cộm rát, sợ ánh sáng, chảy nước mắt và khó mở mắt. Khi gặp tình trạng này, hãy rời khỏi nguồn sáng ngay lập tức, không dụi mắt và chườm mát nhẹ nhàng. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt hoặc các phương pháp dân gian. Nếu các triệu chứng nghiêm trọng hoặc không cải thiện, hãy tìm kiếm chăm sóc y tế. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm.",
     steps: [
       {
         num: "01",
-        title: "KHÔNG DỤI MẮT",
-        desc: "Dụi mắt làm bong rộng thêm vạt biểu mô giác mạc đang tổn thương.",
-        isDo: false
-      },
-      {
-        num: "02",
-        title: "RỬA MẮT BẰNG NƯỚC MUỐI SINH LÝ",
-        desc: "Dùng NaCl 0.9% rửa sạch bụi bẩn và chất bẩn hữu cơ từ cành cây bám lại.",
+        title: "LÀM GÌ NGAY: RỜI NGUỒN SÁNG VÀ CHƯỜM MÁT",
+        desc: "Rời khỏi nguồn sáng ngay, nhắm mắt nghỉ nơi phòng tối, chườm mát nhẹ nhàng và nhỏ nước mắt nhân tạo.",
         isDo: true
       },
       {
-        num: "03",
-        title: "KHÔNG TỰ MUA THUỐC CHỨA CORTICOID",
-        desc: "Tuyệt đối không nhỏ thuốc có Dexamethasone/Prednisolone vì sẽ gây bùng phát nấm giác mạc dẫn đến thủng mắt.",
+        num: "02",
+        title: "KHÔNG ĐƯỢC LÀM: TUYỆT ĐỐI KHÔNG TỰ DÙNG THUỐC TÊ NHỎ MẮT",
+        desc: "Không dụi mắt. Tuyệt đối không tự ý dùng thuốc tê nhỏ mắt vì gây ức chế tế bào và hoại tử biểu mô giác mạc.",
         isDo: false
       },
       {
-        num: "04",
-        title: "ĐẾN CƠ SỞ CHUYÊN KHOA MẮT",
-        desc: "Bác sĩ cần nhuộm huỳnh quang đánh giá độ sâu vết xước và kê thuốc kháng sinh đặc hiệu chống nhiễm nấm thực vật.",
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: TÌM KIẾM CHĂM SÓC Y TẾ NẾU KHÔNG ĐỠ",
+        desc: "Nếu các triệu chứng nghiêm trọng hoặc không cải thiện sau 12-24 giờ, hãy tìm kiếm chăm sóc y tế.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Đau nhức dữ dội khi mở mắt, chảy nước mắt giàn giụa",
-      "Xuất hiện đốm trắng hoặc đục trên tròng đen",
-      "Mắt đỏ rực xung quanh lòng đen (cương tụ rìa)",
-      "Mắt tiết nhiều ghèn mủ vàng xanh"
-    ]
+      "Mắt đau nhức buốt dữ dội kéo dài quá 12 tiếng không thuyên giảm",
+      "Thị lực suy giảm, nhìn mờ",
+      "Nhạy cảm với ánh sáng cực độ không thể mở mắt"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế sớm."
+  },
+
+  // Aliases cho các ID cũ
+  METAL_FOREIGN_BODY: {
+    id: "METAL_FOREIGN_BODY",
+    audio_id: "EM-02",
+    caseId: "EM-02",
+    title: "Sơ cứu dị vật nhọn / Vật cắm vào mắt",
+    subtitle: "Mạt sắt mài cơ khí, mảnh vụn kim loại găm vào giác mạc",
+    severity: "critical",
+    priority: "critical",
+    severityLabel: "CỰC KỲ KHẨN CẤP",
+    priorityLabel: "Cực kỳ khẩn cấp",
+    recommendedVideoId: "V005",
+    keywords: ["mạt sắt", "kim loại", "máy mài", "cắt sắt", "EM-02"],
+    summary: "Dị vật cắm vào mắt là cấp cứu khẩn cấp. Tuyệt đối không tự ý rút ra.",
+    audioScript: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
+    steps: [
+      {
+        num: "01",
+        title: "LÀM GÌ NGAY: CHE CHẮN NHẸ NHÀNG BẰNG CỐC GIẤY SẠCH",
+        desc: "Dùng cốc giấy sạch hình vòm che chở dị vật khỏi va chạm, không tì đè lên mắt.",
+        isDo: true
+      },
+      {
+        num: "02",
+        title: "KHÔNG ĐƯỢC LÀM: KHÔNG RÚT - KHÔNG XOAY - KHÔNG DÙNG NAM CHÂM",
+        desc: "Tuyệt đối không tự ý rút dị vật, không dùng nam châm hay tăm bông tự cạy gắp.",
+        isDo: false
+      },
+      {
+        num: "03",
+        title: "KHI NÀO CẤP CỨU: ĐẾN NGAY CƠ SỞ CHUYÊN KHOA MẮT",
+        desc: "Đến ngay bệnh viện mắt để bác sĩ gắp dị vật và nạo sạch vòng rỉ dưới kính hiển vi.",
+        isDo: true
+      }
+    ],
+    warningSigns: [
+      "Nhìn thấy chấm đen kim loại bám chặt trên tròng đen",
+      "Đau buốt nhức mắt khi chớp mắt, giảm thị lực"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
   },
 
   FISH_HOOK_INJURY: {
     id: "FISH_HOOK_INJURY",
-    title: "Dị vật móc câu găm vào mắt",
-    subtitle: "Lưỡi câu cá, móc kim loại có ngạnh sắc nhọn xuyên thấu mi mắt hoặc giác mạc",
-    severity: "emergency",
+    audio_id: "EM-02",
+    caseId: "EM-02",
+    title: "Sơ cứu dị vật nhọn / Móc câu vào mắt",
+    subtitle: "Lưỡi câu cá có ngạnh sắc nhọn cắm vào mô mắt",
+    severity: "critical",
+    priority: "critical",
     severityLabel: "CỰC KỲ KHẨN CẤP",
+    priorityLabel: "Cực kỳ khẩn cấp",
     recommendedVideoId: "V005",
-    keywords: ["móc câu", "câu cá", "lưỡi câu", "ngạnh", "móc sắt", "găm vào mắt", "xuyên thấu"],
-    summary: "Cấp cứu ngoại khoa: Ngạnh móc câu giữ chặt trong mô mắt. Tuyệt đối không được kéo giật móc ra.",
-    audioScript: "Cảnh báo cấp cứu khẩn cấp dị vật móc câu: Bước một, tuyệt đối không được giật hoặc kéo móc câu ra ngoài vì ngạnh câu sẽ xé rách nhãn cầu. Bước hai, cắt dây cước câu cá. Bước ba, cố định cán móc câu bằng cốc giấy và đưa bệnh nhân đi cấp cứu ngay.",
+    keywords: ["móc câu", "câu cá", "ngạnh", "EM-02"],
+    summary: "Cấp cứu khẩn cấp: Ngạnh móc câu giữ chặt trong mô mắt. Tuyệt đối không được kéo giật móc ra.",
+    audioScript: "Nếu gặp trường hợp dị vật nhọn như mạt kim loại, mảnh kính, cành cây hoặc vật nhọn tốc độ cao cắm vào mắt, đây là tình huống khẩn cấp. Hãy nhớ kỹ: Tuyệt đối không cố tự lấy dị vật ra. Không kéo, không xoay, không dùng bất cứ dụng cụ nào chạm vào dị vật. Bạn cũng không được ấn hoặc băng ép trực tiếp lên nhãn cầu. Hãy bảo vệ mắt bằng cách che chắn nhẹ nhàng mà không tạo áp lực lên mắt, sau đó đưa người bị nạn đến ngay cơ sở y tế chuyên khoa mắt càng sớm càng tốt. Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp.",
     steps: [
       {
         num: "01",
-        title: "TUYỆT ĐỐI KHÔNG GIẬT MÓC RA",
-        desc: "Móc câu có ngạnh ngược, hành động giật kéo ra sẽ xé toạc toàn bộ giác mạc và thoát dịch kính gây mù vĩnh viễn.",
-        isDo: false
+        title: "LÀM GÌ NGAY: CẮT DÂY CƯỚC VÀ CHE CỐC BẢO VỆ",
+        desc: "Cắt sát dây cước, úp cốc bảo vệ nhẹ nhàng quanh móc câu.",
+        isDo: true
       },
       {
         num: "02",
-        title: "CẮT DÂY CƯỚC CÂU CÁ",
-        desc: "Dùng kéo cắt đứt dây cước câu để loại bỏ lực kéo căng tác động lên đầu móc đang găm trong mắt.",
-        isDo: true
-      },
-      {
-        num: "03",
-        title: "CHẮN BẢO VỆ BẰNG CỐC GIẤY",
-        desc: "Đặt đáy cốc giấy hoặc nắp chụp bảo vệ úp trùm lên móc câu rồi dán băng dính xung quanh, tránh va quẹt bên ngoài.",
-        isDo: true
-      },
-      {
-        num: "04",
-        title: "ĐẾN BỆNH VIỆN MẮT CẤP CỨU NGAY",
-        desc: "Đến ngay bệnh viện chuyên khoa mắt để bác sĩ phẫu thuật lấy móc câu bằng dụng cụ vi phẫu vô trùng.",
-        isDo: true
-      }
-    ],
-    warningSigns: [
-      "Móc găm trực tiếp vào tròng đen (giác mạc) hoặc tròng trắng (củng mạc)",
-      "Chảy dịch trong suốt hoặc chảy máu từ vết đâm",
-      "Mắt xẹp hoặc đồng tử méo mó hướng về vết thương",
-      "Mất thị lực tức thì"
-    ]
-  },
-
-  METAL_FOREIGN_BODY: {
-    id: "METAL_FOREIGN_BODY",
-    title: "Mạt sắt / kim loại bắn vào mắt",
-    subtitle: "Mạt sắt mài cơ khí, mảnh vụn kim loại tốc độ cao găm vào giác mạc",
-    severity: "emergency",
-    severityLabel: "CỰC KỲ KHẨN CẤP",
-    recommendedVideoId: "V007",
-    keywords: ["mạt sắt", "kim loại", "máy mài", "cắt sắt", "mảnh kim loại", "sắt bắn", "gọt sắt"],
-    summary: "Mạt sắt nóng bắn tốc độ cao găm sâu vào giác mạc và nhanh chóng tạo vòng rỉ sét gây độc tế bào mắt.",
-    audioScript: "Hướng dẫn xử lý mạt sắt bắn vào mắt: Bước một, không dụi mắt và không dùng nam châm hay tăm bông cạy gắp. Bước hai, che nhẹ mắt bằng gạc vô trùng. Bước ba, đến ngay bệnh viện mắt trong vòng 24 giờ để bác sĩ gắp mạt sắt và nạo sạch vòng rỉ sét.",
-    steps: [
-      {
-        num: "01",
-        title: "KHÔNG DỤI MẮT",
-        desc: "Dụi mắt làm mạt sắt ấn sâu hơn qua các lớp giác mạc, thậm chí đâm thủng vào tiền phòng.",
-        isDo: false
-      },
-      {
-        num: "02",
-        title: "KHÔNG DÙNG NAM CHÂM TỰ HÚT",
-        desc: "Lực hút không định hướng từ nam châm bên ngoài có thể làm rách rộng vết thương giác mạc.",
+        title: "KHÔNG ĐƯỢC LÀM: TUYỆT ĐỐI KHÔNG GIẬT MÓC CÂU RA",
+        desc: "Ngạnh ngược sẽ xé rách giác mạc và thoát dịch kính gây mù lòa nếu giật ra.",
         isDo: false
       },
       {
         num: "03",
-        title: "CHE BẢO VỆ BẰNG GẠC SẠCH",
-        desc: "Dùng gạc sạch che nhẹ mắt, không băng ép chặt để tránh đè nén dị vật.",
-        isDo: true
-      },
-      {
-        num: "04",
-        title: "ĐI KHÁM ĐỂ NẠO VÒNG RỈ SẮT",
-        desc: "Chỉ sau vài giờ, mạt sắt sẽ oxy hóa tạo thành vòng rỉ nâu ăn sâu. Cần bác sĩ nạo sạch dưới kính sinh hiển vi.",
+        title: "KHI NÀO CẤP CỨU: CHUYỂN BỆNH VIỆN MẮT KHẨN CẤP",
+        desc: "Đến viện mắt ngay để bác sĩ phẫu thuật vi phẫu lấy dị vật ra an toàn.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Nhìn thấy chấm đen hoặc nâu kim loại bám chặt trên tròng đen",
-      "Đau buốt nhức mắt khi chớp mắt",
-      "Mắt đỏ rực, phù nề mi mắt",
-      "Nhìn mờ hoặc sợ ánh sáng"
-    ]
+      "Móc găm trực tiếp vào tròng đen hoặc tròng trắng",
+      "Chảy dịch hoặc máu từ vết đâm"
+    ],
+    disclaimer: "Đây là hướng dẫn sơ cứu ban đầu. Tình huống này cần được đánh giá y tế khẩn cấp."
   },
 
   RED_EYE_INFECTION: {
     id: "RED_EYE_INFECTION",
-    title: "Mắt đỏ nhiều ghèn (Viêm kết mạc)",
-    subtitle: "Đau mắt đỏ, viêm kết mạc do virus, vi khuẩn, ghèn dính mí buổi sáng",
-    severity: "warning",
-    severityLabel: "CẦN ĐƯỢC KHÁM",
+    audio_id: "DIS-08B",
+    caseId: "DIS-08B",
+    title: "Thông tin tham khảo: Đau mắt đỏ (Viêm kết mạc)",
+    subtitle: "Dấu hiệu thường gặp của viêm kết mạc do virus, vi khuẩn",
+    severity: "low",
+    priority: "low",
+    severityLabel: "THÔNG TIN",
+    priorityLabel: "Thông tin",
     recommendedVideoId: "V008",
-    keywords: ["mắt đỏ", "ghèn", "đau mắt đỏ", "viêm kết mạc", "rỉ mắt", "dính mí", "chảy dịch"],
-    summary: "Viêm kết mạc nhiễm trùng lây lan nhanh qua tiếp xúc. Cần cách ly đồ dùng và khám bác sĩ.",
-    audioScript: "Hướng dẫn khi bị mắt đỏ có ghèn: Bước một, nhỏ nước muối sinh lý ngày 4 đến 6 lần để làm sạch dịch ghèn. Bước hai, dùng khăn mặt riêng và rửa tay thường xuyên. Bước ba, đi khám bác sĩ mắt để được kê đúng loại thuốc nhỏ.",
+    keywords: ["mắt đỏ", "ghèn", "đau mắt đỏ", "viêm kết mạc", "DIS-08"],
+    summary: "Thông tin tham khảo: Viêm kết mạc lây lan qua tiếp xúc. Bạn nên được bác sĩ kiểm tra để có phương án thích hợp.",
+    audioScript: "Viêm kết mạc, hay đau mắt đỏ, cũng thường do virus gây ra với các dấu hiệu như mắt đỏ nhiều, chảy nước mắt, sưng, và cảm giác có dị vật trong mắt. Bệnh thường ảnh hưởng cả hai mắt, có thể kèm theo hạch ở tai hoặc các triệu chứng giống cảm cúm. Loại viêm kết mạc này rất dễ lây lan qua đường hô hấp hoặc tiếp xúc với dịch tiết của người bệnh. Thông tin này nhằm mục đích giáo dục và không thay thế chẩn đoán hoặc tư vấn của bác sĩ.",
     steps: [
       {
         num: "01",
         title: "RỬA MẮT BẰNG NƯỚC MUỐI SINH LÝ",
-        desc: "Dùng NaCl 0.9% nhỏ rửa từ 4–6 lần mỗi ngày để tống xuất vi khuẩn và ghèn ứ đọng.",
+        desc: "Dùng NaCl 0.9% nhỏ rửa làm sạch dịch tiết ghèn mắt.",
         isDo: true
       },
       {
         num: "02",
         title: "DÙNG KHĂN VÀ ĐỒ DÙNG RIÊNG",
-        desc: "Sử dụng khăn mặt riêng, gối riêng, thường xuyên giặt phơi nắng để tránh lây bệnh cho các thành viên trong gia đình.",
+        desc: "Dùng đồ riêng, rửa tay sạch thường xuyên tránh lây cho người thân.",
         isDo: true
       },
       {
         num: "03",
-        title: "KHÔNG TỰ MUA THUỐC CÓ CORTICOID",
-        desc: "Dùng sai thuốc nhỏ chứa corticoid có thể làm trầm trọng thêm viêm giác mạc do virus herpes và gây đục thủy tinh thể.",
-        isDo: false
-      },
-      {
-        num: "04",
-        title: "KHÁM BÁC SĨ MẮT NẾU KHÔNG ĐỠ",
-        desc: "Nếu sau 2–3 ngày mắt vẫn đỏ nhiều, xuất hiện giả mạc hoặc nhìn mờ, cần đến bệnh viện mắt kiểm tra ngay.",
+        title: "BẠN NÊN ĐƯỢC BÁC SĨ KIỂM TRA",
+        desc: "Khám bác sĩ mắt để được hướng dẫn điều trị chính xác, không tự mua thuốc chứa corticoid.",
         isDo: true
       }
     ],
     warningSigns: [
-      "Mắt đau nhức sâu trong hốc mắt kèm đau đầu",
-      "Giảm thị lực hoặc nhìn thấy quầng màu quanh bóng đèn",
-      "Ghèn mủ đặc màu xanh vàng chảy liên tục",
-      "Mí mắt sưng húp không mở được"
-    ]
+      "Mắt đau nhức sâu kèm đau đầu",
+      "Giảm thị lực hoặc nhìn thấy quầng màu quanh ánh sáng"
+    ],
+    disclaimer: "Thông tin này nhằm mục đích giáo dục và không thay thế chẩn đoán hoặc tư vấn của bác sĩ."
   }
 };
