@@ -17,14 +17,15 @@ export const eyeCareVideos = [
   {
     id: "V002",
     category: "CHEMICAL_EYE_EXPOSURE",
-    title: "Cấp cứu khẩn cấp: Xối rửa mắt tức thì khi dính hóa chất tẩy rửa / axit",
-    embedUrl: "https://www.youtube-nocookie.com/embed/G6g3rQx0ZcE",
-    youtubeId: "G6g3rQx0ZcE",
+    title: "Hướng dẫn sơ cứu khi hóa chất bắn vào mắt",
+    videoUrl: "https://www.youtube.com/watch?v=2D920qeMOrI",
+    embedUrl: "https://www.youtube-nocookie.com/embed/2D920qeMOrI",
+    youtubeId: "2D920qeMOrI",
     duration: "03:40",
     language: "vi",
     verified: true,
-    source: "Cấp cứu Y khoa St John & KHANGEYE Medical",
-    description: "Kỹ thuật vạch mi mắt và tư thế xối dòng nước liên tục 15-20 phút bảo vệ thị lực khi dính xà phòng, hóa chất độc hại."
+    source: "Cấp cứu Y khoa & Bệnh viện Mắt KHANGEYE",
+    description: "Kỹ thuật vạch mi mắt và tư thế xối dòng nước liên tục 15-20 phút bảo vệ thị lực khi dính hóa chất, xà phòng, axit/bazơ độc hại."
   },
   {
     id: "V003",
@@ -52,15 +53,16 @@ export const eyeCareVideos = [
   },
   {
     id: "V005",
-    category: "FISH_HOOK_INJURY",
-    title: "Quy tắc an toàn sống còn khi dị vật sắc nhọn / móc câu găm vào mắt",
-    embedUrl: "https://www.youtube-nocookie.com/embed/XqEZyfB2Uv8",
-    youtubeId: "XqEZyfB2Uv8",
+    category: "PENETRATING_OBJECT",
+    title: "Hướng dẫn sơ cứu khi dị vật nhọn găm vào mắt",
+    videoUrl: "https://www.youtube.com/watch?v=-ZZzoUVhIuc",
+    embedUrl: "https://www.youtube-nocookie.com/embed/-ZZzoUVhIuc",
+    youtubeId: "-ZZzoUVhIuc",
     duration: "02:30",
     language: "vi",
     verified: true,
-    source: "Hội Phẫu thuật Chấn thương Mắt",
-    description: "Tuyệt đối không tự ý rút móc câu; cách dùng cốc giấy cố định vật xuyên thấu trước khi chuyển viện cấp cứu."
+    source: "Hội Phẫu thuật Chấn thương Mắt & KHANGEYE Medical",
+    description: "Quy tắc sống còn: Tuyệt đối không tự ý rút dị vật ra; cách dùng cốc giấy hình vòm cố định che chắn trước khi chuyển viện cấp cứu."
   },
   {
     id: "V006",
@@ -105,6 +107,14 @@ export const eyeCareVideos = [
  */
 export function findVideoByCategory(categoryId) {
   if (!categoryId) return null;
+  // Hỗ trợ mapping các biến thể của dị vật nhọn / găm vào mắt sang V005
+  if (categoryId === 'PENETRATING_OBJECT' || categoryId === 'FISH_HOOK_INJURY' || categoryId === 'METAL_FOREIGN_BODY' || categoryId === 'EM-02') {
+    return eyeCareVideos.find(v => v.id === 'V005' || v.category === 'PENETRATING_OBJECT');
+  }
+  // Hỗ trợ hóa chất bắn vào mắt sang V002
+  if (categoryId === 'CHEMICAL_EYE_EXPOSURE' || categoryId === 'EM-03') {
+    return eyeCareVideos.find(v => v.id === 'V002' || v.category === 'CHEMICAL_EYE_EXPOSURE');
+  }
   return eyeCareVideos.find(v => v.category === categoryId) || null;
 }
 

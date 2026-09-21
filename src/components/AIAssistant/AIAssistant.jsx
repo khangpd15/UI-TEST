@@ -12,7 +12,7 @@ import WarningSigns from './WarningSigns';
 
 import { analyzeEyeSituation } from '../../services/aiService';
 import { EYE_CARE_CATEGORIES } from '../../data/eyeCareCategories';
-import { findVideoByCategory } from '../../data/videoLibrary';
+import { findVideoByCategory, findVideoById } from '../../data/videoLibrary';
 import { stopSpeaking } from '../../utils/speechUtils';
 
 /**
@@ -59,7 +59,7 @@ export default function AIAssistant({
     else if (idStr.includes('red-eye')) categoryKey = 'RED_EYE_INFECTION';
 
     const catData = EYE_CARE_CATEGORIES[categoryKey] || EYE_CARE_CATEGORIES.FOREIGN_BODY_DUST;
-    const matchedVideo = findVideoByCategory(catData.id);
+    const matchedVideo = findVideoByCategory(catData.id) || (catData.recommendedVideoId ? findVideoById(catData.recommendedVideoId) : null);
 
     setAnalysisResult({
       category: catData.id,
