@@ -78,7 +78,7 @@ export default function KnowledgeCard({ item, onSelect }) {
       {/* 1. Ảnh y tế lớn với badge mã Audio ID và Priority */}
       <div className="knowledge-card-img-box position-relative">
         <img src={image} alt={`Minh họa ${title}`} loading="lazy" />
-        <div className="position-absolute top-0 start-0 m-2 d-flex flex-wrap gap-1">
+        <div className="position-absolute top-0 start-0 m-2 d-flex flex-wrap gap-1" style={{ zIndex: 2, pointerEvents: 'none' }}>
           {audio_id && (
             <span className="badge bg-dark text-white px-2 py-1 font-monospace" style={{ fontSize: '0.8rem' }}>
               {audio_id}
@@ -95,7 +95,7 @@ export default function KnowledgeCard({ item, onSelect }) {
             {isEmergency ? 'Cấp cứu' : 'Bệnh lý'}
           </span>
         </div>
-        <div className="position-absolute top-0 end-0 m-2">
+        <div className="position-absolute top-0 end-0 m-2" style={{ zIndex: 2, pointerEvents: 'none' }}>
           <SeverityBadge severity={priority} customText={priorityLabel} />
         </div>
       </div>
