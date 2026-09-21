@@ -5,14 +5,15 @@ export const eyeCareVideos = [
   {
     id: "V001",
     category: "FOREIGN_BODY_DUST",
-    title: "Hướng dẫn xử trí bụi và dị vật nhỏ bay vào mắt an toàn",
-    embedUrl: "https://www.youtube-nocookie.com/embed/g2Jd1U22Bfg",
-    youtubeId: "g2Jd1U22Bfg",
-    duration: "02:15",
+    title: "Hướng dẫn sơ cứu khi dị vật nhỏ bay vào mắt",
+    videoUrl: "https://www.youtube.com/shorts/pCQYyeAPyoM",
+    embedUrl: "https://www.youtube-nocookie.com/embed/pCQYyeAPyoM",
+    youtubeId: "pCQYyeAPyoM",
+    duration: "01:00",
     language: "vi",
     verified: true,
     source: "Hội Nhãn khoa Quốc tế & Bệnh viện Mắt KHANGEYE",
-    description: "Cách rửa mắt đúng kỹ thuật bằng nước muối sinh lý, không làm trầy xước giác mạc khi có hạt bụi bẩn bay vào."
+    description: "Cách rửa mắt đúng kỹ thuật bằng nước sạch hoặc nước muối sinh lý, không làm trầy xước giác mạc khi có hạt bụi, cát bay vào."
   },
   {
     id: "V002",
@@ -30,14 +31,15 @@ export const eyeCareVideos = [
   {
     id: "V003",
     category: "BLUNT_EYE_TRAUMA",
-    title: "Sơ cứu chấn thương mắt do va đập thể thao, té ngã, đụng dập",
-    embedUrl: "https://www.youtube-nocookie.com/embed/5F_1nO9cM5A",
-    youtubeId: "5F_1nO9cM5A",
+    title: "Hướng dẫn sơ cứu khi bị va đập vào mắt",
+    videoUrl: "https://www.youtube.com/watch?v=PHrrxe3p8vw",
+    embedUrl: "https://www.youtube-nocookie.com/embed/PHrrxe3p8vw",
+    youtubeId: "PHrrxe3p8vw",
     duration: "02:50",
     language: "vi",
     verified: true,
     source: "Chuyên khoa Chấn thương Mắt KHANGEYE",
-    description: "Nguyên tắc không tì đè nhãn cầu, cách chườm lạnh giảm tụ máu và tư thế nghỉ ngơi chờ khám chuyên sâu."
+    description: "Nguyên tắc nghỉ ngơi, chườm lạnh nhẹ quanh hốc mắt, tuyệt đối không tì đè nhãn cầu và theo dõi các dấu hiệu báo động đỏ."
   },
   {
     id: "V004",
@@ -107,13 +109,21 @@ export const eyeCareVideos = [
  */
 export function findVideoByCategory(categoryId) {
   if (!categoryId) return null;
-  // Hỗ trợ mapping các biến thể của dị vật nhọn / găm vào mắt sang V005
+  // EM-01: Dị vật nhỏ / Bụi vào mắt sang V001
+  if (categoryId === 'FOREIGN_BODY_DUST' || categoryId === 'EM-01') {
+    return eyeCareVideos.find(v => v.id === 'V001' || v.category === 'FOREIGN_BODY_DUST');
+  }
+  // EM-02: Dị vật nhọn / găm vào mắt sang V005
   if (categoryId === 'PENETRATING_OBJECT' || categoryId === 'FISH_HOOK_INJURY' || categoryId === 'METAL_FOREIGN_BODY' || categoryId === 'EM-02') {
     return eyeCareVideos.find(v => v.id === 'V005' || v.category === 'PENETRATING_OBJECT');
   }
-  // Hỗ trợ hóa chất bắn vào mắt sang V002
+  // EM-03: Hóa chất bắn vào mắt sang V002
   if (categoryId === 'CHEMICAL_EYE_EXPOSURE' || categoryId === 'EM-03') {
     return eyeCareVideos.find(v => v.id === 'V002' || v.category === 'CHEMICAL_EYE_EXPOSURE');
+  }
+  // EM-05: Chấn thương do va đập sang V003
+  if (categoryId === 'BLUNT_EYE_TRAUMA' || categoryId === 'EM-05') {
+    return eyeCareVideos.find(v => v.id === 'V003' || v.category === 'BLUNT_EYE_TRAUMA');
   }
   return eyeCareVideos.find(v => v.category === categoryId) || null;
 }
