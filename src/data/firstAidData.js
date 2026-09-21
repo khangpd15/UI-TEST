@@ -313,6 +313,9 @@ export const firstAidCases = {
   "WELDING_UV_EXPOSURE": em06
 };
 
+// Export alias map để tra cứu thuận tiện
+export const firstAidMap = firstAidCases;
+
 // Mảng danh sách sơ cứu cấp cứu chuẩn EM-01 đến EM-06
 export const firstAidList = [
   {

@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import EmergencyFloatingButton from './components/EmergencyFloatingButton';
 import VoiceAssistant from './components/VoiceAssistant';
+import RemiMascot from './components/RemiMascot/RemiMascot';
 import DeviceViewSwitcher from './components/DeviceViewSwitcher';
 
 // Pages
@@ -112,12 +113,12 @@ export default function App() {
           onCallEmergency={handleTriggerEmergencyCall}
         />
 
-        {/* 4. Floating Voice Assistant (Section 12: right: 24px; bottom: 96px;) */}
-        {activePage !== 'emergency' && activePage !== 'ai-assistant' && (
-          <VoiceAssistant
-            onSelectCase={handleSelectProblem}
-          />
-        )}
+        {/* 4. Floating Mascot Chatbot "Remi" (Đồng hành chăm sóc mắt trên toàn website) */}
+        <RemiMascot
+          activePage={activePage}
+          selectedCaseId={selectedCaseId}
+          onSelectCase={handleSelectProblem}
+        />
 
         {/* 5. Fixed Emergency Floating Button (Section 13: bottom: 16px; left: 16px; right: 16px;) */}
         <EmergencyFloatingButton

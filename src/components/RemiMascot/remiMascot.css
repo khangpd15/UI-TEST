@@ -1,0 +1,507 @@
+/* ==========================================================================
+   REMI FLOATING MASCOT & CHATBOT STYLES
+   Mascot chim cánh cụt Remi - Bạn đồng hành chăm sóc mắt
+   ========================================================================== */
+
+/* --- Biến màu & thiết lập chung --- */
+:root {
+  --remi-teal: #0B7F86;
+  --remi-teal-dark: #075F66;
+  --remi-teal-light: #E8F5F5;
+  --remi-teal-soft: #F0F9F9;
+  --remi-shadow: 0 10px 28px rgba(7, 95, 102, 0.28);
+  --remi-shadow-chat: 0 16px 48px rgba(7, 95, 102, 0.24);
+}
+
+/* --- Container Mascot Floating --- */
+.remi-mascot-wrapper {
+  position: fixed;
+  right: 20px;
+  bottom: 86px;
+  z-index: 1048;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+/* Cho phép click vào các thành phần bên trong */
+.remi-mascot-wrapper > * {
+  pointer-events: auto;
+}
+
+/* Nút Mascot Trigger */
+.remi-trigger-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 8px 18px rgba(7, 95, 102, 0.26));
+}
+
+.remi-trigger-btn:focus-visible {
+  outline: 3px solid var(--remi-teal);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.remi-trigger-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.remi-trigger-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Vòng badge thông báo nhỏ trên đầu Remi */
+.remi-badge-ping {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  width: 14px;
+  height: 14px;
+  background-color: #06B6D4;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  animation: remiPing 2s infinite ease-in-out;
+}
+
+@keyframes remiPing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.8;
+  }
+}
+
+/* --- Speech Bubble Nhỏ (Greeting) --- */
+.remi-greeting-bubble {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 4px;
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1.5px solid #C4E5E5;
+  border-radius: 16px 16px 4px 16px;
+  padding: 8px 12px;
+  min-width: 160px;
+  max-width: 220px;
+  box-shadow: 0 8px 24px rgba(7, 95, 102, 0.16);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  cursor: pointer;
+  animation: remiBubbleAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  z-index: 1048;
+}
+
+/* Đuôi bóng thoại */
+.remi-greeting-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  right: 22px;
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-bottom: 1.5px solid #C4E5E5;
+  border-right: 1.5px solid #C4E5E5;
+  transform: rotate(45deg);
+}
+
+.remi-greeting-bubble:hover {
+  background: #F8FDFF;
+}
+
+@keyframes remiBubbleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Animation Xuất Hiện Lần Đầu (Entrance) --- */
+.remi-entrance {
+  animation: remiEntranceAnim 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes remiEntranceAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Các Animation Tự Nhiên (Idle Mascot) --- */
+/* 1. Lắc lư nhẹ (Waddle) */
+.remi-anim-waddle {
+  animation: remiWaddleAnim 1.6s ease-in-out;
+}
+
+@keyframes remiWaddleAnim {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(-5deg) translateX(-3px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(0);
+  }
+  75% {
+    transform: rotate(5deg) translateX(3px);
+  }
+}
+
+/* 2. Nhảy nhẹ (Jump) */
+.remi-anim-jump {
+  animation: remiJumpAnim 1.1s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes remiJumpAnim {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  30% {
+    transform: translateY(-10px) scale(0.96, 1.05);
+  }
+  55% {
+    transform: translateY(0) scale(1.04, 0.94);
+  }
+  75% {
+    transform: translateY(-3px) scale(0.99, 1.01);
+  }
+}
+
+/* 3. Nghiêng đầu tò mò (Tilt) */
+.remi-anim-tilt {
+  animation: remiTiltAnim 1.5s ease-in-out;
+}
+
+@keyframes remiTiltAnim {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(-8deg);
+  }
+  70% {
+    transform: rotate(6deg);
+  }
+}
+
+/* --- Khung Chat Panel (RemiChat) --- */
+.remi-chat-panel {
+  position: fixed;
+  bottom: 86px;
+  right: 20px;
+  width: 375px;
+  max-width: calc(100vw - 28px);
+  height: 520px;
+  max-height: calc(100vh - 120px);
+  background: #FFFFFF;
+  border: 1px solid #D0EBEB;
+  border-radius: 20px;
+  box-shadow: var(--remi-shadow-chat);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1049;
+  animation: remiChatOpen 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes remiChatOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header Chat */
+.remi-chat-header {
+  background: linear-gradient(135deg, #F0F9F9 0%, #E2F3F3 100%);
+  border-bottom: 1px solid #CDE8E8;
+  flex-shrink: 0;
+}
+
+.remi-avatar-circle {
+  width: 44px;
+  height: 44px;
+  background-color: #FFFFFF;
+  border: 2px solid #BEE3E5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(7, 95, 102, 0.12);
+}
+
+.remi-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+.remi-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #D1E5E5;
+  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+.remi-close-btn:hover {
+  background-color: #FEE2E2;
+  color: #DC2626;
+  border-color: #FECACA;
+}
+
+/* Body Chat Conversation */
+.remi-chat-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: #FBFDFD;
+}
+
+/* Tùy chỉnh thanh cuộn body chat */
+.remi-chat-body::-webkit-scrollbar {
+  width: 5px;
+}
+.remi-chat-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.remi-chat-body::-webkit-scrollbar-thumb {
+  background: #CCE4E4;
+  border-radius: 4px;
+}
+.remi-chat-body::-webkit-scrollbar-thumb:hover {
+  background: #A6D2D4;
+}
+
+/* Bubble tin nhắn */
+.remi-message-bubble {
+  max-width: 84%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  word-break: break-word;
+  position: relative;
+}
+
+.remi-bot-bubble {
+  background-color: #F0F9F9;
+  color: #1E293B;
+  border: 1px solid #D5EFEF;
+  border-radius: 16px 16px 16px 4px;
+  box-shadow: 0 2px 6px rgba(11, 127, 134, 0.05);
+}
+
+.remi-user-bubble {
+  background: linear-gradient(135deg, #0B7F86 0%, #075F66 100%);
+  color: #FFFFFF;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 2px 8px rgba(7, 95, 102, 0.2);
+}
+
+.remi-msg-time {
+  font-size: 0.68rem;
+  opacity: 0.68;
+}
+
+/* Disclaimer y tế */
+.remi-msg-disclaimer {
+  font-size: 0.76rem;
+  background-color: #FEF9C3;
+  color: #854D0E;
+  border-left: 3px solid #EAB308;
+  padding: 6px 8px;
+  border-radius: 4px 6px 6px 4px;
+  line-height: 1.35;
+}
+
+/* Gợi ý tương tác nhanh */
+.remi-suggestion-chip {
+  font-size: 0.78rem !important;
+  border-radius: 999px !important;
+  border-color: #B2DFDF !important;
+  color: #075F66 !important;
+  background-color: #FFFFFF !important;
+  padding: 4px 10px !important;
+  transition: all 0.2s ease !important;
+  white-space: normal;
+  text-align: left;
+}
+
+.remi-suggestion-chip:hover {
+  background-color: #E8F5F5 !important;
+  border-color: #0B7F86 !important;
+  color: #0B7F86 !important;
+  transform: translateY(-1px);
+}
+
+/* Trạng thái ghi âm Voice */
+.remi-listening-pulse {
+  border-color: #FECACA !important;
+  background-color: #FFF5F5 !important;
+}
+
+/* Footer & Input */
+.remi-chat-footer {
+  flex-shrink: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.remi-chat-input {
+  font-size: 0.88rem;
+  border-color: #D1E5E5;
+  border-radius: 12px 0 0 12px !important;
+  padding: 8px 12px;
+}
+
+.remi-chat-input:focus {
+  border-color: #0B7F86;
+  box-shadow: 0 0 0 0.2rem rgba(11, 127, 134, 0.15);
+}
+
+.remi-mic-btn {
+  border-color: #D1E5E5 !important;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.remi-mic-btn:hover {
+  background-color: #F1F5F9;
+  color: #0B7F86;
+}
+
+.remi-mic-btn.btn-danger {
+  background-color: #EF4444 !important;
+  border-color: #DC2626 !important;
+  color: #FFFFFF !important;
+  animation: remiMicPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes remiMicPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+.remi-send-btn {
+  border-radius: 0 12px 12px 0 !important;
+  background-color: #0B7F86 !important;
+  border-color: #0B7F86 !important;
+  color: #FFFFFF !important;
+  font-size: 0.9rem;
+}
+
+.remi-send-btn:hover:not(:disabled) {
+  background-color: #075F66 !important;
+  border-color: #075F66 !important;
+}
+
+.remi-send-btn:disabled {
+  opacity: 0.55;
+}
+
+/* --- Hỗ trợ Thiết bị Di Động & Trình Giả Lập Điện Thoại --- */
+@media (max-width: 576px) {
+  .remi-mascot-wrapper {
+    right: 14px;
+    bottom: 82px;
+  }
+
+  .remi-chat-panel {
+    right: 12px;
+    bottom: 80px;
+    width: calc(100vw - 24px);
+    height: 480px;
+    max-height: calc(100vh - 110px);
+    border-radius: 16px;
+  }
+
+  .remi-greeting-bubble {
+    right: 0;
+    max-width: 190px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+/* Tích hợp an toàn với Device Simulator (khung điện thoại) */
+.phone-mockup-frame .remi-mascot-wrapper {
+  position: absolute;
+  right: 14px;
+  bottom: 80px;
+  z-index: 95;
+}
+
+.phone-mockup-frame .remi-chat-panel {
+  position: absolute;
+  right: 10px;
+  bottom: 76px;
+  width: calc(100% - 20px);
+  max-height: calc(100% - 100px);
+  z-index: 100;
+}
+
+/* --- Tôn trọng Accessibility: prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .remi-entrance,
+  .remi-anim-waddle,
+  .remi-anim-jump,
+  .remi-anim-tilt,
+  .remi-badge-ping,
+  .remi-greeting-bubble,
+  .remi-chat-panel,
+  .remi-mic-btn.btn-danger {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .remi-trigger-btn:hover {
+    transform: none !important;
+  }
+}
