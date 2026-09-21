@@ -9,10 +9,14 @@ export default function Footer({ onNavigate, onCallEmergency }) {
           <div className="col-12 col-md-5">
             <div className="d-flex align-items-center gap-2 mb-2">
               <div
-                className="d-flex align-items-center justify-content-center bg-white rounded-3"
-                style={{ width: '38px', height: '38px', color: 'var(--visi-primary)' }}
+                className="d-flex align-items-center justify-content-center bg-white rounded-3 p-1 shadow-sm flex-shrink-0"
+                style={{ width: '40px', height: '40px' }}
               >
-                <i className="bi bi-eye-fill fs-5"></i>
+                <img
+                  src="/images/logo.png"
+                  alt="ReMiCare Logo"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
               </div>
               <div>
                 <span className="h4 mb-0 fw-heavy text-white">ReMiCare</span>

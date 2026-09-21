@@ -35,7 +35,7 @@ export default function Navbar({ activePage, setActivePage, textScale, setTextSc
               aria-label="ReMiCare - Hệ sinh thái KHANGEYE"
             >
               <div className="visi-logo-icon">
-                <i className="bi bi-eye-fill"></i>
+                <img src="/images/logo.png" alt="ReMiCare Logo" className="visi-logo-img" />
               </div>
               <div className="d-flex flex-column">
                 <div className="d-flex align-items-center gap-1">
